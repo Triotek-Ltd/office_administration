@@ -1,0 +1,8 @@
+{
+  "docs": [
+    "participant",
+    "calendar_event",
+    "schedule_request",
+    "travel_arrangement"
+  ]
+}

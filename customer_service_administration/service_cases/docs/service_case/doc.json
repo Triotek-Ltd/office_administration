@@ -1,0 +1,28 @@
+{
+  "doc_key": "service_case",
+  "doc_title": "Service Case",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "customer_service_administration",
+  "submodule_id": "service_cases",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "customer_service_administration",
+    "submodule": "service_cases",
+    "reference_doc_id": "service_case",
+    "evidence_gaps": [
+      "SLA rules",
+      "classification taxonomy",
+      "inquiry vs complaint split"
+    ]
+  }
+}

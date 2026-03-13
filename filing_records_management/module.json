@@ -1,0 +1,8 @@
+{
+  "id": "filing_records_management",
+  "title": "Filing Records Management",
+  "app_id": "office_administration",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

@@ -1,0 +1,26 @@
+{
+  "doc_key": "disposal_action",
+  "doc_title": "Disposal Action",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "filing_records_management",
+  "submodule_id": "retention_disposal",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "filing_records_management",
+    "submodule": "retention_disposal",
+    "reference_doc_id": "disposal_action",
+    "evidence_gaps": [
+      "disposal certificate model"
+    ]
+  }
+}

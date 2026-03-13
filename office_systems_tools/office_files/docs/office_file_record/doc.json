@@ -1,0 +1,27 @@
+{
+  "doc_key": "office_file_record",
+  "doc_title": "Office File Record",
+  "doc_kind": "master",
+  "status": "draft",
+  "module_id": "office_systems_tools",
+  "submodule_id": "office_files",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "master",
+  "classification": {
+    "archetype": "master",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "office_systems_tools",
+    "submodule": "office_files",
+    "reference_doc_id": "office_file_record",
+    "evidence_gaps": [
+      "storage-provider rules",
+      "retention rules"
+    ]
+  }
+}

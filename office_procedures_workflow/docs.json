@@ -1,0 +1,8 @@
+{
+  "docs": [
+    "meeting_record",
+    "workflow_task",
+    "meeting_action_item",
+    "office_procedure"
+  ]
+}

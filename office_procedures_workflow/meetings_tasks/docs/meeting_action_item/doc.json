@@ -1,0 +1,26 @@
+{
+  "doc_key": "meeting_action_item",
+  "doc_title": "Meeting Action Item",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "office_procedures_workflow",
+  "submodule_id": "meetings_tasks",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "office_procedures_workflow",
+    "submodule": "meetings_tasks",
+    "reference_doc_id": "meeting_action_item",
+    "evidence_gaps": [
+      "independent doc vs child-row model"
+    ]
+  }
+}

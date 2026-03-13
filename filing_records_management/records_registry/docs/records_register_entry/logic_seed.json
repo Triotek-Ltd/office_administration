@@ -1,0 +1,110 @@
+{
+  "doc_id": "records_register_entry",
+  "doc_title": "Records Register Entry",
+  "archetype": "ledger",
+  "doc_kind": "ledger",
+  "actions": [
+    "create",
+    "record",
+    "review",
+    "archive",
+    "view"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 3,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "posting_flow",
+      "supports_reconciliation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "active",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "posting_date": "posting_date",
+      "registration_date": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "entry_no",
+      "document",
+      "record_series"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "posting_date",
+      "workflow_state"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "record": null,
+      "create": null,
+      "view": null,
+      "archive": "archived",
+      "review": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Maintain the formal registry trail for managed office records.",
+    "actors": [
+      "records officer",
+      "custodian"
+    ],
+    "primary_transitions": [
+      "records_register_entry: draft -> active -> archived"
+    ]
+  },
+  "related_docs": [
+    "administrative_document",
+    "document_access_request",
+    "access_log_entry"
+  ],
+  "borrowed_fields": [
+    "document details from administrative_document"
+  ]
+}

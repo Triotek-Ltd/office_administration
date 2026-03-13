@@ -1,0 +1,27 @@
+{
+  "doc_key": "customer_profile",
+  "doc_title": "Customer Profile",
+  "doc_kind": "master",
+  "status": "draft",
+  "module_id": "customer_service_administration",
+  "submodule_id": "service_cases",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "master",
+  "classification": {
+    "archetype": "master",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "customer_service_administration",
+    "submodule": "service_cases",
+    "reference_doc_id": "customer_profile",
+    "evidence_gaps": [
+      "duplicate handling",
+      "external party classification"
+    ]
+  }
+}

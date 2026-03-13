@@ -1,0 +1,134 @@
+{
+  "doc_id": "correspondence_record",
+  "doc_title": "Correspondence Record",
+  "archetype": "transaction",
+  "doc_kind": "transaction",
+  "actions": [
+    "create",
+    "review",
+    "submit",
+    "approve",
+    "return_for_revision",
+    "issue",
+    "send",
+    "file",
+    "track",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "in_review",
+      "approved",
+      "sent",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 4,
+  "fetch_rule_count": 0,
+  "action_handler_count": 10,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "transaction_flow",
+      "supports_submission": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "in_review",
+      "approved",
+      "sent",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "transaction_date": "transaction_date",
+      "party": "party_reference",
+      "currency": "currency_code",
+      "total_amount": "total_amount",
+      "communication_date": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "subject",
+      "from_party",
+      "to_party"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "transaction_date",
+      "party",
+      "total_amount",
+      "workflow_state"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "in_review",
+      "approved",
+      "sent",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "return_for_revision": null,
+      "review": "in_review",
+      "track": null,
+      "send": null,
+      "approve": "approved",
+      "issue": null,
+      "submit": "in_review",
+      "archive": "archived",
+      "file": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Prepare, route, approve, send, and file internal and external correspondence records.",
+    "actors": [
+      "office administrator",
+      "approver",
+      "correspondence owner"
+    ],
+    "primary_transitions": [
+      "correspondence_record: draft -> in_review -> approved -> sent -> archived"
+    ]
+  },
+  "related_docs": [
+    "correspondence_type",
+    "correspondence_approval",
+    "correspondence_followup",
+    "administrative_document"
+  ],
+  "borrowed_fields": [
+    "party display details from linked party or contact records",
+    "filing reference from administrative_document"
+  ]
+}

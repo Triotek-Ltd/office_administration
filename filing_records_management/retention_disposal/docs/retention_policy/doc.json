@@ -1,0 +1,26 @@
+{
+  "doc_key": "retention_policy",
+  "doc_title": "Retention Policy",
+  "doc_kind": "configuration",
+  "status": "draft",
+  "module_id": "filing_records_management",
+  "submodule_id": "retention_disposal",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "configuration",
+  "classification": {
+    "archetype": "configuration",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "filing_records_management",
+    "submodule": "retention_disposal",
+    "reference_doc_id": "retention_policy",
+    "evidence_gaps": [
+      "legal hold handling"
+    ]
+  }
+}

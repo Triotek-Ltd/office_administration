@@ -1,0 +1,26 @@
+{
+  "doc_key": "version_record",
+  "doc_title": "Version Record",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "office_systems_tools",
+  "submodule_id": "office_files",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "office_systems_tools",
+    "submodule": "office_files",
+    "reference_doc_id": "version_record",
+    "evidence_gaps": [
+      "immutable vs replaceable versioning"
+    ]
+  }
+}

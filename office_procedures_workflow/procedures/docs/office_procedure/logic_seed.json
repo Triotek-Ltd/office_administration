@@ -1,0 +1,109 @@
+{
+  "doc_id": "office_procedure",
+  "doc_title": "Office Procedure",
+  "archetype": "configuration",
+  "doc_kind": "configuration",
+  "actions": [
+    "create",
+    "update",
+    "review",
+    "publish",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "approved",
+      "published",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "configuration_control",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "approved",
+      "published",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "owner": "actor_reference",
+      "effective_date": "schedule_marker",
+      "review_date": "schedule_marker",
+      "publication_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "procedure_no",
+      "purpose",
+      "owner"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "approved",
+      "published",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "review": null,
+      "archive": "archived",
+      "publish": "published",
+      "update": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Define and publish office procedures that drive repeatable operational work.",
+    "actors": [
+      "office administrator",
+      "process owner"
+    ],
+    "primary_transitions": [
+      "office_procedure: draft -> approved -> published -> archived"
+    ]
+  },
+  "related_docs": [
+    "workflow_task"
+  ],
+  "borrowed_fields": []
+}

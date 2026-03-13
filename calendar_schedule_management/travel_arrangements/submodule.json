@@ -1,0 +1,8 @@
+{
+  "id": "travel_arrangements",
+  "title": "Travel Arrangements",
+  "app_id": "office_administration",
+  "module_id": "calendar_schedule_management",
+  "type": "submodule",
+  "status": "draft"
+}

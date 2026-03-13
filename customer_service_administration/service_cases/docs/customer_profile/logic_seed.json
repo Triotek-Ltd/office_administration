@@ -1,0 +1,112 @@
+{
+  "doc_id": "customer_profile",
+  "doc_title": "Customer Profile",
+  "archetype": "master",
+  "doc_kind": "master",
+  "actions": [
+    "create",
+    "update",
+    "view",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "active",
+    "states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 4,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "entity_lifecycle",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "customer_no",
+      "name",
+      "email"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "active",
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "view": null,
+      "archive": "archived",
+      "update": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Maintain the service-facing customer identity and contact context used across service cases.",
+    "actors": [
+      "service desk officer",
+      "customer service supervisor"
+    ],
+    "start_condition": "A service interaction requires a customer-facing party record.",
+    "ordered_steps": [
+      "Create or update the customer profile.",
+      "Record contact details and preferred communication method.",
+      "Use the profile to support service-case handling."
+    ],
+    "primary_actions": [
+      "create",
+      "update",
+      "view",
+      "archive"
+    ],
+    "primary_transitions": [
+      "customer_profile: active -> archived"
+    ],
+    "downstream_effects": [
+      "Service cases can reuse customer identity and contact details."
+    ]
+  },
+  "related_docs": [
+    "service_case"
+  ],
+  "borrowed_fields": []
+}

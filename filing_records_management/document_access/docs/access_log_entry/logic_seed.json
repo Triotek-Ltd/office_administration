@@ -1,0 +1,102 @@
+{
+  "doc_id": "access_log_entry",
+  "doc_title": "Access Log Entry",
+  "archetype": "ledger",
+  "doc_kind": "ledger",
+  "actions": [
+    "record",
+    "view",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "active",
+    "states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 2,
+  "fetch_rule_count": 0,
+  "action_handler_count": 3,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "posting_flow",
+      "supports_reconciliation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "posting_date": "posting_date",
+      "access_date": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "log_no",
+      "request",
+      "document"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "posting_date",
+      "workflow_state"
+    ],
+    "initial_state": "active",
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "record": null,
+      "view": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Record the audit trail of document access activity and outcomes.",
+    "actors": [
+      "records officer",
+      "custodian"
+    ],
+    "primary_transitions": [
+      "access_log_entry: active -> archived"
+    ]
+  },
+  "related_docs": [
+    "administrative_document",
+    "document_access_request"
+  ],
+  "borrowed_fields": [
+    "request context from document_access_request"
+  ]
+}

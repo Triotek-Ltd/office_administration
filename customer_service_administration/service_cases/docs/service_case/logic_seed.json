@@ -1,0 +1,150 @@
+{
+  "doc_id": "service_case",
+  "doc_title": "Service Case",
+  "archetype": "workflow_case",
+  "doc_kind": "workflow_case",
+  "actions": [
+    "create",
+    "assign",
+    "track",
+    "confirm",
+    "close",
+    "classify",
+    "escalate",
+    "record",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "opened",
+    "states": [
+      "opened",
+      "in_progress",
+      "resolved",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ]
+  },
+  "related_doc_count": 5,
+  "fetch_rule_count": 0,
+  "action_handler_count": 9,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "case_flow",
+      "supports_assignment": true,
+      "supports_escalation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "opened",
+      "in_progress",
+      "resolved",
+      "closed",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "requester_name",
+      "requester_email",
+      "requester_phone"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "opened",
+    "lifecycle_states": [
+      "opened",
+      "in_progress",
+      "resolved",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "classify": null,
+      "escalate": null,
+      "track": null,
+      "assign": "in_progress",
+      "close": "closed",
+      "archive": "archived",
+      "confirm": "closed",
+      "record": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Receive, classify, assign, resolve, and document inquiries and complaints.",
+    "actors": [
+      "service desk officer",
+      "assigned department owner",
+      "supervisor",
+      "customer"
+    ],
+    "start_condition": "A customer inquiry or complaint is received.",
+    "ordered_steps": [
+      "Open the service case and capture the issue.",
+      "Classify urgency and route to the responsible owner.",
+      "Record actions taken during handling.",
+      "Follow up unresolved issues.",
+      "Confirm resolution with the customer."
+    ],
+    "primary_actions": [
+      "create",
+      "assign",
+      "classify",
+      "escalate",
+      "confirm",
+      "close"
+    ],
+    "primary_transitions": [
+      "service_case: opened -> in_progress",
+      "service_case: in_progress -> resolved -> closed"
+    ],
+    "downstream_effects": [
+      "Service activity becomes auditable through log entries.",
+      "Follow-up actions can be assigned and tracked.",
+      "Resolution communication can be recorded."
+    ]
+  },
+  "related_docs": [
+    "customer_profile",
+    "service_log_entry",
+    "service_resolution",
+    "followup_action",
+    "correspondence_record"
+  ],
+  "borrowed_fields": [
+    "customer contact details from customer_profile",
+    "case type, urgency, and owner from service_case for follow-up records"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "doc_key": "document_access_request",
+  "doc_title": "Document Access Request",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "filing_records_management",
+  "submodule_id": "document_access",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "filing_records_management",
+    "submodule": "document_access",
+    "reference_doc_id": "document_access_request",
+    "evidence_gaps": [
+      "approval authority matrix"
+    ]
+  }
+}

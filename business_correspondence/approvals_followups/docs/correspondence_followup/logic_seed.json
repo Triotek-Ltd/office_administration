@@ -1,0 +1,112 @@
+{
+  "doc_id": "correspondence_followup",
+  "doc_title": "Correspondence Followup",
+  "archetype": "workflow_case",
+  "doc_kind": "workflow_case",
+  "actions": [
+    "create",
+    "assign",
+    "track",
+    "close",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "open",
+    "states": [
+      "open",
+      "in_progress",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "case_flow",
+      "supports_assignment": true,
+      "supports_escalation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "open",
+      "in_progress",
+      "closed",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "owner": "actor_reference",
+      "due_date": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "followup_no",
+      "correspondence",
+      "owner"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "open",
+    "lifecycle_states": [
+      "open",
+      "in_progress",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ],
+    "action_targets": {
+      "close": "closed",
+      "create": null,
+      "assign": "in_progress",
+      "archive": "archived",
+      "track": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Track action items and expected responses that arise from correspondence records.",
+    "actors": [
+      "owner",
+      "office administrator"
+    ],
+    "primary_transitions": [
+      "correspondence_followup: open -> in_progress -> closed -> archived"
+    ]
+  },
+  "related_docs": [
+    "correspondence_record"
+  ],
+  "borrowed_fields": [
+    "recipient, subject, and communication date from correspondence_record"
+  ]
+}

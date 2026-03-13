@@ -1,0 +1,8 @@
+{
+  "id": "meetings_tasks",
+  "title": "Meetings Tasks",
+  "app_id": "office_administration",
+  "module_id": "office_procedures_workflow",
+  "type": "submodule",
+  "status": "draft"
+}

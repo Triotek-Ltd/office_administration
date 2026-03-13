@@ -1,0 +1,27 @@
+{
+  "doc_key": "schedule_request",
+  "doc_title": "Schedule Request",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "calendar_schedule_management",
+  "submodule_id": "scheduling",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "calendar_schedule_management",
+    "submodule": "scheduling",
+    "reference_doc_id": "schedule_request",
+    "evidence_gaps": [
+      "conflict-checking",
+      "approval thresholds"
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "doc_id": "calendar_event",
+  "doc_title": "Calendar Event",
+  "archetype": "event",
+  "doc_kind": "event",
+  "actions": [
+    "create",
+    "update",
+    "confirm",
+    "cancel",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "scheduled",
+    "states": [
+      "scheduled",
+      "completed",
+      "cancelled",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 2,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "event_schedule",
+      "supports_timing": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "scheduled",
+      "completed",
+      "cancelled",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "start_at": "schedule_marker",
+      "end_at": "schedule_marker",
+      "date_time": "event_datetime",
+      "organizer": "actor_reference"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "event_no",
+      "date_time",
+      "venue"
+    ],
+    "list_columns": [
+      "title",
+      "start_at",
+      "end_at",
+      "workflow_state"
+    ],
+    "initial_state": "scheduled",
+    "lifecycle_states": [
+      "scheduled",
+      "completed",
+      "cancelled",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "confirm": "completed",
+      "create": null,
+      "archive": "archived",
+      "cancel": null,
+      "update": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Maintain scheduled office events and their participant context.",
+    "actors": [
+      "organizer",
+      "scheduler",
+      "office administrator"
+    ],
+    "primary_transitions": [
+      "calendar_event: scheduled -> completed -> archived",
+      "calendar_event: scheduled -> cancelled"
+    ]
+  },
+  "related_docs": [
+    "participant",
+    "travel_arrangement"
+  ],
+  "borrowed_fields": [
+    "participant details from participant"
+  ]
+}

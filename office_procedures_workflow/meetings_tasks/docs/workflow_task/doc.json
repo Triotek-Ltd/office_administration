@@ -1,0 +1,27 @@
+{
+  "doc_key": "workflow_task",
+  "doc_title": "Workflow Task",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "office_procedures_workflow",
+  "submodule_id": "meetings_tasks",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "office_procedures_workflow",
+    "submodule": "meetings_tasks",
+    "reference_doc_id": "workflow_task",
+    "evidence_gaps": [
+      "recurring-task rules",
+      "delegation rules"
+    ]
+  }
+}

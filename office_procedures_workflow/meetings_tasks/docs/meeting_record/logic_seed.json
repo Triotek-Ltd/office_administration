@@ -1,0 +1,112 @@
+{
+  "doc_id": "meeting_record",
+  "doc_title": "Meeting Record",
+  "archetype": "event",
+  "doc_kind": "event",
+  "actions": [
+    "create",
+    "update",
+    "confirm",
+    "close",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "scheduled",
+      "completed",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "event_schedule",
+      "supports_timing": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "draft",
+      "scheduled",
+      "completed",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "start_at": "schedule_marker",
+      "end_at": "schedule_marker",
+      "chair": "actor_reference",
+      "attendees": "participant_collection"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "meeting_no",
+      "date",
+      "location"
+    ],
+    "list_columns": [
+      "title",
+      "start_at",
+      "end_at",
+      "workflow_state"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "scheduled",
+      "completed",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "confirm": "completed",
+      "create": null,
+      "archive": "archived",
+      "close": null,
+      "update": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Capture the schedule, agenda, attendance, and outcomes of office meetings.",
+    "actors": [
+      "chair",
+      "recorder",
+      "office administrator"
+    ],
+    "primary_transitions": [
+      "meeting_record: draft -> scheduled -> completed -> archived"
+    ]
+  },
+  "related_docs": [
+    "meeting_action_item"
+  ],
+  "borrowed_fields": [
+    "attendee names from linked participant records where present"
+  ]
+}

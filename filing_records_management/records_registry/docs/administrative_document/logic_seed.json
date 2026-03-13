@@ -1,0 +1,118 @@
+{
+  "doc_id": "administrative_document",
+  "doc_title": "Administrative Document",
+  "archetype": "master",
+  "doc_kind": "master",
+  "actions": [
+    "create",
+    "update",
+    "review",
+    "archive",
+    "classify",
+    "file",
+    "register"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "active",
+      "archived",
+      "disposed"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 5,
+  "fetch_rule_count": 0,
+  "action_handler_count": 7,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "entity_lifecycle",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "draft",
+      "active",
+      "archived",
+      "disposed"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "document_date": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "classification",
+      "record_type",
+      "document_date"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "active",
+      "archived",
+      "disposed"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "archive": "archived",
+      "classify": null,
+      "review": null,
+      "register": null,
+      "create": null,
+      "update": null,
+      "file": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Register, classify, file, and retain internal administrative documents under office records controls.",
+    "actors": [
+      "records officer",
+      "office administrator",
+      "custodian"
+    ],
+    "primary_transitions": [
+      "administrative_document: draft -> active -> archived -> disposed"
+    ]
+  },
+  "related_docs": [
+    "document_classification",
+    "retention_policy",
+    "records_register_entry",
+    "document_access_request",
+    "disposal_action"
+  ],
+  "borrowed_fields": [
+    "classification display fields from document_classification",
+    "retention details from retention_policy"
+  ]
+}

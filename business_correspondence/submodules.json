@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "correspondence_records",
+    "approvals_followups"
+  ]
+}

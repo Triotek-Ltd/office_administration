@@ -1,0 +1,12 @@
+{
+  "id": "customer_service_administration",
+  "entity": "module",
+  "children": {
+    "submodules_registry": "submodules.json",
+    "docs_registry": "docs.json"
+  },
+  "supports": [
+    "submodule",
+    "doc"
+  ]
+}

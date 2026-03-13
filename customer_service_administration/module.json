@@ -1,0 +1,8 @@
+{
+  "id": "customer_service_administration",
+  "title": "Customer Service Administration",
+  "app_id": "office_administration",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

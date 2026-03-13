@@ -1,0 +1,27 @@
+{
+  "doc_key": "calendar_event",
+  "doc_title": "Calendar Event",
+  "doc_kind": "event",
+  "status": "draft",
+  "module_id": "calendar_schedule_management",
+  "submodule_id": "scheduling",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "event",
+  "classification": {
+    "archetype": "event",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "calendar_schedule_management",
+    "submodule": "scheduling",
+    "reference_doc_id": "calendar_event",
+    "evidence_gaps": [
+      "recurring-event model",
+      "resource-booking fields"
+    ]
+  }
+}

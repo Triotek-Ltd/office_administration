@@ -1,0 +1,8 @@
+{
+  "id": "service_cases",
+  "title": "Service Cases",
+  "app_id": "office_administration",
+  "module_id": "customer_service_administration",
+  "type": "submodule",
+  "status": "draft"
+}

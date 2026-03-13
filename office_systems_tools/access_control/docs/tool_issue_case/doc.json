@@ -1,0 +1,26 @@
+{
+  "doc_key": "tool_issue_case",
+  "doc_title": "Tool Issue Case",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "office_systems_tools",
+  "submodule_id": "access_control",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "office_systems_tools",
+    "submodule": "access_control",
+    "reference_doc_id": "tool_issue_case",
+    "evidence_gaps": [
+      "incident vs support-case split"
+    ]
+  }
+}

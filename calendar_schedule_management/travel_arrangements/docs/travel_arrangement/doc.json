@@ -1,0 +1,28 @@
+{
+  "doc_key": "travel_arrangement",
+  "doc_title": "Travel Arrangement",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "calendar_schedule_management",
+  "submodule_id": "travel_arrangements",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "calendar_schedule_management",
+    "submodule": "travel_arrangements",
+    "reference_doc_id": "travel_arrangement",
+    "evidence_gaps": [
+      "transport detail model",
+      "lodging detail model",
+      "reimbursement linkage"
+    ]
+  }
+}

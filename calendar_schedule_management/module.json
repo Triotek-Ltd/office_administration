@@ -1,0 +1,8 @@
+{
+  "id": "calendar_schedule_management",
+  "title": "Calendar Schedule Management",
+  "app_id": "office_administration",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

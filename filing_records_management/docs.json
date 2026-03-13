@@ -1,0 +1,11 @@
+{
+  "docs": [
+    "records_register_entry",
+    "document_access_request",
+    "administrative_document",
+    "document_classification",
+    "disposal_action",
+    "retention_policy",
+    "access_log_entry"
+  ]
+}

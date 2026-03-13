@@ -1,0 +1,8 @@
+{
+  "id": "records_registry",
+  "title": "Records Registry",
+  "app_id": "office_administration",
+  "module_id": "filing_records_management",
+  "type": "submodule",
+  "status": "draft"
+}

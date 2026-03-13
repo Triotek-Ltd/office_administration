@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "scheduling",
+    "travel_arrangements"
+  ]
+}

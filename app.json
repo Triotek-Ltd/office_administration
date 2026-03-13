@@ -1,0 +1,12 @@
+{
+  "id": "office_administration",
+  "title": "My Plug App",
+  "bundle_id": "administration",
+  "module_registry": "modules.json",
+  "config_manifest": "config/3plug.app.json",
+  "license": {
+    "id": "CUSTOM-PROPRIETARY",
+    "type": "proprietary_custom",
+    "terms_ref": "LICENSE"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "doc_id": "document_classification",
+  "doc_title": "Document Classification",
+  "archetype": "reference",
+  "doc_kind": "reference",
+  "actions": [
+    "create",
+    "update",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "active",
+    "states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 2,
+  "fetch_rule_count": 0,
+  "action_handler_count": 3,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "reference_maintenance",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "classification_code",
+      "label",
+      "confidentiality_band"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "active",
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "archive": "archived",
+      "update": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Define the classification scheme used to organize and secure administrative documents.",
+    "actors": [
+      "records officer"
+    ],
+    "primary_transitions": [
+      "document_classification: active -> archived"
+    ]
+  },
+  "related_docs": [
+    "retention_policy",
+    "administrative_document"
+  ],
+  "borrowed_fields": []
+}

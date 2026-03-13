@@ -1,0 +1,12 @@
+{
+  "id": "office_systems_tools",
+  "entity": "module",
+  "children": {
+    "submodules_registry": "submodules.json",
+    "docs_registry": "docs.json"
+  },
+  "supports": [
+    "submodule",
+    "doc"
+  ]
+}

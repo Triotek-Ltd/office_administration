@@ -1,0 +1,113 @@
+{
+  "doc_id": "access_grant",
+  "doc_title": "Access Grant",
+  "archetype": "workflow_case",
+  "doc_kind": "workflow_case",
+  "actions": [
+    "create",
+    "approve",
+    "close",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "open",
+    "states": [
+      "open",
+      "approved",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ]
+  },
+  "related_doc_count": 2,
+  "fetch_rule_count": 0,
+  "action_handler_count": 4,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "case_flow",
+      "supports_assignment": true,
+      "supports_escalation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "open",
+      "approved",
+      "closed",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "requester": "actor_reference",
+      "approver": "actor_reference",
+      "granted_at": "schedule_marker"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "request_no",
+      "target_system_or_file",
+      "requester"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "open",
+    "lifecycle_states": [
+      "open",
+      "approved",
+      "closed",
+      "archived"
+    ],
+    "terminal_states": [
+      "closed",
+      "archived"
+    ],
+    "action_targets": {
+      "close": "closed",
+      "create": null,
+      "approve": "approved",
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Track access requests and grants for office systems and managed files.",
+    "actors": [
+      "requester",
+      "approver",
+      "office administrator"
+    ],
+    "primary_transitions": [
+      "access_grant: open -> approved -> closed -> archived"
+    ]
+  },
+  "related_docs": [
+    "office_file_record",
+    "user_account"
+  ],
+  "borrowed_fields": [
+    "file context from office_file_record"
+  ]
+}

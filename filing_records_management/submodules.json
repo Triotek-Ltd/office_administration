@@ -1,0 +1,7 @@
+{
+  "submodules": [
+    "document_access",
+    "records_registry",
+    "retention_disposal"
+  ]
+}

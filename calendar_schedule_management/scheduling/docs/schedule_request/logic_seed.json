@@ -1,0 +1,114 @@
+{
+  "doc_id": "schedule_request",
+  "doc_title": "Schedule Request",
+  "archetype": "workflow_case",
+  "doc_kind": "workflow_case",
+  "actions": [
+    "create",
+    "review",
+    "confirm",
+    "cancel",
+    "close"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "proposed",
+      "confirmed",
+      "cancelled",
+      "closed"
+    ],
+    "terminal_states": [
+      "closed"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "case_flow",
+      "supports_assignment": true,
+      "supports_escalation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "draft",
+      "proposed",
+      "confirmed",
+      "cancelled",
+      "closed"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "requester": "actor_reference"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "request_no",
+      "requester",
+      "purpose"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "proposed",
+      "confirmed",
+      "cancelled",
+      "closed"
+    ],
+    "terminal_states": [
+      "closed"
+    ],
+    "action_targets": {
+      "confirm": "confirmed",
+      "create": null,
+      "close": "closed",
+      "cancel": null,
+      "review": null
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "Capture and progress scheduling requests into confirmed calendar events.",
+    "actors": [
+      "requester",
+      "scheduler",
+      "office administrator"
+    ],
+    "primary_transitions": [
+      "schedule_request: draft -> proposed -> confirmed -> closed",
+      "schedule_request: proposed -> cancelled"
+    ]
+  },
+  "related_docs": [
+    "calendar_event"
+  ],
+  "borrowed_fields": [
+    "requester details from linked participant or employee records"
+  ]
+}

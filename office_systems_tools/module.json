@@ -1,0 +1,8 @@
+{
+  "id": "office_systems_tools",
+  "title": "Office Systems Tools",
+  "app_id": "office_administration",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

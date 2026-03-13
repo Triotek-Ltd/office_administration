@@ -1,0 +1,26 @@
+{
+  "doc_key": "access_log_entry",
+  "doc_title": "Access Log Entry",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "filing_records_management",
+  "submodule_id": "document_access",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "filing_records_management",
+    "submodule": "document_access",
+    "reference_doc_id": "access_log_entry",
+    "evidence_gaps": [
+      "customer-visible vs internal access trail split"
+    ]
+  }
+}

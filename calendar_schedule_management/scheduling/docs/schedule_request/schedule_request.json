@@ -1,0 +1,670 @@
+{
+  "identity": {
+    "doc_id": "schedule_request",
+    "title": "Schedule Request",
+    "archetype": "workflow_case",
+    "app": "office_administration",
+    "module": "calendar_schedule_management",
+    "submodule": "scheduling",
+    "source_kind": "reference_doc_generation_manifest",
+    "bundle_id": "administration",
+    "app_id": "office_administration",
+    "module_id": "calendar_schedule_management",
+    "submodule_id": "scheduling",
+    "doc_key": "schedule_request"
+  },
+  "doc_key": "schedule_request",
+  "doc_title": "schedule_request",
+  "allowed_actions": [
+    "create",
+    "review",
+    "confirm",
+    "cancel",
+    "close"
+  ],
+  "actions": {
+    "actions": [
+      "create",
+      "review",
+      "confirm",
+      "cancel",
+      "close"
+    ],
+    "families": {
+      "primary": [
+        "create",
+        "review"
+      ],
+      "workflow": [
+        "submit",
+        "approve",
+        "return_for_revision",
+        "escalate",
+        "close",
+        "notify"
+      ]
+    }
+  },
+  "schema": {
+    "field_groups": {
+      "system": [
+        "id",
+        "creation",
+        "modified",
+        "owner",
+        "docstatus",
+        "workflow_state"
+      ],
+      "identity": [
+        "title",
+        "reference_no"
+      ],
+      "content": [
+        "description",
+        "request_no",
+        "purpose",
+        "preferred_dates",
+        "participants",
+        "location_need",
+        "status_note"
+      ],
+      "relations": [],
+      "amounts": [],
+      "dates": [],
+      "parties": [
+        "requester"
+      ],
+      "status": [
+        "workflow_state"
+      ]
+    },
+    "fields": [
+      {
+        "field_id": "title",
+        "label": "Title",
+        "type": "Data",
+        "required": true,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": true,
+        "ui": {
+          "visible": true,
+          "list_visible": true,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "reference_no",
+        "label": "Reference No",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": true,
+        "ui": {
+          "visible": true,
+          "list_visible": true,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "description",
+        "label": "Description",
+        "type": "Text",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "workflow_state",
+        "label": "Workflow State",
+        "type": "Select",
+        "required": true,
+        "read_only": false,
+        "options": {
+          "values": [
+            "draft",
+            "proposed",
+            "confirmed",
+            "cancelled",
+            "closed"
+          ]
+        },
+        "default": "draft",
+        "unique": false,
+        "linked_doc": null,
+        "purpose": "lifecycle_state",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": true,
+        "ui": {
+          "visible": true,
+          "list_visible": true,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "request_no",
+        "label": "Request No",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "requester",
+        "label": "Requester",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "purpose",
+        "label": "Purpose",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "preferred_dates",
+        "label": "Preferred Dates",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "participants",
+        "label": "Participants",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "location_need",
+        "label": "Location Need",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "status_note",
+        "label": "Status Note",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": true,
+          "list_visible": false,
+          "filterable": true,
+          "sortable": true
+        }
+      }
+    ],
+    "title_field": "title",
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "request_no",
+      "requester",
+      "purpose"
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "default_view": "List",
+    "status_field": "workflow_state",
+    "system_fields": [
+      "id",
+      "creation",
+      "modified",
+      "owner",
+      "docstatus",
+      "workflow_state"
+    ],
+    "record_contract": {
+      "doc_kind": "workflow_case",
+      "supports_attachments": true,
+      "supports_comments": true,
+      "supports_activity_log": true,
+      "supports_assignments": true
+    },
+    "lifecycle": {
+      "initial_state": "draft",
+      "states": [
+        "draft",
+        "proposed",
+        "confirmed",
+        "cancelled",
+        "closed"
+      ],
+      "terminal_states": [
+        "closed"
+      ]
+    },
+    "action_rules": {
+      "create": {
+        "allowed_in_states": [
+          "draft",
+          "proposed",
+          "confirmed",
+          "cancelled"
+        ],
+        "transitions_to": null
+      },
+      "review": {
+        "allowed_in_states": [
+          "draft",
+          "proposed",
+          "confirmed",
+          "cancelled"
+        ],
+        "transitions_to": null
+      },
+      "confirm": {
+        "allowed_in_states": [
+          "draft",
+          "proposed",
+          "confirmed",
+          "cancelled"
+        ],
+        "transitions_to": null
+      },
+      "cancel": {
+        "allowed_in_states": [
+          "draft",
+          "proposed",
+          "confirmed",
+          "cancelled"
+        ],
+        "transitions_to": null
+      },
+      "close": {
+        "allowed_in_states": [
+          "draft",
+          "proposed",
+          "confirmed",
+          "cancelled"
+        ],
+        "transitions_to": "closed"
+      }
+    },
+    "role_action_matrix": [
+      {
+        "role_id": "System Manager",
+        "actions": [
+          "create",
+          "update",
+          "view",
+          "list",
+          "record",
+          "review",
+          "assign",
+          "track",
+          "monitor",
+          "confirm",
+          "archive"
+        ]
+      }
+    ],
+    "transaction_behavior": {
+      "is_transactional": false,
+      "transaction_kind": null,
+      "posting_behavior": {
+        "requires_posting": false,
+        "posting_action": "post",
+        "reversal_action": "cancel"
+      },
+      "party_model": {
+        "primary_party_field": null,
+        "counterparty_field": null,
+        "party_roles": []
+      },
+      "value_model": {
+        "currency_field": null,
+        "amount_fields": [],
+        "balance_impact": "none"
+      },
+      "reference_model": {
+        "reference_no_field": "reference_no",
+        "upstream_links": [],
+        "downstream_links": []
+      },
+      "line_items": {
+        "enabled": false,
+        "table_field": null,
+        "item_key_field": null,
+        "quantity_field": null,
+        "rate_field": null,
+        "amount_field": null
+      },
+      "fulfilment": {
+        "enabled": false,
+        "dispatch_state_field": null,
+        "delivery_state_field": null,
+        "completion_action": "confirm"
+      },
+      "audit": {
+        "track_state_history": true,
+        "track_action_log": true,
+        "track_external_refs": true
+      }
+    }
+  },
+  "settings": {
+    "display": {
+      "title_template": "{title}",
+      "subtitle_template": "{reference_no}",
+      "list_columns": [
+        "title",
+        "reference_no",
+        "workflow_state",
+        "modified"
+      ],
+      "default_filters": [],
+      "quick_entry": false
+    },
+    "related_docs": [
+      {
+        "doc_id": "calendar_event",
+        "relation_type": "related",
+        "show_in_related_panel": true
+      }
+    ],
+    "lookup_rules": [],
+    "fetch_rules": [],
+    "reference_map": {
+      "primary_reference_field": "reference_no",
+      "reference_labels": []
+    },
+    "relation_rules": {
+      "parent_doc": null,
+      "child_docs": [],
+      "show_related_panel": true
+    },
+    "borrowed_fields": [
+      {
+        "description": "requester details from linked participant or employee records"
+      }
+    ],
+    "ui_panels": {
+      "show_activity_log": true,
+      "show_comments": true,
+      "show_assignments": true,
+      "show_related_docs": true
+    },
+    "integration": {
+      "external_refs": [],
+      "sync_rules": []
+    },
+    "runtime_hints": {
+      "doc_key": "schedule_request",
+      "supports_related_lookup": true,
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "business_objective": "Capture and progress scheduling requests into confirmed calendar events.",
+        "actors": [
+          "requester",
+          "scheduler",
+          "office administrator"
+        ],
+        "primary_transitions": [
+          "schedule_request: draft -> proposed -> confirmed -> closed",
+          "schedule_request: proposed -> cancelled"
+        ]
+      }
+    }
+  },
+  "classification": {
+    "category": "workflow/support doc",
+    "bundle": "administration",
+    "archetype": "workflow_case",
+    "doc_kind": "workflow_case"
+  },
+  "behavior": {
+    "transaction_behavior": {
+      "is_transactional": false,
+      "transaction_kind": null,
+      "posting_behavior": {
+        "requires_posting": false,
+        "posting_action": "post",
+        "reversal_action": "cancel"
+      },
+      "party_model": {
+        "primary_party_field": null,
+        "counterparty_field": null,
+        "party_roles": []
+      },
+      "value_model": {
+        "currency_field": null,
+        "amount_fields": [],
+        "balance_impact": "none"
+      },
+      "reference_model": {
+        "reference_no_field": "reference_no",
+        "upstream_links": [],
+        "downstream_links": []
+      },
+      "line_items": {
+        "enabled": false,
+        "table_field": null,
+        "item_key_field": null,
+        "quantity_field": null,
+        "rate_field": null,
+        "amount_field": null
+      },
+      "fulfilment": {
+        "enabled": false,
+        "dispatch_state_field": null,
+        "delivery_state_field": null,
+        "completion_action": "confirm"
+      },
+      "audit": {
+        "track_state_history": true,
+        "track_action_log": true,
+        "track_external_refs": true
+      }
+    },
+    "report_boundary_classification": "workflow/support doc",
+    "validation_status": "ready",
+    "validation_warnings": []
+  },
+  "business_logic": {
+    "seeded": true,
+    "folders": [
+      "domain",
+      "actions",
+      "workflows",
+      "relations",
+      "reports",
+      "integrations"
+    ],
+    "seed_file": "logic_seed.json",
+    "handler_registry": "actions/registry.py",
+    "service_entrypoints": {
+      "domain": "domain/service.py",
+      "workflow": "workflows/service.py",
+      "relations": "relations/service.py",
+      "reports": "reports/service.py",
+      "integrations": "integrations/service.py"
+    },
+    "action_handlers": {
+      "base_dir": "actions",
+      "registry": "actions/registry.py",
+      "count": 5,
+      "files": [
+        "actions/create.py",
+        "actions/review.py",
+        "actions/confirm.py",
+        "actions/cancel.py",
+        "actions/close.py"
+      ]
+    },
+    "classification": {
+      "archetype": "workflow_case",
+      "doc_kind": "workflow_case"
+    }
+  },
+  "runtime": {
+    "source_of_truth": "doc_folder",
+    "generated_from": [
+      "doc.json",
+      "schema.json",
+      "actions.json",
+      "settings.json",
+      "logic_seed.json"
+    ],
+    "generator": "plug.apps.doc.file_handler"
+  }
+}

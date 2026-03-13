@@ -1,0 +1,10 @@
+{
+  "modules": [
+    "customer_service_administration",
+    "filing_records_management",
+    "business_correspondence",
+    "office_procedures_workflow",
+    "calendar_schedule_management",
+    "office_systems_tools"
+  ]
+}

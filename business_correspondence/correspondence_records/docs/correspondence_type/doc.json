@@ -1,0 +1,27 @@
+{
+  "doc_key": "correspondence_type",
+  "doc_title": "Correspondence Type",
+  "doc_kind": "reference",
+  "status": "draft",
+  "module_id": "business_correspondence",
+  "submodule_id": "correspondence_records",
+  "app_id": "office_administration",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "reference",
+  "classification": {
+    "archetype": "reference",
+    "bundle": "administration"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "administration",
+    "app": "office_administration",
+    "module": "business_correspondence",
+    "submodule": "correspondence_records",
+    "reference_doc_id": "correspondence_type",
+    "evidence_gaps": [
+      "final type taxonomy",
+      "approval defaults"
+    ]
+  }
+}
