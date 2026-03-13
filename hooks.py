@@ -4,7 +4,7 @@
 app_name = "office_administration"
 app_title = "My Plug App"
 app_description = "This is a new plug app."
-app_publisher = "Triotek Ltd"
+app_publisher = "Triotek-Ltd"
 app_email = "contact@example.io"
 app_license = "CUSTOM-PROPRIETARY"
 

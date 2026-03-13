@@ -2,13 +2,13 @@
   "id": "office_administration",
   "title": "My Plug App",
   "description": "This is a new plug app.",
-  "publisher": "Triotek Ltd",
+  "publisher": "Triotek-Ltd",
   "email": "contact@example.io",
   "license": {
     "id": "CUSTOM-PROPRIETARY",
     "type": "proprietary_custom",
     "terms_ref": "LICENSE",
-    "owner": "Triotek Ltd"
+    "owner": "Triotek-Ltd"
   },
   "type": "3plug_app",
   "status": "draft",

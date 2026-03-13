@@ -1,7 +1,7 @@
 3plug Custom Proprietary License (Placeholder)
 
 License ID: CUSTOM-PROPRIETARY
-Owner: Triotek Systems Ltd (or the app/bundle publisher stated in app metadata)
+Owner: Triotek-Ltd (or the app/bundle publisher stated in app metadata)
 
 This software is proprietary and is not licensed under an open-source license.
 Use, copying, modification, redistribution, sublicensing, and deployment are

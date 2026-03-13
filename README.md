@@ -7,7 +7,7 @@ Welcome to **office_administration**!.
 - **App Name**: office_administration
 - **App Title**: My Plug App
 - **App Description**: This is a new plug app.
-- **Publisher**: Triotek Ltd
+- **Publisher**: Triotek-Ltd
 - **Publisher Email**: contact@example.io
 - **License**: CUSTOM-PROPRIETARY
 
@@ -41,7 +41,7 @@ Follow the steps below to get started with **office_administration**:
 
 ## License
 
-This app is licensed under **CUSTOM-PROPRIETARY** (Triotek custom proprietary terms).
+This app is licensed under **CUSTOM-PROPRIETARY** (Triotek-Ltd proprietary terms).
 See the app `LICENSE` file and publisher terms for full conditions.
 
 ## Contributing
