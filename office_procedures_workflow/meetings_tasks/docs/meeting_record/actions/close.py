@@ -8,7 +8,7 @@ ACTION_ID = "close"
 ACTION_RULE = {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Capture the schedule, agenda, attendance, and outcomes of office meetings.', 'actors': ['chair', 'recorder', 'office administrator'], 'primary_transitions': ['meeting_record: draft -> scheduled -> completed -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': [], 'primary_actions': [], 'primary_transitions': [], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'update': ['scheduler'], 'confirm': ['participants'], 'close': ['scheduler'], 'archive': ['scheduler']}}
 
 def handle_close(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

@@ -58,13 +58,14 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "requester": "actor_reference"
+      "requester": "actor_reference",
+      "related_calendar_event": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "request_no",
+      "request_number",
       "requester",
       "purpose"
     ],
@@ -86,25 +87,61 @@
       "closed"
     ],
     "action_targets": {
-      "confirm": "confirmed",
       "create": null,
-      "close": "closed",
+      "review": null,
+      "confirm": "confirmed",
       "cancel": null,
-      "review": null
+      "close": "closed"
     }
   },
   "workflow_hints": {
-    "business_objective": "Capture and progress scheduling requests into confirmed calendar events.",
+    "business_objective": "receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements",
     "actors": [
-      "requester",
       "scheduler",
-      "office administrator"
+      "participants",
+      "admin support"
+    ],
+    "start_condition": "a meeting, travel, or calendar request is received",
+    "ordered_steps": [
+      "Capture the scheduling or travel request.",
+      "Update the event for changes, conflicts, or cancellations."
+    ],
+    "primary_actions": [
+      "create",
+      "review",
+      "reschedule",
+      "cancel",
+      "close"
     ],
     "primary_transitions": [
-      "schedule_request: draft -> proposed -> confirmed -> closed",
-      "schedule_request: proposed -> cancelled"
-    ]
+      "schedule_request: draft -> in_review",
+      "schedule_request: in_review -> resolved -> closed"
+    ],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "action_actors": {
+      "create": [
+        "scheduler"
+      ],
+      "review": [
+        "participants"
+      ],
+      "confirm": [
+        "participants"
+      ],
+      "cancel": [
+        "scheduler"
+      ],
+      "close": [
+        "scheduler"
+      ]
+    }
   },
+  "downstream_effects": [
+    "supports meetings, travel, and service coordination"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "calendar_event"
   ],

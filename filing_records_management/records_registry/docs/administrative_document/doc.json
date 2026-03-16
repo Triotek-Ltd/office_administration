@@ -20,8 +20,9 @@
     "submodule": "records_registry",
     "reference_doc_id": "administrative_document",
     "evidence_gaps": [
-      "document subtype taxonomy",
-      "physical vs digital retention split"
+      "final retention series mapping",
+      "physical",
+      "digital storage model"
     ]
   }
 }

@@ -1,0 +1,130 @@
+{
+  "doc_id": "service_log_entry",
+  "doc_title": "Service Log Entry",
+  "archetype": "ledger",
+  "doc_kind": "ledger",
+  "actions": [
+    "record",
+    "view",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "active",
+    "states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 3,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "posting_flow",
+      "supports_reconciliation": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "posting_date": "posting_date",
+      "related_service_case": "relation_collection"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "log_number",
+      "case_link",
+      "timestamp"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "posting_date",
+      "workflow_state"
+    ],
+    "initial_state": "active",
+    "lifecycle_states": [
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "record": null,
+      "view": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {
+    "business_objective": "receive, classify, assign, resolve, and document inquiries and complaints",
+    "actors": [
+      "service desk officer",
+      "assigned department owner",
+      "supervisor",
+      "customer"
+    ],
+    "start_condition": "a customer inquiry or complaint is received",
+    "ordered_steps": [
+      "Record actions taken during handling.",
+      "Archive service documentation."
+    ],
+    "primary_actions": [
+      "record",
+      "view",
+      "archive"
+    ],
+    "primary_transitions": [
+      "service_log_entry: active"
+    ],
+    "downstream_effects": [
+      "service cases feed reporting, quality improvement, and risk/compliance review"
+    ],
+    "action_actors": {
+      "record": [
+        "service desk officer"
+      ],
+      "archive": [
+        "assigned department owner"
+      ]
+    }
+  },
+  "downstream_effects": [
+    "service cases feed reporting, quality improvement, and risk/compliance review"
+  ],
+  "action_side_effects_file": "side_effects.json",
+  "related_docs": [
+    "service_case"
+  ],
+  "borrowed_fields": [
+    "case type",
+    "urgency",
+    "owner from service_case"
+  ]
+}

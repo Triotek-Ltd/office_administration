@@ -58,13 +58,14 @@
       "owner": "actor_reference",
       "effective_date": "schedule_marker",
       "review_date": "schedule_marker",
-      "publication_status": "status_flag"
+      "publication_status": "status_flag",
+      "related_workflow_task": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "procedure_no",
+      "procedure_number",
       "purpose",
       "owner"
     ],
@@ -86,22 +87,57 @@
     ],
     "action_targets": {
       "create": null,
+      "update": null,
       "review": null,
-      "archive": "archived",
       "publish": "published",
-      "update": null
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Define and publish office procedures that drive repeatable operational work.",
+    "business_objective": "maintain standard office procedures, run recurring coordination meetings, and ensure agreed actions are tracked to closure",
     "actors": [
-      "office administrator",
-      "process owner"
+      "admin coordinator",
+      "meeting owner",
+      "task owners"
+    ],
+    "start_condition": "an internal procedure or meeting-driven workflow must be coordinated",
+    "ordered_steps": [
+      "Create or revise the office procedure baseline."
+    ],
+    "primary_actions": [
+      "create",
+      "update",
+      "review",
+      "approve"
     ],
     "primary_transitions": [
-      "office_procedure: draft -> approved -> published -> archived"
-    ]
+      "office_procedure: draft -> in_review -> approved -> active"
+    ],
+    "downstream_effects": [
+      "supports coordination, compliance, and operational follow-through"
+    ],
+    "action_actors": {
+      "create": [
+        "admin coordinator"
+      ],
+      "update": [
+        "admin coordinator"
+      ],
+      "review": [
+        "admin coordinator"
+      ],
+      "publish": [
+        "meeting owner"
+      ],
+      "archive": [
+        "meeting owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "supports coordination, compliance, and operational follow-through"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "workflow_task"
   ],

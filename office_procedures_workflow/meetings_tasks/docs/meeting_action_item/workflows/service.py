@@ -8,10 +8,10 @@ ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'in_progress', 'closed']
 TERMINAL_STATES = ['closed']
-ACTION_RULES = {'close': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'closed'}, 'create': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'closed'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track discrete follow-up commitments created during meetings until completion.', 'actors': ['owner', 'chair', 'office administrator'], 'primary_transitions': ['meeting_action_item: open -> in_progress -> closed']}
+WORKFLOW_HINTS = {}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

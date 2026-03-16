@@ -52,15 +52,17 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "access_date": "schedule_marker"
+      "access_date": "schedule_marker",
+      "related_administrative_document": "relation_collection",
+      "related_document_access_request": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "log_no",
-      "request",
-      "document"
+      "log_number",
+      "request_link",
+      "document_link"
     ],
     "list_columns": [
       "title",
@@ -83,20 +85,50 @@
     }
   },
   "workflow_hints": {
-    "business_objective": "Record the audit trail of document access activity and outcomes.",
+    "business_objective": "register, store, retrieve, control, and dispose of administrative records",
     "actors": [
       "records officer",
-      "custodian"
+      "document owner",
+      "requester",
+      "approver",
+      "archive custodian"
     ],
-    "primary_transitions": [
-      "access_log_entry: active -> archived"
-    ]
+    "start_condition": "a document is received or created and must be governed as a business record",
+    "ordered_steps": [
+      "Handle retrieval and access requests."
+    ],
+    "primary_actions": [
+      "create",
+      "assign",
+      "approve",
+      "record",
+      "close"
+    ],
+    "primary_transitions": [],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable"
+    ],
+    "action_actors": {
+      "record": [
+        "records officer"
+      ],
+      "archive": [
+        "document owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "records become available to compliance, audit, and legal processes",
+    "access and disposal events become auditable"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "administrative_document",
     "document_access_request"
   ],
   "borrowed_fields": [
-    "request context from document_access_request"
+    "requester",
+    "target document context from document_access_request"
   ]
 }

@@ -20,7 +20,7 @@
     "submodule": "office_files",
     "reference_doc_id": "version_record",
     "evidence_gaps": [
-      "immutable vs replaceable versioning"
+      "immutable vs replaceable versioning strategy"
     ]
   }
 }

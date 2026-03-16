@@ -1,6 +1,6 @@
 {
   "docs": [
-    "document_access_request",
-    "access_log_entry"
+    "access_log_entry",
+    "document_access_request"
   ]
 }

@@ -52,14 +52,15 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "event_date": "schedule_marker"
+      "event_date": "schedule_marker",
+      "related_correspondence_record": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "log_no",
-      "correspondence",
+      "log_number",
+      "correspondence_link",
       "event_date"
     ],
     "list_columns": [
@@ -83,19 +84,37 @@
     }
   },
   "workflow_hints": {
-    "business_objective": "Maintain an audit trail of communication events for correspondence processing.",
+    "relation_context": {
+      "related_docs": [
+        "correspondence_record"
+      ],
+      "borrowed_fields": [
+        "correspondence type",
+        "subject from correspondence_record"
+      ],
+      "inferred_roles": [
+        "approver"
+      ]
+    },
     "actors": [
-      "office administrator",
-      "operator"
+      "approver"
     ],
-    "primary_transitions": [
-      "communication_log_entry: active -> archived"
-    ]
+    "action_actors": {
+      "record": [
+        "approver"
+      ],
+      "archive": [
+        "approver"
+      ]
+    }
   },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "correspondence_record"
   ],
   "borrowed_fields": [
-    "correspondence type and subject from correspondence_record"
+    "correspondence type",
+    "subject from correspondence_record"
   ]
 }

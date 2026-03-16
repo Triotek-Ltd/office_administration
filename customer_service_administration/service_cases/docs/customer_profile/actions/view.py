@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "customer_profile"
 ACTION_ID = "view"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': None}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain the service-facing customer identity and contact context used across service cases.', 'actors': ['service desk officer', 'customer service supervisor'], 'start_condition': 'A service interaction requires a customer-facing party record.', 'ordered_steps': ['Create or update the customer profile.', 'Record contact details and preferred communication method.', 'Use the profile to support service-case handling.'], 'primary_actions': ['create', 'update', 'view', 'archive'], 'primary_transitions': ['customer_profile: active -> archived'], 'downstream_effects': ['Service cases can reuse customer identity and contact details.']}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['service_case'], 'borrowed_fields': [], 'inferred_roles': ['account owner', 'case owner']}, 'actors': ['account owner', 'case owner'], 'action_actors': {'create': ['account owner'], 'update': ['account owner'], 'archive': ['account owner']}}
 
 def handle_view(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

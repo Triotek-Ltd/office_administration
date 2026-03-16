@@ -55,16 +55,17 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "start_at": "schedule_marker",
-      "end_at": "schedule_marker",
+      "start_at": "event_start",
+      "end_at": "event_end",
       "chair": "actor_reference",
-      "attendees": "participant_collection"
+      "attendees": "participant_collection",
+      "related_meeting_action_item": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "meeting_no",
+      "meeting_number",
       "date",
       "location"
     ],
@@ -85,24 +86,49 @@
       "archived"
     ],
     "action_targets": {
-      "confirm": "completed",
       "create": null,
-      "archive": "archived",
+      "update": null,
+      "confirm": "completed",
       "close": null,
-      "update": null
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Capture the schedule, agenda, attendance, and outcomes of office meetings.",
+    "business_objective": "receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements",
     "actors": [
-      "chair",
-      "recorder",
-      "office administrator"
+      "scheduler",
+      "participants",
+      "admin support"
     ],
-    "primary_transitions": [
-      "meeting_record: draft -> scheduled -> completed -> archived"
-    ]
+    "start_condition": "a meeting, travel, or calendar request is received",
+    "ordered_steps": [],
+    "primary_actions": [],
+    "primary_transitions": [],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "action_actors": {
+      "create": [
+        "scheduler"
+      ],
+      "update": [
+        "scheduler"
+      ],
+      "confirm": [
+        "participants"
+      ],
+      "close": [
+        "scheduler"
+      ],
+      "archive": [
+        "scheduler"
+      ]
+    }
   },
+  "downstream_effects": [
+    "supports meetings, travel, and service coordination"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "meeting_action_item"
   ],

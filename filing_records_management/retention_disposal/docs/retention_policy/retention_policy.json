@@ -14,7 +14,7 @@
     "doc_key": "retention_policy"
   },
   "doc_key": "retention_policy",
-  "doc_title": "retention_policy",
+  "doc_title": "Retention Policy",
   "allowed_actions": [
     "create",
     "update",
@@ -58,7 +58,10 @@
         "disposal_rule",
         "authority_source"
       ],
-      "relations": [],
+      "relations": [
+        "related_document_classification",
+        "related_disposal_action"
+      ],
       "amounts": [],
       "dates": [
         "review_date"
@@ -338,6 +341,54 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_document_classification",
+        "label": "Related Document Classification",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "document_classification",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_disposal_action",
+        "label": "Related Disposal Action",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "disposal_action",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -413,17 +464,51 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
+          "create",
+          "update",
           "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
           "archive"
+        ]
+      },
+      {
+        "role_id": "records officer",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "update"
+        ]
+      },
+      {
+        "role_id": "document owner",
+        "actions": [
+          "view",
+          "list",
+          "review",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "requester",
+        "actions": [
+          "view",
+          "list"
+        ]
+      },
+      {
+        "role_id": "approver",
+        "actions": [
+          "view",
+          "list"
+        ]
+      },
+      {
+        "role_id": "archive custodian",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -496,7 +581,20 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_document_classification",
+        "doc_id": "document_classification",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_disposal_action",
+        "doc_id": "disposal_action",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -504,7 +602,10 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "document_classification",
+        "disposal_action"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [],
@@ -523,15 +624,43 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Define the retention and disposal controls applied to administrative records.",
+        "business_objective": "register, store, retrieve, control, and dispose of administrative records",
         "actors": [
           "records officer",
-          "compliance reviewer"
+          "document owner",
+          "requester",
+          "approver",
+          "archive custodian"
         ],
-        "primary_transitions": [
-          "retention_policy: draft -> active -> archived"
-        ]
-      }
+        "start_condition": "a document is received or created and must be governed as a business record",
+        "ordered_steps": [
+          "Link retention and storage controls."
+        ],
+        "primary_actions": [
+          "review",
+          "update"
+        ],
+        "primary_transitions": [],
+        "downstream_effects": [
+          "records become available to compliance, audit, and legal processes",
+          "access and disposal events become auditable"
+        ],
+        "action_actors": {
+          "create": [
+            "records officer"
+          ],
+          "update": [
+            "records officer"
+          ],
+          "review": [
+            "document owner"
+          ],
+          "archive": [
+            "document owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -607,6 +736,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -623,6 +755,33 @@
       "doc_kind": "configuration"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/filing_records_management/retention_disposal/retention_policy/",
+    "status_field": "workflow_state",
+    "initial_state": "draft",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "draft",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "document_classification",
+      "disposal_action"
+    ],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable"
+    ],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -630,7 +789,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

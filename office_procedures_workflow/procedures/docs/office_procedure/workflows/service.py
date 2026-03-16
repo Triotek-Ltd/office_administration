@@ -8,10 +8,10 @@ ARCHETYPE = "configuration"
 INITIAL_STATE = 'draft'
 STATES = ['draft', 'approved', 'published', 'archived']
 TERMINAL_STATES = ['archived']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': 'archived'}, 'publish': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': 'published'}, 'update': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': None}, 'update': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': None}, 'publish': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': 'published'}, 'archive': {'allowed_in_states': ['draft', 'approved', 'published'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Define and publish office procedures that drive repeatable operational work.', 'actors': ['office administrator', 'process owner'], 'primary_transitions': ['office_procedure: draft -> approved -> published -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'maintain standard office procedures, run recurring coordination meetings, and ensure agreed actions are tracked to closure', 'actors': ['admin coordinator', 'meeting owner', 'task owners'], 'start_condition': 'an internal procedure or meeting-driven workflow must be coordinated', 'ordered_steps': ['Create or revise the office procedure baseline.'], 'primary_actions': ['create', 'update', 'review', 'approve'], 'primary_transitions': ['office_procedure: draft -> in_review -> approved -> active'], 'downstream_effects': ['supports coordination, compliance, and operational follow-through'], 'action_actors': {'create': ['admin coordinator'], 'update': ['admin coordinator'], 'review': ['admin coordinator'], 'publish': ['meeting owner'], 'archive': ['meeting owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

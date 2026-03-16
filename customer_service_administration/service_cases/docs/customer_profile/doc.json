@@ -20,8 +20,8 @@
     "submodule": "service_cases",
     "reference_doc_id": "customer_profile",
     "evidence_gaps": [
-      "duplicate handling",
-      "external party classification"
+      "duplicate management",
+      "party classification model"
     ]
   }
 }

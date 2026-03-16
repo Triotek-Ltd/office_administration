@@ -8,7 +8,7 @@ ACTION_ID = "return_for_revision"
 ACTION_RULE = {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Capture review and approval decisions for correspondence that requires controlled issuance.', 'actors': ['approver', 'office administrator'], 'primary_transitions': ['correspondence_approval: open -> in_review -> approved -> closed']}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['correspondence_record'], 'borrowed_fields': ['subject', 'sender', 'recipient', 'approval-required flag from correspondence_record'], 'inferred_roles': ['approver']}, 'actors': ['approver'], 'action_actors': {'submit': ['approver'], 'approve': ['approver'], 'close': ['approver']}}
 
 def handle_return_for_revision(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

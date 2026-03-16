@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'entity_lifecycle', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['draft', 'active', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'owner': 'actor_reference'}, 'search_fields': ['title', 'reference_no', 'description', 'file_no', 'file_type', 'owner'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'review': None, 'archive': 'archived', 'update': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'owner': 'actor_reference', 'related_version_record': 'relation_collection', 'related_access_grant': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'file_number', 'file_type', 'owner'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'review': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Maintain the master record for office-managed files and systems artifacts.', 'actors': ['office administrator', 'owner'], 'primary_transitions': ['office_file_record: draft -> active -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'govern office files and tool access, and resolve day-to-day office-system support issues', 'actors': ['office user', 'system admin', 'support owner'], 'start_condition': 'an office document or tool access/update event occurs', 'ordered_steps': ['Register or update the office file record.'], 'primary_actions': ['create', 'update', 'archive'], 'primary_transitions': ['office_file_record: draft -> active'], 'downstream_effects': ['supports office controls and operational continuity'], 'action_actors': {'create': ['office user'], 'update': ['office user'], 'review': ['system admin'], 'archive': ['support owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['supports office controls and operational continuity'], 'related_docs': ['version_record', 'access_grant'], 'action_targets': {'create': None, 'update': None, 'review': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "office_file_record"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

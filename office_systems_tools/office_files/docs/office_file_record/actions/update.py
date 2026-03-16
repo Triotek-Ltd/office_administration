@@ -8,7 +8,7 @@ ACTION_ID = "update"
 ACTION_RULE = {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain the master record for office-managed files and systems artifacts.', 'actors': ['office administrator', 'owner'], 'primary_transitions': ['office_file_record: draft -> active -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'govern office files and tool access, and resolve day-to-day office-system support issues', 'actors': ['office user', 'system admin', 'support owner'], 'start_condition': 'an office document or tool access/update event occurs', 'ordered_steps': ['Register or update the office file record.'], 'primary_actions': ['create', 'update', 'archive'], 'primary_transitions': ['office_file_record: draft -> active'], 'downstream_effects': ['supports office controls and operational continuity'], 'action_actors': {'create': ['office user'], 'update': ['office user'], 'review': ['system admin'], 'archive': ['support owner']}}
 
 def handle_update(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

@@ -1,7 +1,7 @@
 {
   "docs": [
-    "records_register_entry",
     "administrative_document",
-    "document_classification"
+    "document_classification",
+    "records_register_entry"
   ]
 }

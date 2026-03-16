@@ -20,7 +20,8 @@
     "submodule": "retention_disposal",
     "reference_doc_id": "retention_policy",
     "evidence_gaps": [
-      "legal hold handling"
+      "jurisdiction-specific retention triggers",
+      "override rules"
     ]
   }
 }

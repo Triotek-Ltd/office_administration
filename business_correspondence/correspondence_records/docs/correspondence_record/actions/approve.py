@@ -8,7 +8,7 @@ ACTION_ID = "approve"
 ACTION_RULE = {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'approved'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Prepare, route, approve, send, and file internal and external correspondence records.', 'actors': ['office administrator', 'approver', 'correspondence owner'], 'primary_transitions': ['correspondence_record: draft -> in_review -> approved -> sent -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'receive, classify, assign, resolve, and document inquiries and complaints', 'actors': ['service desk officer', 'assigned department owner', 'supervisor', 'customer'], 'start_condition': 'a customer inquiry or complaint is received', 'ordered_steps': ['Confirm resolution with the customer.'], 'primary_actions': ['confirm', 'close'], 'primary_transitions': [], 'downstream_effects': ['service cases feed reporting, quality improvement, and risk/compliance review'], 'action_actors': {'create': ['service desk officer'], 'review': ['assigned department owner'], 'submit': ['service desk officer'], 'approve': ['supervisor'], 'issue': ['assigned department owner'], 'track': ['service desk officer'], 'archive': ['assigned department owner']}}
 
 def handle_approve(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

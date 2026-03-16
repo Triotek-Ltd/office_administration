@@ -14,7 +14,7 @@
     "doc_key": "travel_arrangement"
   },
   "doc_key": "travel_arrangement",
-  "doc_title": "travel_arrangement",
+  "doc_title": "Travel Arrangement",
   "allowed_actions": [
     "create",
     "issue",
@@ -61,14 +61,14 @@
       ],
       "content": [
         "description",
-        "travel_no",
-        "traveler",
+        "travel_number",
         "destination",
-        "authorization_no",
+        "authorization_number",
         "advance_flag",
         "status"
       ],
       "relations": [
+        "traveler",
         "event"
       ],
       "amounts": [
@@ -288,8 +288,8 @@
         }
       },
       {
-        "field_id": "travel_no",
-        "label": "Travel No",
+        "field_id": "travel_number",
+        "label": "Travel Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -303,10 +303,10 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
@@ -320,8 +320,8 @@
         "default": null,
         "unique": false,
         "options": null,
-        "purpose": null,
-        "linked_doc": null,
+        "purpose": "actor_reference",
+        "linked_doc": "participant",
         "depends_on": null,
         "mandatory_depends_on": null,
         "read_only_depends_on": null,
@@ -432,8 +432,8 @@
         }
       },
       {
-        "field_id": "authorization_no",
-        "label": "Authorization No",
+        "field_id": "authorization_number",
+        "label": "Authorization Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -447,10 +447,10 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
@@ -509,7 +509,7 @@
       "title",
       "reference_no",
       "description",
-      "travel_no",
+      "travel_number",
       "traveler",
       "event"
     ],
@@ -567,7 +567,7 @@
           "confirmed",
           "cancelled"
         ],
-        "transitions_to": null
+        "transitions_to": "confirmed"
       },
       "cancel": {
         "allowed_in_states": [
@@ -590,17 +590,39 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
+          "create",
+          "issue",
           "confirm",
+          "cancel",
           "archive"
+        ]
+      },
+      {
+        "role_id": "scheduler",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "cancel",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "participants",
+        "actions": [
+          "view",
+          "list",
+          "confirm"
+        ]
+      },
+      {
+        "role_id": "admin support",
+        "actions": [
+          "view",
+          "list",
+          "issue"
         ]
       }
     ],
@@ -692,7 +714,13 @@
     },
     "borrowed_fields": [
       {
-        "description": "traveler and event context from participant and calendar_event"
+        "description": "traveler"
+      },
+      {
+        "description": "event context from participant"
+      },
+      {
+        "description": "calendar_event"
       }
     ],
     "ui_panels": {
@@ -710,17 +738,47 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Track travel plans linked to office events and participants.",
+        "business_objective": "receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements",
         "actors": [
-          "traveler",
           "scheduler",
-          "office administrator"
+          "participants",
+          "admin support"
+        ],
+        "start_condition": "a meeting, travel, or calendar request is received",
+        "ordered_steps": [
+          "Create supporting travel arrangements where required."
+        ],
+        "primary_actions": [
+          "create",
+          "approve",
+          "issue",
+          "close"
         ],
         "primary_transitions": [
-          "travel_arrangement: draft -> confirmed -> archived",
-          "travel_arrangement: draft -> cancelled"
-        ]
-      }
+          "travel_arrangement: draft -> approved -> issued -> closed"
+        ],
+        "downstream_effects": [
+          "supports meetings, travel, and service coordination"
+        ],
+        "action_actors": {
+          "create": [
+            "scheduler"
+          ],
+          "issue": [
+            "admin support"
+          ],
+          "confirm": [
+            "participants"
+          ],
+          "cancel": [
+            "scheduler"
+          ],
+          "archive": [
+            "scheduler"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -800,6 +858,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -817,6 +878,39 @@
       "doc_kind": "transaction"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/calendar_schedule_management/travel_arrangements/travel_arrangement/",
+    "status_field": "workflow_state",
+    "initial_state": "draft",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "confirm",
+        "source_state": "draft",
+        "target_state": "confirmed",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "draft",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "calendar_event",
+      "participant"
+    ],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -824,7 +918,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

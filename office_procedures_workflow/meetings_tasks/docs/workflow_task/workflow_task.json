@@ -14,7 +14,7 @@
     "doc_key": "workflow_task"
   },
   "doc_key": "workflow_task",
-  "doc_title": "workflow_task",
+  "doc_title": "Workflow Task",
   "allowed_actions": [
     "create",
     "assign",
@@ -61,13 +61,16 @@
       ],
       "content": [
         "description",
-        "task_no",
+        "task_number",
         "source_procedure",
         "assignee",
         "priority",
         "outcome"
       ],
-      "relations": [],
+      "relations": [
+        "related_office_procedure",
+        "related_meeting_record"
+      ],
       "amounts": [],
       "dates": [
         "due_date"
@@ -182,8 +185,8 @@
         }
       },
       {
-        "field_id": "task_no",
-        "label": "Task No",
+        "field_id": "task_number",
+        "label": "Task Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -197,10 +200,10 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
@@ -238,7 +241,7 @@
         "default": null,
         "unique": false,
         "options": null,
-        "purpose": null,
+        "purpose": "actor_reference",
         "linked_doc": null,
         "depends_on": null,
         "mandatory_depends_on": null,
@@ -324,6 +327,54 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_office_procedure",
+        "label": "Related Office Procedure",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "office_procedure",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_meeting_record",
+        "label": "Related Meeting Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "meeting_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -331,7 +382,7 @@
       "title",
       "reference_no",
       "description",
-      "task_no",
+      "task_number",
       "source_procedure",
       "assignee"
     ],
@@ -380,7 +431,7 @@
           "open",
           "in_progress"
         ],
-        "transitions_to": null
+        "transitions_to": "in_progress"
       },
       "track": {
         "allowed_in_states": [
@@ -408,16 +459,12 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
+          "create",
           "assign",
           "track",
-          "monitor",
-          "confirm",
+          "close",
           "archive"
         ]
       }
@@ -491,7 +538,20 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_office_procedure",
+        "doc_id": "office_procedure",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_meeting_record",
+        "doc_id": "meeting_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -499,12 +559,18 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "office_procedure",
+        "meeting_record"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
       {
-        "description": "procedure ownership and deadlines from office_procedure"
+        "description": "procedure ownership"
+      },
+      {
+        "description": "deadlines from office_procedure"
       }
     ],
     "ui_panels": {
@@ -521,17 +587,7 @@
       "doc_key": "workflow_task",
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
-      "workflow_hints": {
-        "business_objective": "Track office work items created from procedures, meetings, and follow-through requirements.",
-        "actors": [
-          "assignee",
-          "owner",
-          "office administrator"
-        ],
-        "primary_transitions": [
-          "workflow_task: open -> in_progress -> closed -> archived"
-        ]
-      }
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -607,6 +663,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -624,6 +683,42 @@
       "doc_kind": "workflow_case"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/office_procedures_workflow/meetings_tasks/workflow_task/",
+    "status_field": "workflow_state",
+    "initial_state": "open",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "assign",
+        "source_state": "open",
+        "target_state": "in_progress",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "close",
+        "source_state": "open",
+        "target_state": "closed",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "open",
+        "target_state": "archived",
+        "disallowed_state": "closed"
+      }
+    ],
+    "related_docs": [
+      "office_procedure",
+      "meeting_record"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -631,7 +726,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

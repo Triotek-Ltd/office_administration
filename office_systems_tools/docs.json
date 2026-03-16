@@ -2,7 +2,7 @@
   "docs": [
     "access_grant",
     "office_file_record",
-    "version_record",
-    "tool_issue_case"
+    "tool_issue_case",
+    "version_record"
   ]
 }

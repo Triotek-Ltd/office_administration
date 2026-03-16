@@ -54,14 +54,16 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "owner": "actor_reference",
-      "completion_note": "completion_note"
+      "completion_note": "completion_note",
+      "related_meeting_record": "relation_collection",
+      "related_workflow_task": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "item_no",
-      "meeting",
+      "item_number",
+      "meeting_link",
       "owner"
     ],
     "list_columns": [
@@ -80,28 +82,21 @@
       "closed"
     ],
     "action_targets": {
-      "close": "closed",
       "create": null,
       "assign": "in_progress",
-      "track": null
+      "track": null,
+      "close": "closed"
     }
   },
-  "workflow_hints": {
-    "business_objective": "Track discrete follow-up commitments created during meetings until completion.",
-    "actors": [
-      "owner",
-      "chair",
-      "office administrator"
-    ],
-    "primary_transitions": [
-      "meeting_action_item: open -> in_progress -> closed"
-    ]
-  },
+  "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "meeting_record",
     "workflow_task"
   ],
   "borrowed_fields": [
-    "meeting date and context from meeting_record"
+    "meeting date",
+    "context from meeting_record"
   ]
 }

@@ -58,14 +58,15 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "owner": "actor_reference",
-      "due_date": "schedule_marker"
+      "due_date": "schedule_marker",
+      "related_correspondence_record": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "followup_no",
-      "correspondence",
+      "follow_up_number",
+      "correspondence_link",
       "owner"
     ],
     "list_columns": [
@@ -86,27 +87,56 @@
       "archived"
     ],
     "action_targets": {
-      "close": "closed",
       "create": null,
       "assign": "in_progress",
-      "archive": "archived",
-      "track": null
+      "track": null,
+      "close": "closed",
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Track action items and expected responses that arise from correspondence records.",
+    "relation_context": {
+      "related_docs": [
+        "correspondence_record"
+      ],
+      "borrowed_fields": [
+        "recipient",
+        "subject",
+        "communication date from correspondence_record"
+      ],
+      "inferred_roles": [
+        "approver"
+      ]
+    },
     "actors": [
-      "owner",
-      "office administrator"
+      "approver"
     ],
-    "primary_transitions": [
-      "correspondence_followup: open -> in_progress -> closed -> archived"
-    ]
+    "action_actors": {
+      "create": [
+        "approver"
+      ],
+      "assign": [
+        "approver"
+      ],
+      "track": [
+        "approver"
+      ],
+      "close": [
+        "approver"
+      ],
+      "archive": [
+        "approver"
+      ]
+    }
   },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "correspondence_record"
   ],
   "borrowed_fields": [
-    "recipient, subject, and communication date from correspondence_record"
+    "recipient",
+    "subject",
+    "communication date from correspondence_record"
   ]
 }

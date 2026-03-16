@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "version_record"
 ACTION_ID = "archive"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': 'archived'}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': 'archived'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain the change history for office file records and their versions.', 'actors': ['owner', 'office administrator'], 'primary_transitions': ['version_record: active -> archived']}
+WORKFLOW_HINTS = {}
 
 def handle_archive(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

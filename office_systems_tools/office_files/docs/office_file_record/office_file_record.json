@@ -14,7 +14,7 @@
     "doc_key": "office_file_record"
   },
   "doc_key": "office_file_record",
-  "doc_title": "office_file_record",
+  "doc_title": "Office File Record",
   "allowed_actions": [
     "create",
     "update",
@@ -51,14 +51,17 @@
       ],
       "content": [
         "description",
-        "file_no",
+        "file_number",
         "file_type",
         "owner",
         "storage_path",
         "access_class",
         "current_version"
       ],
-      "relations": [],
+      "relations": [
+        "related_version_record",
+        "related_access_grant"
+      ],
       "amounts": [],
       "dates": [],
       "parties": [],
@@ -170,8 +173,8 @@
         }
       },
       {
-        "field_id": "file_no",
-        "label": "File No",
+        "field_id": "file_number",
+        "label": "File Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -185,10 +188,10 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
@@ -226,7 +229,7 @@
         "default": null,
         "unique": false,
         "options": null,
-        "purpose": null,
+        "purpose": "actor_reference",
         "linked_doc": null,
         "depends_on": null,
         "mandatory_depends_on": null,
@@ -312,6 +315,54 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_version_record",
+        "label": "Related Version Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "version_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_access_grant",
+        "label": "Related Access Grant",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "access_grant",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -319,7 +370,7 @@
       "title",
       "reference_no",
       "description",
-      "file_no",
+      "file_number",
       "file_type",
       "owner"
     ],
@@ -387,16 +438,36 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
+          "create",
+          "update",
           "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "office user",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "update"
+        ]
+      },
+      {
+        "role_id": "system admin",
+        "actions": [
+          "view",
+          "list",
+          "review"
+        ]
+      },
+      {
+        "role_id": "support owner",
+        "actions": [
+          "view",
+          "list",
           "archive"
         ]
       }
@@ -470,7 +541,20 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_version_record",
+        "doc_id": "version_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_access_grant",
+        "doc_id": "access_grant",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -478,7 +562,10 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "version_record",
+        "access_grant"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [],
@@ -497,15 +584,43 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Maintain the master record for office-managed files and systems artifacts.",
+        "business_objective": "govern office files and tool access, and resolve day-to-day office-system support issues",
         "actors": [
-          "office administrator",
-          "owner"
+          "office user",
+          "system admin",
+          "support owner"
+        ],
+        "start_condition": "an office document or tool access/update event occurs",
+        "ordered_steps": [
+          "Register or update the office file record."
+        ],
+        "primary_actions": [
+          "create",
+          "update",
+          "archive"
         ],
         "primary_transitions": [
-          "office_file_record: draft -> active -> archived"
-        ]
-      }
+          "office_file_record: draft -> active"
+        ],
+        "downstream_effects": [
+          "supports office controls and operational continuity"
+        ],
+        "action_actors": {
+          "create": [
+            "office user"
+          ],
+          "update": [
+            "office user"
+          ],
+          "review": [
+            "system admin"
+          ],
+          "archive": [
+            "support owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -581,6 +696,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -597,6 +715,32 @@
       "doc_kind": "master"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/office_systems_tools/office_files/office_file_record/",
+    "status_field": "workflow_state",
+    "initial_state": "draft",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "draft",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "version_record",
+      "access_grant"
+    ],
+    "downstream_effects": [
+      "supports office controls and operational continuity"
+    ],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -604,7 +748,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

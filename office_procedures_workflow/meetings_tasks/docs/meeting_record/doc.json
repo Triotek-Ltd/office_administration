@@ -20,8 +20,7 @@
     "submodule": "meetings_tasks",
     "reference_doc_id": "meeting_record",
     "evidence_gaps": [
-      "quorum rules",
-      "voting requirements",
+      "quorum or voting requirements",
       "attachment handling"
     ]
   }

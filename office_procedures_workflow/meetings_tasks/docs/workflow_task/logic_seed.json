@@ -58,13 +58,15 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "assignee": "actor_reference",
-      "due_date": "schedule_marker"
+      "due_date": "schedule_marker",
+      "related_office_procedure": "relation_collection",
+      "related_meeting_record": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "task_no",
+      "task_number",
       "source_procedure",
       "assignee"
     ],
@@ -86,29 +88,22 @@
       "archived"
     ],
     "action_targets": {
-      "close": "closed",
       "create": null,
       "assign": "in_progress",
-      "archive": "archived",
-      "track": null
+      "track": null,
+      "close": "closed",
+      "archive": "archived"
     }
   },
-  "workflow_hints": {
-    "business_objective": "Track office work items created from procedures, meetings, and follow-through requirements.",
-    "actors": [
-      "assignee",
-      "owner",
-      "office administrator"
-    ],
-    "primary_transitions": [
-      "workflow_task: open -> in_progress -> closed -> archived"
-    ]
-  },
+  "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "office_procedure",
     "meeting_record"
   ],
   "borrowed_fields": [
-    "procedure ownership and deadlines from office_procedure"
+    "procedure ownership",
+    "deadlines from office_procedure"
   ]
 }

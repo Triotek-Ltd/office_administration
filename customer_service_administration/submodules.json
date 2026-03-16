@@ -1,5 +1,6 @@
 {
   "submodules": [
-    "service_cases"
+    "service_cases",
+    "service_logs"
   ]
 }

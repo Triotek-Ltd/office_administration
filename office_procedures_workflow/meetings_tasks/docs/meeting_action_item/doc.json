@@ -20,7 +20,7 @@
     "submodule": "meetings_tasks",
     "reference_doc_id": "meeting_action_item",
     "evidence_gaps": [
-      "independent doc vs child-row model"
+      "whether action items are independent docs or child rows"
     ]
   }
 }

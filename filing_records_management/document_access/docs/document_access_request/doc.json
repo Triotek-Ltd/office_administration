@@ -20,7 +20,9 @@
     "submodule": "document_access",
     "reference_doc_id": "document_access_request",
     "evidence_gaps": [
-      "approval authority matrix"
+      "approval hierarchy",
+      "access categories",
+      "service-level expectations"
     ]
   }
 }

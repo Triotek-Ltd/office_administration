@@ -14,7 +14,7 @@
     "doc_key": "version_record"
   },
   "doc_key": "version_record",
-  "doc_title": "version_record",
+  "doc_title": "Version Record",
   "allowed_actions": [
     "record",
     "view",
@@ -49,13 +49,15 @@
       ],
       "content": [
         "description",
-        "version_no",
-        "file",
+        "version_number",
+        "file_link",
         "version_label",
         "changed_by",
-        "change_summary"
+        "summary_of_change"
       ],
-      "relations": [],
+      "relations": [
+        "related_office_file_record"
+      ],
       "amounts": [],
       "dates": [
         "posting_date",
@@ -193,8 +195,8 @@
         }
       },
       {
-        "field_id": "version_no",
-        "label": "Version No",
+        "field_id": "version_number",
+        "label": "Version Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -208,17 +210,17 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
       },
       {
-        "field_id": "file",
-        "label": "File",
+        "field_id": "file_link",
+        "label": "File Link",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -313,8 +315,8 @@
         }
       },
       {
-        "field_id": "change_summary",
-        "label": "Change Summary",
+        "field_id": "summary_of_change",
+        "label": "Summary Of Change",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -335,6 +337,30 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_office_file_record",
+        "label": "Related Office File Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "office_file_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -342,8 +368,8 @@
       "title",
       "reference_no",
       "description",
-      "version_no",
-      "file",
+      "version_number",
+      "file_link",
       "version_label"
     ],
     "sort_field": "modified",
@@ -399,16 +425,9 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
           "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
           "archive"
         ]
       }
@@ -477,7 +496,14 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_office_file_record",
+        "doc_id": "office_file_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -485,12 +511,17 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "office_file_record"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
       {
-        "description": "file context from office_file_record"
+        "description": "file title"
+      },
+      {
+        "description": "owner from office_file_record"
       }
     ],
     "ui_panels": {
@@ -507,16 +538,7 @@
       "doc_key": "version_record",
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
-      "workflow_hints": {
-        "business_objective": "Maintain the change history for office file records and their versions.",
-        "actors": [
-          "owner",
-          "office administrator"
-        ],
-        "primary_transitions": [
-          "version_record: active -> archived"
-        ]
-      }
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -592,6 +614,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -607,6 +632,30 @@
       "doc_kind": "ledger"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/office_systems_tools/office_files/version_record/",
+    "status_field": "workflow_state",
+    "initial_state": "active",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "active",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "office_file_record"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -614,7 +663,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

@@ -57,15 +57,18 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "document_date": "schedule_marker"
+      "document_date": "schedule_marker",
+      "related_records_register_entry": "relation_collection",
+      "related_document_access_request": "relation_collection",
+      "related_disposal_action": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
+      "reference_number",
       "classification",
-      "record_type",
-      "document_date"
+      "record_type"
     ],
     "list_columns": [
       "title",
@@ -84,26 +87,73 @@
       "archived"
     ],
     "action_targets": {
-      "archive": "archived",
-      "classify": null,
-      "review": null,
-      "register": null,
       "create": null,
       "update": null,
-      "file": null
+      "review": null,
+      "archive": "archived",
+      "classify": null,
+      "file": null,
+      "register": null
     }
   },
   "workflow_hints": {
-    "business_objective": "Register, classify, file, and retain internal administrative documents under office records controls.",
+    "business_objective": "register, store, retrieve, control, and dispose of administrative records",
     "actors": [
       "records officer",
-      "office administrator",
-      "custodian"
+      "document owner",
+      "requester",
+      "approver",
+      "archive custodian"
+    ],
+    "start_condition": "a document is received or created and must be governed as a business record",
+    "ordered_steps": [
+      "Intake and classify the document.",
+      "Assign internal reference and register the record.",
+      "Link retention and storage controls.",
+      "Store the record and make it retrievable.",
+      "Move inactive records toward archive handling.",
+      "Execute disposal when retention expires and approval exists."
+    ],
+    "primary_actions": [
+      "create",
+      "classify",
+      "register",
+      "record",
+      "review",
+      "update",
+      "archive",
+      "submit",
+      "approve",
+      "close"
     ],
     "primary_transitions": [
-      "administrative_document: draft -> active -> archived -> disposed"
-    ]
+      "administrative_document: draft -> active",
+      "administrative_document: active -> archived -> disposed"
+    ],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable"
+    ],
+    "action_actors": {
+      "create": [
+        "records officer"
+      ],
+      "update": [
+        "records officer"
+      ],
+      "review": [
+        "document owner"
+      ],
+      "archive": [
+        "document owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "records become available to compliance, audit, and legal processes",
+    "access and disposal events become auditable"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "document_classification",
     "retention_policy",
@@ -112,7 +162,8 @@
     "disposal_action"
   ],
   "borrowed_fields": [
-    "classification display fields from document_classification",
-    "retention details from retention_policy"
+    "classification defaults from document_classification",
+    "retention duration",
+    "disposal rules from retention_policy"
   ]
 }

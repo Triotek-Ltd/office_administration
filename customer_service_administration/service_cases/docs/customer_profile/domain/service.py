@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'entity_lifecycle', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['active', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state'}, 'search_fields': ['title', 'reference_no', 'description', 'customer_no', 'name', 'email'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'active', 'lifecycle_states': ['active', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'view': None, 'archive': 'archived', 'update': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'related_service_case': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'customer_number', 'name', 'email'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'active', 'lifecycle_states': ['active', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'view': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Maintain the service-facing customer identity and contact context used across service cases.', 'actors': ['service desk officer', 'customer service supervisor'], 'start_condition': 'A service interaction requires a customer-facing party record.', 'ordered_steps': ['Create or update the customer profile.', 'Record contact details and preferred communication method.', 'Use the profile to support service-case handling.'], 'primary_actions': ['create', 'update', 'view', 'archive'], 'primary_transitions': ['customer_profile: active -> archived'], 'downstream_effects': ['Service cases can reuse customer identity and contact details.']}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['service_case'], 'borrowed_fields': [], 'inferred_roles': ['account owner', 'case owner']}, 'actors': ['account owner', 'case owner'], 'action_actors': {'create': ['account owner'], 'update': ['account owner'], 'archive': ['account owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['service_case'], 'action_targets': {'create': None, 'update': None, 'view': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "customer_profile"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

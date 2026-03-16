@@ -52,7 +52,9 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "review_date": "schedule_marker"
+      "review_date": "schedule_marker",
+      "related_document_classification": "relation_collection",
+      "related_disposal_action": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -79,21 +81,53 @@
     ],
     "action_targets": {
       "create": null,
+      "update": null,
       "review": null,
-      "archive": "archived",
-      "update": null
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Define the retention and disposal controls applied to administrative records.",
+    "business_objective": "register, store, retrieve, control, and dispose of administrative records",
     "actors": [
       "records officer",
-      "compliance reviewer"
+      "document owner",
+      "requester",
+      "approver",
+      "archive custodian"
     ],
-    "primary_transitions": [
-      "retention_policy: draft -> active -> archived"
-    ]
+    "start_condition": "a document is received or created and must be governed as a business record",
+    "ordered_steps": [
+      "Link retention and storage controls."
+    ],
+    "primary_actions": [
+      "review",
+      "update"
+    ],
+    "primary_transitions": [],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable"
+    ],
+    "action_actors": {
+      "create": [
+        "records officer"
+      ],
+      "update": [
+        "records officer"
+      ],
+      "review": [
+        "document owner"
+      ],
+      "archive": [
+        "document owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "records become available to compliance, audit, and legal processes",
+    "access and disposal events become auditable"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "document_classification",
     "disposal_action"

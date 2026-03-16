@@ -20,7 +20,8 @@
     "submodule": "document_access",
     "reference_doc_id": "access_log_entry",
     "evidence_gaps": [
-      "customer-visible vs internal access trail split"
+      "retrieval event model",
+      "retention policy for access logs"
     ]
   }
 }

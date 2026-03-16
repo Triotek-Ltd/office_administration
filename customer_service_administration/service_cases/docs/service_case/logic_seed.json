@@ -15,9 +15,9 @@
     "archive"
   ],
   "lifecycle": {
-    "initial_state": "opened",
+    "initial_state": "open",
     "states": [
-      "opened",
+      "open",
       "in_progress",
       "resolved",
       "closed",
@@ -28,7 +28,7 @@
       "archived"
     ]
   },
-  "related_doc_count": 5,
+  "related_doc_count": 3,
   "fetch_rule_count": 0,
   "action_handler_count": 9,
   "archetype_profile": {
@@ -45,7 +45,7 @@
       "external_sync_enabled": false
     },
     "lifecycle_states": [
-      "opened",
+      "open",
       "in_progress",
       "resolved",
       "closed",
@@ -62,7 +62,10 @@
       "workflow_state"
     ],
     "field_purposes": {
-      "workflow_state": "lifecycle_state"
+      "workflow_state": "lifecycle_state",
+      "related_customer_profile": "relation_collection",
+      "related_service_log_entry": "relation_collection",
+      "related_service_resolution": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -78,9 +81,9 @@
       "workflow_state",
       "modified"
     ],
-    "initial_state": "opened",
+    "initial_state": "open",
     "lifecycle_states": [
-      "opened",
+      "open",
       "in_progress",
       "resolved",
       "closed",
@@ -92,59 +95,83 @@
     ],
     "action_targets": {
       "create": null,
+      "assign": "in_progress",
+      "track": null,
+      "confirm": "closed",
+      "close": "closed",
       "classify": null,
       "escalate": null,
-      "track": null,
-      "assign": "in_progress",
-      "close": "closed",
-      "archive": "archived",
-      "confirm": "closed",
-      "record": null
+      "record": null,
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Receive, classify, assign, resolve, and document inquiries and complaints.",
+    "business_objective": "receive, classify, assign, resolve, and document inquiries and complaints",
     "actors": [
       "service desk officer",
       "assigned department owner",
       "supervisor",
       "customer"
     ],
-    "start_condition": "A customer inquiry or complaint is received.",
+    "start_condition": "a customer inquiry or complaint is received",
     "ordered_steps": [
       "Open the service case and capture the issue.",
       "Classify urgency and route to the responsible owner.",
-      "Record actions taken during handling.",
       "Follow up unresolved issues.",
-      "Confirm resolution with the customer."
+      "Confirm resolution with the customer.",
+      "Archive service documentation."
     ],
     "primary_actions": [
       "create",
       "assign",
       "classify",
       "escalate",
+      "track",
       "confirm",
-      "close"
+      "close",
+      "archive"
     ],
     "primary_transitions": [
       "service_case: opened -> in_progress",
       "service_case: in_progress -> resolved -> closed"
     ],
     "downstream_effects": [
-      "Service activity becomes auditable through log entries.",
-      "Follow-up actions can be assigned and tracked.",
-      "Resolution communication can be recorded."
-    ]
+      "service cases feed reporting, quality improvement, and risk/compliance review"
+    ],
+    "action_actors": {
+      "create": [
+        "service desk officer"
+      ],
+      "assign": [
+        "service desk officer"
+      ],
+      "track": [
+        "service desk officer"
+      ],
+      "confirm": [
+        "supervisor"
+      ],
+      "close": [
+        "assigned department owner"
+      ],
+      "record": [
+        "service desk officer"
+      ],
+      "archive": [
+        "assigned department owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "service cases feed reporting, quality improvement, and risk/compliance review"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "customer_profile",
     "service_log_entry",
-    "service_resolution",
-    "followup_action",
-    "correspondence_record"
+    "service_resolution"
   ],
   "borrowed_fields": [
-    "customer contact details from customer_profile",
-    "case type, urgency, and owner from service_case for follow-up records"
+    "customer contact details from customer_profile"
   ]
 }

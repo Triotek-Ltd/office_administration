@@ -21,7 +21,7 @@
     "reference_doc_id": "office_file_record",
     "evidence_gaps": [
       "storage-provider rules",
-      "retention rules"
+      "retention linkage"
     ]
   }
 }

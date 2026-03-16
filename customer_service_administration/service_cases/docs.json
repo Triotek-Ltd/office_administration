@@ -1,8 +1,6 @@
 {
   "docs": [
-    "service_case",
     "customer_profile",
-    "service_log_entry",
-    "service_resolution"
+    "service_case"
   ]
 }

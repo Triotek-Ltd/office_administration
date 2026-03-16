@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "correspondence_type"
 ACTION_ID = "create"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': None}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Define the correspondence categories and handling defaults used during office communication workflows.', 'actors': ['office administrator'], 'primary_transitions': ['correspondence_type: active -> archived']}
+WORKFLOW_HINTS = {}
 
 def handle_create(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

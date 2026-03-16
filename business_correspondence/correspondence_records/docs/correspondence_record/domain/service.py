@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'transaction_flow', 'supports_submission': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': True}, 'integration_profile': {'external_sync_enabled': True, 'tracks_external_refs': True}, 'lifecycle_states': ['draft', 'in_review', 'approved', 'sent', 'archived'], 'is_transactional': True}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state', 'transaction_date'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'transaction_date': 'transaction_date', 'party': 'party_reference', 'currency': 'currency_code', 'total_amount': 'total_amount', 'communication_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'subject', 'from_party', 'to_party'], 'list_columns': ['title', 'reference_no', 'transaction_date', 'party', 'total_amount', 'workflow_state'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'in_review', 'approved', 'sent', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'return_for_revision': None, 'review': 'in_review', 'track': None, 'send': None, 'approve': 'approved', 'issue': None, 'submit': 'in_review', 'archive': 'archived', 'file': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state', 'transaction_date'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'transaction_date': 'transaction_date', 'party': 'primary_party', 'currency': 'currency_code', 'total_amount': 'total_amount', 'communication_date': 'schedule_marker', 'related_correspondence_approval': 'relation_collection', 'related_correspondence_followup': 'relation_collection', 'related_administrative_document': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'subject', 'from_party', 'to_party'], 'list_columns': ['title', 'reference_no', 'transaction_date', 'party', 'total_amount', 'workflow_state'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'in_review', 'approved', 'sent', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'review': 'in_review', 'submit': 'in_review', 'approve': 'approved', 'return_for_revision': None, 'issue': None, 'send': None, 'file': None, 'track': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Prepare, route, approve, send, and file internal and external correspondence records.', 'actors': ['office administrator', 'approver', 'correspondence owner'], 'primary_transitions': ['correspondence_record: draft -> in_review -> approved -> sent -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'receive, classify, assign, resolve, and document inquiries and complaints', 'actors': ['service desk officer', 'assigned department owner', 'supervisor', 'customer'], 'start_condition': 'a customer inquiry or complaint is received', 'ordered_steps': ['Confirm resolution with the customer.'], 'primary_actions': ['confirm', 'close'], 'primary_transitions': [], 'downstream_effects': ['service cases feed reporting, quality improvement, and risk/compliance review'], 'action_actors': {'create': ['service desk officer'], 'review': ['assigned department owner'], 'submit': ['service desk officer'], 'approve': ['supervisor'], 'issue': ['assigned department owner'], 'track': ['service desk officer'], 'archive': ['assigned department owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['service cases feed reporting, quality improvement, and risk/compliance review'], 'related_docs': ['correspondence_type', 'correspondence_approval', 'correspondence_followup', 'administrative_document'], 'action_targets': {'create': None, 'review': 'in_review', 'submit': 'in_review', 'approve': 'approved', 'return_for_revision': None, 'issue': None, 'send': None, 'file': None, 'track': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "correspondence_record"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

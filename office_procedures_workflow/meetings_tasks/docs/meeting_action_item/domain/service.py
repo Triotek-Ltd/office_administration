@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'case_flow', 'supports_assignment': True, 'supports_escalation': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['open', 'in_progress', 'closed'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'owner': 'actor_reference', 'completion_note': 'completion_note'}, 'search_fields': ['title', 'reference_no', 'description', 'item_no', 'meeting', 'owner'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'open', 'lifecycle_states': ['open', 'in_progress', 'closed'], 'terminal_states': ['closed'], 'action_targets': {'close': 'closed', 'create': None, 'assign': 'in_progress', 'track': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'owner': 'actor_reference', 'completion_note': 'completion_note', 'related_meeting_record': 'relation_collection', 'related_workflow_task': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'item_number', 'meeting_link', 'owner'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'open', 'lifecycle_states': ['open', 'in_progress', 'closed'], 'terminal_states': ['closed'], 'action_targets': {'create': None, 'assign': 'in_progress', 'track': None, 'close': 'closed'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Track discrete follow-up commitments created during meetings until completion.', 'actors': ['owner', 'chair', 'office administrator'], 'primary_transitions': ['meeting_action_item: open -> in_progress -> closed']}
+WORKFLOW_HINTS = {}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['meeting_record', 'workflow_task'], 'action_targets': {'create': None, 'assign': 'in_progress', 'track': None, 'close': 'closed'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "meeting_action_item"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

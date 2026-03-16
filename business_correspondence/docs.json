@@ -1,9 +1,9 @@
 {
   "docs": [
-    "correspondence_record",
-    "correspondence_followup",
+    "communication_log_entry",
     "correspondence_approval",
-    "correspondence_type",
-    "communication_log_entry"
+    "correspondence_followup",
+    "correspondence_record",
+    "correspondence_type"
   ]
 }

@@ -1,0 +1,139 @@
+{
+  "doc_id": "service_resolution",
+  "doc_title": "Service Resolution",
+  "archetype": "transaction",
+  "doc_kind": "transaction",
+  "actions": [
+    "create",
+    "review",
+    "confirm",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "confirmed",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 1,
+  "fetch_rule_count": 0,
+  "action_handler_count": 4,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "transaction_flow",
+      "supports_submission": true
+    },
+    "reporting_profile": {
+      "supports_snapshots": true,
+      "supports_outputs": true
+    },
+    "integration_profile": {
+      "external_sync_enabled": true,
+      "tracks_external_refs": true
+    },
+    "lifecycle_states": [
+      "draft",
+      "confirmed",
+      "archived"
+    ],
+    "is_transactional": true
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "transaction_date": "transaction_date",
+      "party": "primary_party",
+      "currency": "currency_code",
+      "total_amount": "total_amount",
+      "confirmation_date": "schedule_marker",
+      "archive_status": "status_flag",
+      "related_service_case": "relation_collection"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "resolution_number",
+      "case_link",
+      "resolution_type"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "transaction_date",
+      "party",
+      "total_amount",
+      "workflow_state"
+    ],
+    "initial_state": "draft",
+    "lifecycle_states": [
+      "draft",
+      "confirmed",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "review": null,
+      "confirm": "confirmed",
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "service_case"
+      ],
+      "borrowed_fields": [
+        "requester",
+        "issue context from service_case"
+      ],
+      "inferred_roles": [
+        "account owner",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "account owner",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "account owner"
+      ],
+      "review": [
+        "case owner"
+      ],
+      "confirm": [
+        "case owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
+  "related_docs": [
+    "service_case"
+  ],
+  "borrowed_fields": [
+    "requester",
+    "issue context from service_case"
+  ]
+}

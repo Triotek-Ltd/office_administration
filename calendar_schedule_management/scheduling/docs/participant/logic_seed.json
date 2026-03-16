@@ -48,13 +48,15 @@
       "workflow_state"
     ],
     "field_purposes": {
-      "workflow_state": "lifecycle_state"
+      "workflow_state": "lifecycle_state",
+      "related_calendar_event": "relation_collection",
+      "related_travel_arrangement": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "participant_no",
+      "participant_number",
       "name",
       "email"
     ],
@@ -74,19 +76,13 @@
     ],
     "action_targets": {
       "create": null,
-      "archive": "archived",
-      "update": null
+      "update": null,
+      "archive": "archived"
     }
   },
-  "workflow_hints": {
-    "business_objective": "Maintain reusable participant records for office scheduling and travel coordination.",
-    "actors": [
-      "office administrator"
-    ],
-    "primary_transitions": [
-      "participant: active -> archived"
-    ]
-  },
+  "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "calendar_event",
     "travel_arrangement"

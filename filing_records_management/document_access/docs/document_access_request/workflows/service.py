@@ -8,10 +8,10 @@ ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'in_review', 'resolved', 'closed']
 TERMINAL_STATES = ['closed']
-ACTION_RULES = {'close': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'closed'}, 'create': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'closed'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Control and audit access requests for managed administrative records.', 'actors': ['requester', 'records officer', 'approver'], 'primary_transitions': ['document_access_request: open -> in_review -> resolved -> closed']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Handle retrieval and access requests.'], 'primary_actions': ['create', 'assign', 'approve', 'record', 'close'], 'primary_transitions': ['document_access_request: opened -> in_review -> resolved -> closed'], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'assign': ['records officer'], 'approve': ['approver'], 'close': ['document owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

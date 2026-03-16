@@ -8,7 +8,7 @@ ACTION_ID = "assign"
 ACTION_RULE = {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track office work items created from procedures, meetings, and follow-through requirements.', 'actors': ['assignee', 'owner', 'office administrator'], 'primary_transitions': ['workflow_task: open -> in_progress -> closed -> archived']}
+WORKFLOW_HINTS = {}
 
 def handle_assign(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

@@ -8,7 +8,7 @@ ACTION_ID = "confirm"
 ACTION_RULE = {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': 'confirmed'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Capture and progress scheduling requests into confirmed calendar events.', 'actors': ['requester', 'scheduler', 'office administrator'], 'primary_transitions': ['schedule_request: draft -> proposed -> confirmed -> closed', 'schedule_request: proposed -> cancelled']}
+WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': ['Capture the scheduling or travel request.', 'Update the event for changes, conflicts, or cancellations.'], 'primary_actions': ['create', 'review', 'reschedule', 'cancel', 'close'], 'primary_transitions': ['schedule_request: draft -> in_review', 'schedule_request: in_review -> resolved -> closed'], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'review': ['participants'], 'confirm': ['participants'], 'cancel': ['scheduler'], 'close': ['scheduler']}}
 
 def handle_confirm(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

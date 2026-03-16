@@ -48,7 +48,9 @@
       "workflow_state"
     ],
     "field_purposes": {
-      "workflow_state": "lifecycle_state"
+      "workflow_state": "lifecycle_state",
+      "related_retention_policy": "relation_collection",
+      "related_administrative_document": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -74,22 +76,54 @@
     ],
     "action_targets": {
       "create": null,
-      "archive": "archived",
-      "update": null
+      "update": null,
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Define the classification scheme used to organize and secure administrative documents.",
+    "business_objective": "register, store, retrieve, control, and dispose of administrative records",
     "actors": [
-      "records officer"
+      "records officer",
+      "document owner",
+      "requester",
+      "approver",
+      "archive custodian"
     ],
-    "primary_transitions": [
-      "document_classification: active -> archived"
-    ]
+    "start_condition": "a document is received or created and must be governed as a business record",
+    "ordered_steps": [
+      "Intake and classify the document."
+    ],
+    "primary_actions": [
+      "create",
+      "classify"
+    ],
+    "primary_transitions": [],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable"
+    ],
+    "action_actors": {
+      "create": [
+        "records officer"
+      ],
+      "update": [
+        "records officer"
+      ],
+      "archive": [
+        "document owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "records become available to compliance, audit, and legal processes",
+    "access and disposal events become auditable"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "retention_policy",
     "administrative_document"
   ],
-  "borrowed_fields": []
+  "borrowed_fields": [
+    "retention defaults from retention_policy"
+  ]
 }

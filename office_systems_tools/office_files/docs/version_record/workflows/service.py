@@ -8,10 +8,10 @@ ARCHETYPE = "ledger"
 INITIAL_STATE = 'active'
 STATES = ['active', 'archived']
 TERMINAL_STATES = ['archived']
-ACTION_RULES = {'record': {'allowed_in_states': 'active', 'transitions_to': None}, 'view': {'allowed_in_states': 'active', 'transitions_to': None}, 'archive': {'allowed_in_states': 'active', 'transitions_to': 'archived'}}
+ACTION_RULES = {'record': {'allowed_in_states': ['active'], 'transitions_to': None}, 'view': {'allowed_in_states': ['active'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['active'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain the change history for office file records and their versions.', 'actors': ['owner', 'office administrator'], 'primary_transitions': ['version_record: active -> archived']}
+WORKFLOW_HINTS = {}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

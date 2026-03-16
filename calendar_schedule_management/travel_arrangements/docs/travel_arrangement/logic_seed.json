@@ -58,7 +58,7 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "transaction_date": "transaction_date",
-      "party": "party_reference",
+      "party": "primary_party",
       "currency": "currency_code",
       "total_amount": "total_amount",
       "traveler": "actor_reference",
@@ -69,7 +69,7 @@
       "title",
       "reference_no",
       "description",
-      "travel_no",
+      "travel_number",
       "traveler",
       "event"
     ],
@@ -92,30 +92,65 @@
       "archived"
     ],
     "action_targets": {
-      "issue": null,
       "create": null,
-      "archive": "archived",
+      "issue": null,
       "confirm": "confirmed",
-      "cancel": null
+      "cancel": null,
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Track travel plans linked to office events and participants.",
+    "business_objective": "receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements",
     "actors": [
-      "traveler",
       "scheduler",
-      "office administrator"
+      "participants",
+      "admin support"
+    ],
+    "start_condition": "a meeting, travel, or calendar request is received",
+    "ordered_steps": [
+      "Create supporting travel arrangements where required."
+    ],
+    "primary_actions": [
+      "create",
+      "approve",
+      "issue",
+      "close"
     ],
     "primary_transitions": [
-      "travel_arrangement: draft -> confirmed -> archived",
-      "travel_arrangement: draft -> cancelled"
-    ]
+      "travel_arrangement: draft -> approved -> issued -> closed"
+    ],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "action_actors": {
+      "create": [
+        "scheduler"
+      ],
+      "issue": [
+        "admin support"
+      ],
+      "confirm": [
+        "participants"
+      ],
+      "cancel": [
+        "scheduler"
+      ],
+      "archive": [
+        "scheduler"
+      ]
+    }
   },
+  "downstream_effects": [
+    "supports meetings, travel, and service coordination"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "calendar_event",
     "participant"
   ],
   "borrowed_fields": [
-    "traveler and event context from participant and calendar_event"
+    "traveler",
+    "event context from participant",
+    "calendar_event"
   ]
 }

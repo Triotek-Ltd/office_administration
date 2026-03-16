@@ -8,10 +8,10 @@ ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'draft'
 STATES = ['draft', 'in_review', 'approved', 'closed', 'archived']
 TERMINAL_STATES = ['closed', 'archived']
-ACTION_RULES = {'close': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'closed'}, 'submit': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'in_review'}, 'create': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': None}, 'approve': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'approved'}, 'archive': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'archived'}}
+ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': None}, 'submit': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'approved'}, 'close': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['draft', 'in_review', 'approved'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track approval and completion of records disposal under retention controls.', 'actors': ['records officer', 'approver', 'custodian'], 'primary_transitions': ['disposal_action: draft -> in_review -> approved -> closed -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Execute disposal when retention expires and approval exists.'], 'primary_actions': ['create', 'submit', 'approve', 'close', 'archive'], 'primary_transitions': ['disposal_action: draft -> in_review -> approved -> closed -> archived'], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'submit': ['records officer'], 'approve': ['approver'], 'close': ['document owner'], 'archive': ['document owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

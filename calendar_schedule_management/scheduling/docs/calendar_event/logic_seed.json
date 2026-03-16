@@ -55,18 +55,18 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "start_at": "schedule_marker",
-      "end_at": "schedule_marker",
-      "date_time": "event_datetime",
-      "organizer": "actor_reference"
+      "start_at": "event_start",
+      "end_at": "event_end",
+      "organizer": "actor_reference",
+      "related_travel_arrangement": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "event_no",
-      "date_time",
-      "venue"
+      "event_number",
+      "date",
+      "time"
     ],
     "list_columns": [
       "title",
@@ -85,25 +85,62 @@
       "archived"
     ],
     "action_targets": {
-      "confirm": "completed",
       "create": null,
-      "archive": "archived",
+      "update": null,
+      "confirm": "completed",
       "cancel": null,
-      "update": null
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Maintain scheduled office events and their participant context.",
+    "business_objective": "receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements",
     "actors": [
-      "organizer",
       "scheduler",
-      "office administrator"
+      "participants",
+      "admin support"
+    ],
+    "start_condition": "a meeting, travel, or calendar request is received",
+    "ordered_steps": [
+      "Confirm availability and reserve the calendar slot.",
+      "Update the event for changes, conflicts, or cancellations."
+    ],
+    "primary_actions": [
+      "create",
+      "schedule",
+      "confirm",
+      "reschedule",
+      "cancel",
+      "close"
     ],
     "primary_transitions": [
-      "calendar_event: scheduled -> completed -> archived",
-      "calendar_event: scheduled -> cancelled"
-    ]
+      "calendar_event: draft -> scheduled -> confirmed",
+      "calendar_event: confirmed -> rescheduled or cancelled -> closed"
+    ],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "action_actors": {
+      "create": [
+        "scheduler"
+      ],
+      "update": [
+        "scheduler"
+      ],
+      "confirm": [
+        "participants"
+      ],
+      "cancel": [
+        "scheduler"
+      ],
+      "archive": [
+        "scheduler"
+      ]
+    }
   },
+  "downstream_effects": [
+    "supports meetings, travel, and service coordination"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "participant",
     "travel_arrangement"

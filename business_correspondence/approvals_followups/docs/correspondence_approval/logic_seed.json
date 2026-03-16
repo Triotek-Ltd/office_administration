@@ -56,14 +56,15 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "approver": "actor_reference",
-      "decision_date": "schedule_marker"
+      "decision_date": "schedule_marker",
+      "related_correspondence_record": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "approval_no",
-      "correspondence",
+      "approval_number",
+      "correspondence_link",
       "approver"
     ],
     "list_columns": [
@@ -83,26 +84,51 @@
       "closed"
     ],
     "action_targets": {
-      "return_for_revision": null,
       "submit": "in_review",
       "approve": "approved",
+      "return_for_revision": null,
       "close": "closed"
     }
   },
   "workflow_hints": {
-    "business_objective": "Capture review and approval decisions for correspondence that requires controlled issuance.",
+    "relation_context": {
+      "related_docs": [
+        "correspondence_record"
+      ],
+      "borrowed_fields": [
+        "subject",
+        "sender",
+        "recipient",
+        "approval-required flag from correspondence_record"
+      ],
+      "inferred_roles": [
+        "approver"
+      ]
+    },
     "actors": [
-      "approver",
-      "office administrator"
+      "approver"
     ],
-    "primary_transitions": [
-      "correspondence_approval: open -> in_review -> approved -> closed"
-    ]
+    "action_actors": {
+      "submit": [
+        "approver"
+      ],
+      "approve": [
+        "approver"
+      ],
+      "close": [
+        "approver"
+      ]
+    }
   },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "correspondence_record"
   ],
   "borrowed_fields": [
-    "subject, sender, recipient, and approval-required flag from correspondence_record"
+    "subject",
+    "sender",
+    "recipient",
+    "approval-required flag from correspondence_record"
   ]
 }

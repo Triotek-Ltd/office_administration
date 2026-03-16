@@ -8,7 +8,7 @@ ACTION_ID = "update"
 ACTION_RULE = {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Register, classify, file, and retain internal administrative documents under office records controls.', 'actors': ['records officer', 'office administrator', 'custodian'], 'primary_transitions': ['administrative_document: draft -> active -> archived -> disposed']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Intake and classify the document.', 'Assign internal reference and register the record.', 'Link retention and storage controls.', 'Store the record and make it retrievable.', 'Move inactive records toward archive handling.', 'Execute disposal when retention expires and approval exists.'], 'primary_actions': ['create', 'classify', 'register', 'record', 'review', 'update', 'archive', 'submit', 'approve', 'close'], 'primary_transitions': ['administrative_document: draft -> active', 'administrative_document: active -> archived -> disposed'], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'update': ['records officer'], 'review': ['document owner'], 'archive': ['document owner']}}
 
 def handle_update(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

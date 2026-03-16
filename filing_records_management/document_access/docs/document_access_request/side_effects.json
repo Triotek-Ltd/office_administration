@@ -1,0 +1,18 @@
+{
+  "create": [
+    {
+      "type": "update_current",
+      "fields": {
+        "workflow_state": "in_review"
+      }
+    }
+  ],
+  "close": [
+    {
+      "type": "update_current",
+      "fields": {
+        "workflow_state": "closed"
+      }
+    }
+  ]
+}

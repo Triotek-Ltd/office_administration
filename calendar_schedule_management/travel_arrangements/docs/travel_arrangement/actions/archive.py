@@ -8,7 +8,7 @@ ACTION_ID = "archive"
 ACTION_RULE = {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': 'archived'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track travel plans linked to office events and participants.', 'actors': ['traveler', 'scheduler', 'office administrator'], 'primary_transitions': ['travel_arrangement: draft -> confirmed -> archived', 'travel_arrangement: draft -> cancelled']}
+WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': ['Create supporting travel arrangements where required.'], 'primary_actions': ['create', 'approve', 'issue', 'close'], 'primary_transitions': ['travel_arrangement: draft -> approved -> issued -> closed'], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'issue': ['admin support'], 'confirm': ['participants'], 'cancel': ['scheduler'], 'archive': ['scheduler']}}
 
 def handle_archive(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

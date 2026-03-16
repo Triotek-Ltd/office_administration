@@ -1,7 +1,7 @@
 {
   "docs": [
+    "meeting_action_item",
     "meeting_record",
-    "workflow_task",
-    "meeting_action_item"
+    "workflow_task"
   ]
 }

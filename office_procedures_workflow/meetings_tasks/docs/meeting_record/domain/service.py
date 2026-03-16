@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'event_schedule', 'supports_timing': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['draft', 'scheduled', 'completed', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'start_at': 'schedule_marker', 'end_at': 'schedule_marker', 'chair': 'actor_reference', 'attendees': 'participant_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'meeting_no', 'date', 'location'], 'list_columns': ['title', 'start_at', 'end_at', 'workflow_state'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'scheduled', 'completed', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'confirm': 'completed', 'create': None, 'archive': 'archived', 'close': None, 'update': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'start_at': 'event_start', 'end_at': 'event_end', 'chair': 'actor_reference', 'attendees': 'participant_collection', 'related_meeting_action_item': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'meeting_number', 'date', 'location'], 'list_columns': ['title', 'start_at', 'end_at', 'workflow_state'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'scheduled', 'completed', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'confirm': 'completed', 'close': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Capture the schedule, agenda, attendance, and outcomes of office meetings.', 'actors': ['chair', 'recorder', 'office administrator'], 'primary_transitions': ['meeting_record: draft -> scheduled -> completed -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': [], 'primary_actions': [], 'primary_transitions': [], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'update': ['scheduler'], 'confirm': ['participants'], 'close': ['scheduler'], 'archive': ['scheduler']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['supports meetings, travel, and service coordination'], 'related_docs': ['meeting_action_item'], 'action_targets': {'create': None, 'update': None, 'confirm': 'completed', 'close': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "meeting_record"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

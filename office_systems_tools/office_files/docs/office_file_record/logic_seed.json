@@ -52,13 +52,15 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "owner": "actor_reference"
+      "owner": "actor_reference",
+      "related_version_record": "relation_collection",
+      "related_access_grant": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "file_no",
+      "file_number",
       "file_type",
       "owner"
     ],
@@ -79,21 +81,52 @@
     ],
     "action_targets": {
       "create": null,
+      "update": null,
       "review": null,
-      "archive": "archived",
-      "update": null
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Maintain the master record for office-managed files and systems artifacts.",
+    "business_objective": "govern office files and tool access, and resolve day-to-day office-system support issues",
     "actors": [
-      "office administrator",
-      "owner"
+      "office user",
+      "system admin",
+      "support owner"
+    ],
+    "start_condition": "an office document or tool access/update event occurs",
+    "ordered_steps": [
+      "Register or update the office file record."
+    ],
+    "primary_actions": [
+      "create",
+      "update",
+      "archive"
     ],
     "primary_transitions": [
-      "office_file_record: draft -> active -> archived"
-    ]
+      "office_file_record: draft -> active"
+    ],
+    "downstream_effects": [
+      "supports office controls and operational continuity"
+    ],
+    "action_actors": {
+      "create": [
+        "office user"
+      ],
+      "update": [
+        "office user"
+      ],
+      "review": [
+        "system admin"
+      ],
+      "archive": [
+        "support owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "supports office controls and operational continuity"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "version_record",
     "access_grant"

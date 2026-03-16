@@ -8,10 +8,10 @@ ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'in_progress', 'escalated', 'closed', 'archived']
 TERMINAL_STATES = ['closed', 'archived']
-ACTION_RULES = {'close': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'closed'}, 'create': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'in_progress'}, 'archive': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'archived'}, 'escalate': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'escalated'}}
+ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'in_progress'}, 'escalate': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'escalated'}, 'close': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track support and incident-style issues against office tools and managed systems.', 'actors': ['reporter', 'support owner', 'office administrator'], 'primary_transitions': ['tool_issue_case: open -> in_progress -> escalated or closed -> archived']}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['office_file_record'], 'borrowed_fields': ['system or file context from office_file_record'], 'inferred_roles': ['case owner']}, 'actors': ['case owner'], 'action_actors': {'create': ['case owner'], 'assign': ['case owner'], 'close': ['case owner'], 'archive': ['case owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

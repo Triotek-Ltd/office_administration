@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from manifold.core.services.relation_resolution import RelationResolutionService
+from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "access_log_entry"
 RELATED_DOCS = [{'doc_id': 'administrative_document', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'document_access_request', 'relation_type': 'related', 'show_in_related_panel': True}]
 FETCH_RULES = []
 
-BORROWED_FIELDS = [{'description': 'request context from document_access_request'}]
+BORROWED_FIELDS = [{'description': 'requester'}, {'description': 'target document context from document_access_request'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

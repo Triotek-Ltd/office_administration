@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'case_flow', 'supports_assignment': True, 'supports_escalation': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['draft', 'proposed', 'confirmed', 'cancelled', 'closed'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'requester': 'actor_reference'}, 'search_fields': ['title', 'reference_no', 'description', 'request_no', 'requester', 'purpose'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'proposed', 'confirmed', 'cancelled', 'closed'], 'terminal_states': ['closed'], 'action_targets': {'confirm': 'confirmed', 'create': None, 'close': 'closed', 'cancel': None, 'review': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'requester': 'actor_reference', 'related_calendar_event': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'request_number', 'requester', 'purpose'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'proposed', 'confirmed', 'cancelled', 'closed'], 'terminal_states': ['closed'], 'action_targets': {'create': None, 'review': None, 'confirm': 'confirmed', 'cancel': None, 'close': 'closed'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Capture and progress scheduling requests into confirmed calendar events.', 'actors': ['requester', 'scheduler', 'office administrator'], 'primary_transitions': ['schedule_request: draft -> proposed -> confirmed -> closed', 'schedule_request: proposed -> cancelled']}
+WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': ['Capture the scheduling or travel request.', 'Update the event for changes, conflicts, or cancellations.'], 'primary_actions': ['create', 'review', 'reschedule', 'cancel', 'close'], 'primary_transitions': ['schedule_request: draft -> in_review', 'schedule_request: in_review -> resolved -> closed'], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'review': ['participants'], 'confirm': ['participants'], 'cancel': ['scheduler'], 'close': ['scheduler']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['supports meetings, travel, and service coordination'], 'related_docs': ['calendar_event'], 'action_targets': {'create': None, 'review': None, 'confirm': 'confirmed', 'cancel': None, 'close': 'closed'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "schedule_request"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

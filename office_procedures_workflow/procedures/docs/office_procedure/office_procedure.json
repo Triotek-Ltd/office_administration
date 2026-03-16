@@ -14,7 +14,7 @@
     "doc_key": "office_procedure"
   },
   "doc_key": "office_procedure",
-  "doc_title": "office_procedure",
+  "doc_title": "Office Procedure",
   "allowed_actions": [
     "create",
     "update",
@@ -53,12 +53,14 @@
       ],
       "content": [
         "description",
-        "procedure_no",
+        "procedure_number",
         "purpose",
         "owner",
         "version"
       ],
-      "relations": [],
+      "relations": [
+        "related_workflow_task"
+      ],
       "amounts": [],
       "dates": [
         "effective_date",
@@ -175,8 +177,8 @@
         }
       },
       {
-        "field_id": "procedure_no",
-        "label": "Procedure No",
+        "field_id": "procedure_number",
+        "label": "Procedure Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -190,10 +192,10 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
@@ -231,7 +233,7 @@
         "default": null,
         "unique": false,
         "options": null,
-        "purpose": null,
+        "purpose": "actor_reference",
         "linked_doc": null,
         "depends_on": null,
         "mandatory_depends_on": null,
@@ -348,6 +350,30 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_workflow_task",
+        "label": "Related Workflow Task",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "workflow_task",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -355,7 +381,7 @@
       "title",
       "reference_no",
       "description",
-      "procedure_no",
+      "procedure_number",
       "purpose",
       "owner"
     ],
@@ -421,7 +447,7 @@
           "approved",
           "published"
         ],
-        "transitions_to": null
+        "transitions_to": "published"
       },
       "archive": {
         "allowed_in_states": [
@@ -436,17 +462,39 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
+          "create",
+          "update",
           "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "publish",
           "archive"
+        ]
+      },
+      {
+        "role_id": "admin coordinator",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "update",
+          "review"
+        ]
+      },
+      {
+        "role_id": "meeting owner",
+        "actions": [
+          "view",
+          "list",
+          "publish",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "task owners",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -514,7 +562,14 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_workflow_task",
+        "doc_id": "workflow_task",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -522,7 +577,9 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "workflow_task"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [],
@@ -541,15 +598,47 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Define and publish office procedures that drive repeatable operational work.",
+        "business_objective": "maintain standard office procedures, run recurring coordination meetings, and ensure agreed actions are tracked to closure",
         "actors": [
-          "office administrator",
-          "process owner"
+          "admin coordinator",
+          "meeting owner",
+          "task owners"
+        ],
+        "start_condition": "an internal procedure or meeting-driven workflow must be coordinated",
+        "ordered_steps": [
+          "Create or revise the office procedure baseline."
+        ],
+        "primary_actions": [
+          "create",
+          "update",
+          "review",
+          "approve"
         ],
         "primary_transitions": [
-          "office_procedure: draft -> approved -> published -> archived"
-        ]
-      }
+          "office_procedure: draft -> in_review -> approved -> active"
+        ],
+        "downstream_effects": [
+          "supports coordination, compliance, and operational follow-through"
+        ],
+        "action_actors": {
+          "create": [
+            "admin coordinator"
+          ],
+          "update": [
+            "admin coordinator"
+          ],
+          "review": [
+            "admin coordinator"
+          ],
+          "publish": [
+            "meeting owner"
+          ],
+          "archive": [
+            "meeting owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -625,6 +714,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -642,6 +734,37 @@
       "doc_kind": "configuration"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/office_procedures_workflow/procedures/office_procedure/",
+    "status_field": "workflow_state",
+    "initial_state": "draft",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "publish",
+        "source_state": "draft",
+        "target_state": "published",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "draft",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "workflow_task"
+    ],
+    "downstream_effects": [
+      "supports coordination, compliance, and operational follow-through"
+    ],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -649,7 +772,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

@@ -1,0 +1,10 @@
+{
+  "close": [
+    {
+      "type": "update_current",
+      "fields": {
+        "workflow_state": "closed"
+      }
+    }
+  ]
+}

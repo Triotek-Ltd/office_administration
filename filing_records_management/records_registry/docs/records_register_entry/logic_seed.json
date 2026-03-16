@@ -56,15 +56,18 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "registration_date": "schedule_marker"
+      "registration_date": "schedule_marker",
+      "related_administrative_document": "relation_collection",
+      "related_document_access_request": "relation_collection",
+      "related_access_log_entry": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "entry_no",
-      "document",
-      "record_series"
+      "entry_number",
+      "document_link",
+      "reference_number"
     ],
     "list_columns": [
       "title",
@@ -82,29 +85,62 @@
       "archived"
     ],
     "action_targets": {
-      "record": null,
       "create": null,
-      "view": null,
+      "record": null,
+      "review": null,
       "archive": "archived",
-      "review": null
+      "view": null
     }
   },
   "workflow_hints": {
-    "business_objective": "Maintain the formal registry trail for managed office records.",
+    "business_objective": "draft, approve, send, record, and follow up formal business communications",
     "actors": [
-      "records officer",
-      "custodian"
+      "administrative officer",
+      "drafter",
+      "approver",
+      "recipient",
+      "follow-up owner"
     ],
-    "primary_transitions": [
-      "records_register_entry: draft -> active -> archived"
-    ]
+    "start_condition": "incoming communication is received or outgoing correspondence must be initiated",
+    "ordered_steps": [
+      "File the communication into the records system."
+    ],
+    "primary_actions": [
+      "register",
+      "record",
+      "archive"
+    ],
+    "primary_transitions": [],
+    "downstream_effects": [
+      "correspondence becomes available to records, audit, legal, and service workflows"
+    ],
+    "action_actors": {
+      "create": [
+        "administrative officer"
+      ],
+      "record": [
+        "administrative officer"
+      ],
+      "review": [
+        "drafter"
+      ],
+      "archive": [
+        "follow-up owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "correspondence becomes available to records, audit, legal, and service workflows"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "administrative_document",
     "document_access_request",
     "access_log_entry"
   ],
   "borrowed_fields": [
-    "document details from administrative_document"
+    "reference number",
+    "classification",
+    "storage location from administrative_document"
   ]
 }

@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "access_log_entry"
 ACTION_ID = "archive"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': 'archived'}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': 'archived'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Record the audit trail of document access activity and outcomes.', 'actors': ['records officer', 'custodian'], 'primary_transitions': ['access_log_entry: active -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Handle retrieval and access requests.'], 'primary_actions': ['create', 'assign', 'approve', 'record', 'close'], 'primary_transitions': [], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'record': ['records officer'], 'archive': ['document owner']}}
 
 def handle_archive(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

@@ -8,7 +8,7 @@ ACTION_ID = "approve"
 ACTION_RULE = {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'approved'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track access requests and grants for office systems and managed files.', 'actors': ['requester', 'approver', 'office administrator'], 'primary_transitions': ['access_grant: open -> approved -> closed -> archived']}
+WORKFLOW_HINTS = {}
 
 def handle_approve(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

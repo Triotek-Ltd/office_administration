@@ -20,7 +20,7 @@
     "submodule": "procedures",
     "reference_doc_id": "office_procedure",
     "evidence_gaps": [
-      "versioning model",
+      "versioning",
       "acknowledgment model"
     ]
   }

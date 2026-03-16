@@ -65,10 +65,13 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "transaction_date": "transaction_date",
-      "party": "party_reference",
+      "party": "primary_party",
       "currency": "currency_code",
       "total_amount": "total_amount",
-      "communication_date": "schedule_marker"
+      "communication_date": "schedule_marker",
+      "related_correspondence_approval": "relation_collection",
+      "related_correspondence_followup": "relation_collection",
+      "related_administrative_document": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -99,28 +102,65 @@
     ],
     "action_targets": {
       "create": null,
-      "return_for_revision": null,
       "review": "in_review",
-      "track": null,
-      "send": null,
-      "approve": "approved",
-      "issue": null,
       "submit": "in_review",
-      "archive": "archived",
-      "file": null
+      "approve": "approved",
+      "return_for_revision": null,
+      "issue": null,
+      "send": null,
+      "file": null,
+      "track": null,
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Prepare, route, approve, send, and file internal and external correspondence records.",
+    "business_objective": "receive, classify, assign, resolve, and document inquiries and complaints",
     "actors": [
-      "office administrator",
-      "approver",
-      "correspondence owner"
+      "service desk officer",
+      "assigned department owner",
+      "supervisor",
+      "customer"
     ],
-    "primary_transitions": [
-      "correspondence_record: draft -> in_review -> approved -> sent -> archived"
-    ]
+    "start_condition": "a customer inquiry or complaint is received",
+    "ordered_steps": [
+      "Confirm resolution with the customer."
+    ],
+    "primary_actions": [
+      "confirm",
+      "close"
+    ],
+    "primary_transitions": [],
+    "downstream_effects": [
+      "service cases feed reporting, quality improvement, and risk/compliance review"
+    ],
+    "action_actors": {
+      "create": [
+        "service desk officer"
+      ],
+      "review": [
+        "assigned department owner"
+      ],
+      "submit": [
+        "service desk officer"
+      ],
+      "approve": [
+        "supervisor"
+      ],
+      "issue": [
+        "assigned department owner"
+      ],
+      "track": [
+        "service desk officer"
+      ],
+      "archive": [
+        "assigned department owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "service cases feed reporting, quality improvement, and risk/compliance review"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "correspondence_type",
     "correspondence_approval",

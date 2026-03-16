@@ -20,7 +20,8 @@
     "submodule": "retention_disposal",
     "reference_doc_id": "disposal_action",
     "evidence_gaps": [
-      "disposal certificate model"
+      "destruction certificate model",
+      "witness or approval requirements"
     ]
   }
 }

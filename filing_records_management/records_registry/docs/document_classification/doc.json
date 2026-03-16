@@ -20,7 +20,8 @@
     "submodule": "records_registry",
     "reference_doc_id": "document_classification",
     "evidence_gaps": [
-      "classification hierarchy depth"
+      "final classification taxonomy",
+      "confidentiality levels"
     ]
   }
 }

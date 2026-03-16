@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'entity_lifecycle', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['draft', 'active', 'archived', 'disposed'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'document_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'classification', 'record_type', 'document_date'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'archived', 'disposed'], 'terminal_states': ['archived'], 'action_targets': {'archive': 'archived', 'classify': None, 'review': None, 'register': None, 'create': None, 'update': None, 'file': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'document_date': 'schedule_marker', 'related_records_register_entry': 'relation_collection', 'related_document_access_request': 'relation_collection', 'related_disposal_action': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'reference_number', 'classification', 'record_type'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'archived', 'disposed'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'review': None, 'archive': 'archived', 'classify': None, 'file': None, 'register': None}}
 
-WORKFLOW_HINTS = {'business_objective': 'Register, classify, file, and retain internal administrative documents under office records controls.', 'actors': ['records officer', 'office administrator', 'custodian'], 'primary_transitions': ['administrative_document: draft -> active -> archived -> disposed']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Intake and classify the document.', 'Assign internal reference and register the record.', 'Link retention and storage controls.', 'Store the record and make it retrievable.', 'Move inactive records toward archive handling.', 'Execute disposal when retention expires and approval exists.'], 'primary_actions': ['create', 'classify', 'register', 'record', 'review', 'update', 'archive', 'submit', 'approve', 'close'], 'primary_transitions': ['administrative_document: draft -> active', 'administrative_document: active -> archived -> disposed'], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'update': ['records officer'], 'review': ['document owner'], 'archive': ['document owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'related_docs': ['document_classification', 'retention_policy', 'records_register_entry', 'document_access_request', 'disposal_action'], 'action_targets': {'create': None, 'update': None, 'review': None, 'archive': 'archived', 'classify': None, 'file': None, 'register': None}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "administrative_document"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

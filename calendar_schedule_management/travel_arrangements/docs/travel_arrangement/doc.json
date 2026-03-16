@@ -20,7 +20,7 @@
     "submodule": "travel_arrangements",
     "reference_doc_id": "travel_arrangement",
     "evidence_gaps": [
-      "transport detail model",
+      "transport",
       "lodging detail model",
       "reimbursement linkage"
     ]

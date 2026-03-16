@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from manifold.core.services.relation_resolution import RelationResolutionService
+from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "service_case"
-RELATED_DOCS = [{'doc_id': 'customer_profile', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'service_log_entry', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'service_resolution', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'followup_action', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'correspondence_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+RELATED_DOCS = [{'doc_id': 'customer_profile', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'service_log_entry', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'service_resolution', 'relation_type': 'related', 'show_in_related_panel': True}]
 FETCH_RULES = []
 
-BORROWED_FIELDS = [{'description': 'customer contact details from customer_profile'}, {'description': 'case type, urgency, and owner from service_case for follow-up records'}]
+BORROWED_FIELDS = [{'description': 'customer contact details from customer_profile'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

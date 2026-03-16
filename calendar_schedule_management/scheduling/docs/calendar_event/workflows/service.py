@@ -8,10 +8,10 @@ ARCHETYPE = "event"
 INITIAL_STATE = 'scheduled'
 STATES = ['scheduled', 'completed', 'cancelled', 'archived']
 TERMINAL_STATES = ['archived']
-ACTION_RULES = {'confirm': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': 'completed'}, 'create': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': 'archived'}, 'cancel': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}, 'update': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}, 'update': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': 'completed'}, 'cancel': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain scheduled office events and their participant context.', 'actors': ['organizer', 'scheduler', 'office administrator'], 'primary_transitions': ['calendar_event: scheduled -> completed -> archived', 'calendar_event: scheduled -> cancelled']}
+WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': ['Confirm availability and reserve the calendar slot.', 'Update the event for changes, conflicts, or cancellations.'], 'primary_actions': ['create', 'schedule', 'confirm', 'reschedule', 'cancel', 'close'], 'primary_transitions': ['calendar_event: draft -> scheduled -> confirmed', 'calendar_event: confirmed -> rescheduled or cancelled -> closed'], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'update': ['scheduler'], 'confirm': ['participants'], 'cancel': ['scheduler'], 'archive': ['scheduler']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

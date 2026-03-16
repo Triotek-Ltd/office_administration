@@ -59,15 +59,15 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "case_no": "reference",
-      "reporter": "actor_reference"
+      "reporter": "actor_reference",
+      "related_office_file_record": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "case_no",
-      "system_or_tool",
+      "case_number",
+      "tool_or_system",
       "reporter"
     ],
     "list_columns": [
@@ -89,28 +89,49 @@
       "archived"
     ],
     "action_targets": {
-      "close": "closed",
       "create": null,
       "assign": "in_progress",
-      "archive": "archived",
-      "escalate": "escalated"
+      "escalate": "escalated",
+      "close": "closed",
+      "archive": "archived"
     }
   },
   "workflow_hints": {
-    "business_objective": "Track support and incident-style issues against office tools and managed systems.",
+    "relation_context": {
+      "related_docs": [
+        "office_file_record"
+      ],
+      "borrowed_fields": [
+        "system or file context from office_file_record"
+      ],
+      "inferred_roles": [
+        "case owner"
+      ]
+    },
     "actors": [
-      "reporter",
-      "support owner",
-      "office administrator"
+      "case owner"
     ],
-    "primary_transitions": [
-      "tool_issue_case: open -> in_progress -> escalated or closed -> archived"
-    ]
+    "action_actors": {
+      "create": [
+        "case owner"
+      ],
+      "assign": [
+        "case owner"
+      ],
+      "close": [
+        "case owner"
+      ],
+      "archive": [
+        "case owner"
+      ]
+    }
   },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "office_file_record"
   ],
   "borrowed_fields": [
-    "file or system context from office_file_record"
+    "system or file context from office_file_record"
   ]
 }

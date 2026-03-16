@@ -5,7 +5,7 @@ from __future__ import annotations
 
 DOC_ID = "access_log_entry"
 ALLOWED_ACTIONS = ['record', 'view', 'archive']
-ACTION_RULES = {'record': {'allowed_in_states': 'active', 'transitions_to': None}, 'view': {'allowed_in_states': 'active', 'transitions_to': None}, 'archive': {'allowed_in_states': 'active', 'transitions_to': 'archived'}}
+ACTION_RULES = {'record': {'allowed_in_states': ['active'], 'transitions_to': None}, 'view': {'allowed_in_states': ['active'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['active'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 

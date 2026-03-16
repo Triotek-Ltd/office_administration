@@ -5,7 +5,7 @@ from __future__ import annotations
 
 DOC_ID = "document_classification"
 ALLOWED_ACTIONS = ['create', 'update', 'archive']
-ACTION_RULES = {'create': {'allowed_in_states': 'active', 'transitions_to': None}, 'update': {'allowed_in_states': 'active', 'transitions_to': None}, 'archive': {'allowed_in_states': 'active', 'transitions_to': 'archived'}}
+ACTION_RULES = {'create': {'allowed_in_states': ['active'], 'transitions_to': None}, 'update': {'allowed_in_states': ['active'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['active'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 

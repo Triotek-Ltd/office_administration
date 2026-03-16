@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'posting_flow', 'supports_reconciliation': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': True}, 'integration_profile': {'external_sync_enabled': True, 'tracks_external_refs': True}, 'lifecycle_states': ['draft', 'active', 'archived'], 'is_transactional': True}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state', 'posting_date'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'posting_date': 'posting_date', 'registration_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'entry_no', 'document', 'record_series'], 'list_columns': ['title', 'reference_no', 'posting_date', 'workflow_state'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'record': None, 'create': None, 'view': None, 'archive': 'archived', 'review': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state', 'posting_date'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'posting_date': 'posting_date', 'registration_date': 'schedule_marker', 'related_administrative_document': 'relation_collection', 'related_document_access_request': 'relation_collection', 'related_access_log_entry': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'entry_number', 'document_link', 'reference_number'], 'list_columns': ['title', 'reference_no', 'posting_date', 'workflow_state'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'active', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'record': None, 'review': None, 'archive': 'archived', 'view': None}}
 
-WORKFLOW_HINTS = {'business_objective': 'Maintain the formal registry trail for managed office records.', 'actors': ['records officer', 'custodian'], 'primary_transitions': ['records_register_entry: draft -> active -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'draft, approve, send, record, and follow up formal business communications', 'actors': ['administrative officer', 'drafter', 'approver', 'recipient', 'follow-up owner'], 'start_condition': 'incoming communication is received or outgoing correspondence must be initiated', 'ordered_steps': ['File the communication into the records system.'], 'primary_actions': ['register', 'record', 'archive'], 'primary_transitions': [], 'downstream_effects': ['correspondence becomes available to records, audit, legal, and service workflows'], 'action_actors': {'create': ['administrative officer'], 'record': ['administrative officer'], 'review': ['drafter'], 'archive': ['follow-up owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['correspondence becomes available to records, audit, legal, and service workflows'], 'related_docs': ['administrative_document', 'document_access_request', 'access_log_entry'], 'action_targets': {'create': None, 'record': None, 'review': None, 'archive': 'archived', 'view': None}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "records_register_entry"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

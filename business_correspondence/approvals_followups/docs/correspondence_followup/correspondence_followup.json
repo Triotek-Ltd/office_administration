@@ -14,7 +14,7 @@
     "doc_key": "correspondence_followup"
   },
   "doc_key": "correspondence_followup",
-  "doc_title": "correspondence_followup",
+  "doc_title": "Correspondence Followup",
   "allowed_actions": [
     "create",
     "assign",
@@ -61,14 +61,15 @@
       ],
       "content": [
         "description",
-        "followup_no",
+        "follow_up_number",
+        "correspondence_link",
         "owner",
         "required_response",
         "status",
         "closure_note"
       ],
       "relations": [
-        "correspondence"
+        "related_correspondence_record"
       ],
       "amounts": [],
       "dates": [
@@ -184,8 +185,32 @@
         }
       },
       {
-        "field_id": "followup_no",
-        "label": "Followup No",
+        "field_id": "follow_up_number",
+        "label": "Follow Up Number",
+        "type": "Data",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": null,
+        "linked_doc": null,
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": true,
+        "ui": {
+          "visible": true,
+          "list_visible": true,
+          "filterable": true,
+          "sortable": true
+        }
+      },
+      {
+        "field_id": "correspondence_link",
+        "label": "Correspondence Link",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -208,30 +233,6 @@
         }
       },
       {
-        "field_id": "correspondence",
-        "label": "Correspondence",
-        "type": "Data",
-        "required": false,
-        "read_only": false,
-        "default": null,
-        "unique": false,
-        "options": null,
-        "purpose": null,
-        "linked_doc": "correspondence_record",
-        "depends_on": null,
-        "mandatory_depends_on": null,
-        "read_only_depends_on": null,
-        "fetch_from": null,
-        "allow_on_submit": false,
-        "indexed": false,
-        "ui": {
-          "visible": true,
-          "list_visible": false,
-          "filterable": true,
-          "sortable": true
-        }
-      },
-      {
         "field_id": "owner",
         "label": "Owner",
         "type": "Data",
@@ -240,7 +241,7 @@
         "default": null,
         "unique": false,
         "options": null,
-        "purpose": null,
+        "purpose": "actor_reference",
         "linked_doc": null,
         "depends_on": null,
         "mandatory_depends_on": null,
@@ -350,6 +351,30 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_correspondence_record",
+        "label": "Related Correspondence Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "correspondence_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -357,8 +382,8 @@
       "title",
       "reference_no",
       "description",
-      "followup_no",
-      "correspondence",
+      "follow_up_number",
+      "correspondence_link",
       "owner"
     ],
     "sort_field": "modified",
@@ -406,7 +431,7 @@
           "open",
           "in_progress"
         ],
-        "transitions_to": null
+        "transitions_to": "in_progress"
       },
       "track": {
         "allowed_in_states": [
@@ -434,16 +459,24 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
+          "create",
           "assign",
           "track",
-          "monitor",
-          "confirm",
+          "close",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "approver",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "assign",
+          "track",
+          "close",
           "archive"
         ]
       }
@@ -512,7 +545,14 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_correspondence_record",
+        "doc_id": "correspondence_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -520,12 +560,20 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "correspondence_record"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
       {
-        "description": "recipient, subject, and communication date from correspondence_record"
+        "description": "recipient"
+      },
+      {
+        "description": "subject"
+      },
+      {
+        "description": "communication date from correspondence_record"
       }
     ],
     "ui_panels": {
@@ -543,15 +591,41 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Track action items and expected responses that arise from correspondence records.",
+        "relation_context": {
+          "related_docs": [
+            "correspondence_record"
+          ],
+          "borrowed_fields": [
+            "recipient",
+            "subject",
+            "communication date from correspondence_record"
+          ],
+          "inferred_roles": [
+            "approver"
+          ]
+        },
         "actors": [
-          "owner",
-          "office administrator"
+          "approver"
         ],
-        "primary_transitions": [
-          "correspondence_followup: open -> in_progress -> closed -> archived"
-        ]
-      }
+        "action_actors": {
+          "create": [
+            "approver"
+          ],
+          "assign": [
+            "approver"
+          ],
+          "track": [
+            "approver"
+          ],
+          "close": [
+            "approver"
+          ],
+          "archive": [
+            "approver"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -627,6 +701,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -644,6 +721,41 @@
       "doc_kind": "workflow_case"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/business_correspondence/approvals_followups/correspondence_followup/",
+    "status_field": "workflow_state",
+    "initial_state": "open",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "assign",
+        "source_state": "open",
+        "target_state": "in_progress",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "close",
+        "source_state": "open",
+        "target_state": "closed",
+        "disallowed_state": "closed"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "open",
+        "target_state": "archived",
+        "disallowed_state": "closed"
+      }
+    ],
+    "related_docs": [
+      "correspondence_record"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -651,7 +763,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

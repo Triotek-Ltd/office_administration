@@ -1,79 +1,107 @@
 {
-    "display":  {
-                    "title_template":  "{title}",
-                    "subtitle_template":  "{reference_no}",
-                    "list_columns":  [
-                                         "title",
-                                         "reference_no",
-                                         "workflow_state",
-                                         "modified"
-                                     ],
-                    "default_filters":  [
-
-                                        ],
-                    "quick_entry":  false
-                },
-    "related_docs":  [
-                         {
-                             "doc_id":  "version_record",
-                             "relation_type":  "related",
-                             "show_in_related_panel":  true
-                         },
-                         {
-                             "doc_id":  "access_grant",
-                             "relation_type":  "related",
-                             "show_in_related_panel":  true
-                         }
-                     ],
-    "lookup_rules":  [
-
-                     ],
-    "fetch_rules":  [
-
-                    ],
-    "reference_map":  {
-                          "primary_reference_field":  "reference_no",
-                          "reference_labels":  [
-
-                                               ]
-                      },
-    "relation_rules":  {
-                           "parent_doc":  null,
-                           "child_docs":  [
-
-                                          ],
-                           "show_related_panel":  true
-                       },
-    "borrowed_fields":  [
-
-                        ],
-    "ui_panels":  {
-                      "show_activity_log":  true,
-                      "show_comments":  true,
-                      "show_assignments":  true,
-                      "show_related_docs":  true
-                  },
-    "integration":  {
-                        "external_refs":  [
-
-                                          ],
-                        "sync_rules":  [
-
-                                       ]
-                    },
-    "runtime_hints":  {
-                          "doc_key":  "office_file_record",
-                          "supports_related_lookup":  true,
-                          "supports_fetch_rules":  true,
-                          "workflow_hints":  {
-                                                 "business_objective":  "Maintain the master record for office-managed files and systems artifacts.",
-                                                 "actors":  [
-                                                                "office administrator",
-                                                                "owner"
-                                                            ],
-                                                 "primary_transitions":  [
-                                                                             "office_file_record: draft -\u003e active -\u003e archived"
-                                                                         ]
-                                             }
-                      }
+  "display": {
+    "title_template": "{title}",
+    "subtitle_template": "{reference_no}",
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "default_filters": [],
+    "quick_entry": false
+  },
+  "related_docs": [
+    {
+      "doc_id": "version_record",
+      "relation_type": "related",
+      "show_in_related_panel": true
+    },
+    {
+      "doc_id": "access_grant",
+      "relation_type": "related",
+      "show_in_related_panel": true
+    }
+  ],
+  "lookup_rules": [
+    {
+      "field_id": "related_version_record",
+      "doc_id": "version_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_access_grant",
+      "doc_id": "access_grant",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
+  "fetch_rules": [],
+  "reference_map": {
+    "primary_reference_field": "reference_no",
+    "reference_labels": []
+  },
+  "relation_rules": {
+    "parent_doc": null,
+    "child_docs": [
+      "version_record",
+      "access_grant"
+    ],
+    "show_related_panel": true
+  },
+  "borrowed_fields": [],
+  "ui_panels": {
+    "show_activity_log": true,
+    "show_comments": true,
+    "show_assignments": true,
+    "show_related_docs": true
+  },
+  "integration": {
+    "external_refs": [],
+    "sync_rules": []
+  },
+  "runtime_hints": {
+    "doc_key": "office_file_record",
+    "supports_related_lookup": true,
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "business_objective": "govern office files and tool access, and resolve day-to-day office-system support issues",
+      "actors": [
+        "office user",
+        "system admin",
+        "support owner"
+      ],
+      "start_condition": "an office document or tool access/update event occurs",
+      "ordered_steps": [
+        "Register or update the office file record."
+      ],
+      "primary_actions": [
+        "create",
+        "update",
+        "archive"
+      ],
+      "primary_transitions": [
+        "office_file_record: draft -> active"
+      ],
+      "downstream_effects": [
+        "supports office controls and operational continuity"
+      ],
+      "action_actors": {
+        "create": [
+          "office user"
+        ],
+        "update": [
+          "office user"
+        ],
+        "review": [
+          "system admin"
+        ],
+        "archive": [
+          "support owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
+  }
 }

@@ -52,14 +52,15 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "posting_date": "posting_date",
-      "changed_at": "schedule_marker"
+      "changed_at": "schedule_marker",
+      "related_office_file_record": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "version_no",
-      "file",
+      "version_number",
+      "file_link",
       "version_label"
     ],
     "list_columns": [
@@ -82,20 +83,14 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {
-    "business_objective": "Maintain the change history for office file records and their versions.",
-    "actors": [
-      "owner",
-      "office administrator"
-    ],
-    "primary_transitions": [
-      "version_record: active -> archived"
-    ]
-  },
+  "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "office_file_record"
   ],
   "borrowed_fields": [
-    "file context from office_file_record"
+    "file title",
+    "owner from office_file_record"
   ]
 }

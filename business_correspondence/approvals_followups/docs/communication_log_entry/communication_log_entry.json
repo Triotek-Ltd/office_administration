@@ -14,7 +14,7 @@
     "doc_key": "communication_log_entry"
   },
   "doc_key": "communication_log_entry",
-  "doc_title": "communication_log_entry",
+  "doc_title": "Communication Log Entry",
   "allowed_actions": [
     "record",
     "view",
@@ -49,14 +49,15 @@
       ],
       "content": [
         "description",
-        "log_no",
+        "log_number",
+        "correspondence_link",
         "actor",
         "action",
         "status_note",
         "channel"
       ],
       "relations": [
-        "correspondence"
+        "related_correspondence_record"
       ],
       "amounts": [],
       "dates": [
@@ -195,8 +196,8 @@
         }
       },
       {
-        "field_id": "log_no",
-        "label": "Log No",
+        "field_id": "log_number",
+        "label": "Log Number",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -210,17 +211,17 @@
         "read_only_depends_on": null,
         "fetch_from": null,
         "allow_on_submit": false,
-        "indexed": false,
+        "indexed": true,
         "ui": {
           "visible": true,
-          "list_visible": false,
+          "list_visible": true,
           "filterable": true,
           "sortable": true
         }
       },
       {
-        "field_id": "correspondence",
-        "label": "Correspondence",
+        "field_id": "correspondence_link",
+        "label": "Correspondence Link",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -228,7 +229,7 @@
         "unique": false,
         "options": null,
         "purpose": null,
-        "linked_doc": "correspondence_record",
+        "linked_doc": null,
         "depends_on": null,
         "mandatory_depends_on": null,
         "read_only_depends_on": null,
@@ -361,6 +362,30 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_correspondence_record",
+        "label": "Related Correspondence Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "correspondence_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -368,8 +393,8 @@
       "title",
       "reference_no",
       "description",
-      "log_no",
-      "correspondence",
+      "log_number",
+      "correspondence_link",
       "event_date"
     ],
     "sort_field": "modified",
@@ -425,16 +450,18 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
           "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "approver",
+        "actions": [
+          "view",
+          "list",
+          "record",
           "archive"
         ]
       }
@@ -503,7 +530,14 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_correspondence_record",
+        "doc_id": "correspondence_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -511,12 +545,17 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "correspondence_record"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
       {
-        "description": "correspondence type and subject from correspondence_record"
+        "description": "correspondence type"
+      },
+      {
+        "description": "subject from correspondence_record"
       }
     ],
     "ui_panels": {
@@ -534,15 +573,31 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Maintain an audit trail of communication events for correspondence processing.",
+        "relation_context": {
+          "related_docs": [
+            "correspondence_record"
+          ],
+          "borrowed_fields": [
+            "correspondence type",
+            "subject from correspondence_record"
+          ],
+          "inferred_roles": [
+            "approver"
+          ]
+        },
         "actors": [
-          "office administrator",
-          "operator"
+          "approver"
         ],
-        "primary_transitions": [
-          "communication_log_entry: active -> archived"
-        ]
-      }
+        "action_actors": {
+          "record": [
+            "approver"
+          ],
+          "archive": [
+            "approver"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -618,6 +673,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -633,6 +691,30 @@
       "doc_kind": "ledger"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/business_correspondence/approvals_followups/communication_log_entry/",
+    "status_field": "workflow_state",
+    "initial_state": "active",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "active",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "correspondence_record"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -640,7 +722,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

@@ -8,10 +8,10 @@ ARCHETYPE = "reference"
 INITIAL_STATE = 'active'
 STATES = ['active', 'archived']
 TERMINAL_STATES = ['archived']
-ACTION_RULES = {'create': {'allowed_in_states': 'active', 'transitions_to': None}, 'archive': {'allowed_in_states': 'active', 'transitions_to': 'archived'}, 'update': {'allowed_in_states': 'active', 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['active'], 'transitions_to': None}, 'update': {'allowed_in_states': ['active'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['active'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Define the correspondence categories and handling defaults used during office communication workflows.', 'actors': ['office administrator'], 'primary_transitions': ['correspondence_type: active -> archived']}
+WORKFLOW_HINTS = {}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

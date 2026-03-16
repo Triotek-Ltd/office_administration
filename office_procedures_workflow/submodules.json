@@ -1,6 +1,6 @@
 {
   "submodules": [
-    "procedures",
-    "meetings_tasks"
+    "meetings_tasks",
+    "procedures"
   ]
 }

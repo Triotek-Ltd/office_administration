@@ -20,7 +20,8 @@
     "submodule": "access_control",
     "reference_doc_id": "tool_issue_case",
     "evidence_gaps": [
-      "incident vs support-case split"
+      "support case vs incident split",
+      "escalation thresholds"
     ]
   }
 }

@@ -8,10 +8,10 @@ ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'approved', 'closed', 'archived']
 TERMINAL_STATES = ['closed', 'archived']
-ACTION_RULES = {'close': {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'closed'}, 'create': {'allowed_in_states': ['open', 'approved'], 'transitions_to': None}, 'approve': {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'approved'}, 'archive': {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'archived'}}
+ACTION_RULES = {'create': {'allowed_in_states': ['open', 'approved'], 'transitions_to': None}, 'approve': {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'approved'}, 'close': {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'approved'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track access requests and grants for office systems and managed files.', 'actors': ['requester', 'approver', 'office administrator'], 'primary_transitions': ['access_grant: open -> approved -> closed -> archived']}
+WORKFLOW_HINTS = {}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

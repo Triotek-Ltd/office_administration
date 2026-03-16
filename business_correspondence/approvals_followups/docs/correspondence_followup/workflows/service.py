@@ -8,10 +8,10 @@ ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'in_progress', 'closed', 'archived']
 TERMINAL_STATES = ['closed', 'archived']
-ACTION_RULES = {'close': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'closed'}, 'create': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}, 'archive': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'archived'}, 'track': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Track action items and expected responses that arise from correspondence records.', 'actors': ['owner', 'office administrator'], 'primary_transitions': ['correspondence_followup: open -> in_progress -> closed -> archived']}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['correspondence_record'], 'borrowed_fields': ['recipient', 'subject', 'communication date from correspondence_record'], 'inferred_roles': ['approver']}, 'actors': ['approver'], 'action_actors': {'create': ['approver'], 'assign': ['approver'], 'track': ['approver'], 'close': ['approver'], 'archive': ['approver']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

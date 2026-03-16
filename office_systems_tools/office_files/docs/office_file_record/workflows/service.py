@@ -8,10 +8,10 @@ ARCHETYPE = "master"
 INITIAL_STATE = 'draft'
 STATES = ['draft', 'active', 'archived']
 TERMINAL_STATES = ['archived']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'active'], 'transitions_to': 'archived'}, 'update': {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}}
+ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}, 'update': {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'active'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'active'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain the master record for office-managed files and systems artifacts.', 'actors': ['office administrator', 'owner'], 'primary_transitions': ['office_file_record: draft -> active -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'govern office files and tool access, and resolve day-to-day office-system support issues', 'actors': ['office user', 'system admin', 'support owner'], 'start_condition': 'an office document or tool access/update event occurs', 'ordered_steps': ['Register or update the office file record.'], 'primary_actions': ['create', 'update', 'archive'], 'primary_transitions': ['office_file_record: draft -> active'], 'downstream_effects': ['supports office controls and operational continuity'], 'action_actors': {'create': ['office user'], 'update': ['office user'], 'review': ['system admin'], 'archive': ['support owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

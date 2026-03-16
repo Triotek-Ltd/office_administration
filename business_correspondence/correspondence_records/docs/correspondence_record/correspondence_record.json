@@ -14,7 +14,7 @@
     "doc_key": "correspondence_record"
   },
   "doc_key": "correspondence_record",
-  "doc_title": "correspondence_record",
+  "doc_title": "Correspondence Record",
   "allowed_actions": [
     "create",
     "review",
@@ -77,7 +77,10 @@
         "purpose"
       ],
       "relations": [
-        "correspondence_type"
+        "correspondence_type",
+        "related_correspondence_approval",
+        "related_correspondence_followup",
+        "related_administrative_document"
       ],
       "amounts": [
         "currency",
@@ -488,6 +491,78 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_correspondence_approval",
+        "label": "Related Correspondence Approval",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "correspondence_approval",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_correspondence_followup",
+        "label": "Related Correspondence Followup",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "correspondence_followup",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_administrative_document",
+        "label": "Related Administrative Document",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "administrative_document",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -548,7 +623,7 @@
           "approved",
           "sent"
         ],
-        "transitions_to": null
+        "transitions_to": "in_review"
       },
       "submit": {
         "allowed_in_states": [
@@ -557,7 +632,7 @@
           "approved",
           "sent"
         ],
-        "transitions_to": null
+        "transitions_to": "in_review"
       },
       "approve": {
         "allowed_in_states": [
@@ -579,10 +654,7 @@
       },
       "issue": {
         "allowed_in_states": [
-          "draft",
-          "in_review",
-          "approved",
-          "sent"
+          "approved"
         ],
         "transitions_to": null
       },
@@ -627,17 +699,53 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
+          "create",
           "review",
-          "assign",
+          "submit",
+          "approve",
+          "return_for_revision",
+          "issue",
+          "send",
+          "file",
           "track",
-          "monitor",
-          "confirm",
           "archive"
+        ]
+      },
+      {
+        "role_id": "service desk officer",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "submit",
+          "track"
+        ]
+      },
+      {
+        "role_id": "assigned department owner",
+        "actions": [
+          "view",
+          "list",
+          "review",
+          "issue",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "supervisor",
+        "actions": [
+          "view",
+          "list",
+          "approve"
+        ]
+      },
+      {
+        "role_id": "customer",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -726,7 +834,26 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_correspondence_approval",
+        "doc_id": "correspondence_approval",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_correspondence_followup",
+        "doc_id": "correspondence_followup",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_administrative_document",
+        "doc_id": "administrative_document",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -734,7 +861,11 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "correspondence_approval",
+        "correspondence_followup",
+        "administrative_document"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -760,16 +891,50 @@
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
       "workflow_hints": {
-        "business_objective": "Prepare, route, approve, send, and file internal and external correspondence records.",
+        "business_objective": "receive, classify, assign, resolve, and document inquiries and complaints",
         "actors": [
-          "office administrator",
-          "approver",
-          "correspondence owner"
+          "service desk officer",
+          "assigned department owner",
+          "supervisor",
+          "customer"
         ],
-        "primary_transitions": [
-          "correspondence_record: draft -> in_review -> approved -> sent -> archived"
-        ]
-      }
+        "start_condition": "a customer inquiry or complaint is received",
+        "ordered_steps": [
+          "Confirm resolution with the customer."
+        ],
+        "primary_actions": [
+          "confirm",
+          "close"
+        ],
+        "primary_transitions": [],
+        "downstream_effects": [
+          "service cases feed reporting, quality improvement, and risk/compliance review"
+        ],
+        "action_actors": {
+          "create": [
+            "service desk officer"
+          ],
+          "review": [
+            "assigned department owner"
+          ],
+          "submit": [
+            "service desk officer"
+          ],
+          "approve": [
+            "supervisor"
+          ],
+          "issue": [
+            "assigned department owner"
+          ],
+          "track": [
+            "service desk officer"
+          ],
+          "archive": [
+            "assigned department owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -849,6 +1014,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -871,6 +1039,53 @@
       "doc_kind": "transaction"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/business_correspondence/correspondence_records/correspondence_record/",
+    "status_field": "workflow_state",
+    "initial_state": "draft",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "review",
+        "source_state": "draft",
+        "target_state": "in_review",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "submit",
+        "source_state": "draft",
+        "target_state": "in_review",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "approve",
+        "source_state": "draft",
+        "target_state": "approved",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "draft",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "correspondence_type",
+      "correspondence_approval",
+      "correspondence_followup",
+      "administrative_document"
+    ],
+    "downstream_effects": [
+      "service cases feed reporting, quality improvement, and risk/compliance review"
+    ],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -878,7 +1093,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

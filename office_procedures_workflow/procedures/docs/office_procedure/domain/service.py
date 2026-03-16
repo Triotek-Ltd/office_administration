@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'configuration_control', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': True}, 'lifecycle_states': ['draft', 'approved', 'published', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'owner': 'actor_reference', 'effective_date': 'schedule_marker', 'review_date': 'schedule_marker', 'publication_status': 'status_flag'}, 'search_fields': ['title', 'reference_no', 'description', 'procedure_no', 'purpose', 'owner'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'approved', 'published', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'review': None, 'archive': 'archived', 'publish': 'published', 'update': None}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'owner': 'actor_reference', 'effective_date': 'schedule_marker', 'review_date': 'schedule_marker', 'publication_status': 'status_flag', 'related_workflow_task': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'procedure_number', 'purpose', 'owner'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'approved', 'published', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'review': None, 'publish': 'published', 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Define and publish office procedures that drive repeatable operational work.', 'actors': ['office administrator', 'process owner'], 'primary_transitions': ['office_procedure: draft -> approved -> published -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'maintain standard office procedures, run recurring coordination meetings, and ensure agreed actions are tracked to closure', 'actors': ['admin coordinator', 'meeting owner', 'task owners'], 'start_condition': 'an internal procedure or meeting-driven workflow must be coordinated', 'ordered_steps': ['Create or revise the office procedure baseline.'], 'primary_actions': ['create', 'update', 'review', 'approve'], 'primary_transitions': ['office_procedure: draft -> in_review -> approved -> active'], 'downstream_effects': ['supports coordination, compliance, and operational follow-through'], 'action_actors': {'create': ['admin coordinator'], 'update': ['admin coordinator'], 'review': ['admin coordinator'], 'publish': ['meeting owner'], 'archive': ['meeting owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['supports coordination, compliance, and operational follow-through'], 'related_docs': ['workflow_task'], 'action_targets': {'create': None, 'update': None, 'review': None, 'publish': 'published', 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "office_procedure"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

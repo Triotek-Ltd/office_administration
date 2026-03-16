@@ -48,7 +48,8 @@
       "workflow_state"
     ],
     "field_purposes": {
-      "workflow_state": "lifecycle_state"
+      "workflow_state": "lifecycle_state",
+      "related_correspondence_record": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -74,19 +75,13 @@
     ],
     "action_targets": {
       "create": null,
-      "archive": "archived",
-      "update": null
+      "update": null,
+      "archive": "archived"
     }
   },
-  "workflow_hints": {
-    "business_objective": "Define the correspondence categories and handling defaults used during office communication workflows.",
-    "actors": [
-      "office administrator"
-    ],
-    "primary_transitions": [
-      "correspondence_type: active -> archived"
-    ]
-  },
+  "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "correspondence_record"
   ],

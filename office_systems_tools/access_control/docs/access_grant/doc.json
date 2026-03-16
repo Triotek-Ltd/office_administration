@@ -21,7 +21,8 @@
     "reference_doc_id": "access_grant",
     "evidence_gaps": [
       "role catalog",
-      "revocation workflow"
+      "revocation",
+      "expiry rules"
     ]
   }
 }

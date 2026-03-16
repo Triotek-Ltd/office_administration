@@ -20,7 +20,8 @@
     "submodule": "records_registry",
     "reference_doc_id": "records_register_entry",
     "evidence_gaps": [
-      "register numbering rules"
+      "exact numbering pattern",
+      "one-entry-per-document vs one-entry-per-series decision"
     ]
   }
 }

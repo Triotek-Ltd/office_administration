@@ -20,7 +20,7 @@
     "submodule": "meetings_tasks",
     "reference_doc_id": "workflow_task",
     "evidence_gaps": [
-      "recurring-task rules",
+      "recurring-task",
       "delegation rules"
     ]
   }

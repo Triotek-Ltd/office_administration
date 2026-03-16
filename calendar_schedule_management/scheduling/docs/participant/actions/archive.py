@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "participant"
 ACTION_ID = "archive"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': 'archived'}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': 'archived'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain reusable participant records for office scheduling and travel coordination.', 'actors': ['office administrator'], 'primary_transitions': ['participant: active -> archived']}
+WORKFLOW_HINTS = {}
 
 def handle_archive(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

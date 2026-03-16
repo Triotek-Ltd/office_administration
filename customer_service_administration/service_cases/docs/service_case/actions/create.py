@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "service_case"
 ACTION_ID = "create"
-ACTION_RULE = {'allowed_in_states': ['opened', 'in_progress', 'resolved'], 'transitions_to': None}
+ACTION_RULE = {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Receive, classify, assign, resolve, and document inquiries and complaints.', 'actors': ['service desk officer', 'assigned department owner', 'supervisor', 'customer'], 'start_condition': 'A customer inquiry or complaint is received.', 'ordered_steps': ['Open the service case and capture the issue.', 'Classify urgency and route to the responsible owner.', 'Record actions taken during handling.', 'Follow up unresolved issues.', 'Confirm resolution with the customer.'], 'primary_actions': ['create', 'assign', 'classify', 'escalate', 'confirm', 'close'], 'primary_transitions': ['service_case: opened -> in_progress', 'service_case: in_progress -> resolved -> closed'], 'downstream_effects': ['Service activity becomes auditable through log entries.', 'Follow-up actions can be assigned and tracked.', 'Resolution communication can be recorded.']}
+WORKFLOW_HINTS = {'business_objective': 'receive, classify, assign, resolve, and document inquiries and complaints', 'actors': ['service desk officer', 'assigned department owner', 'supervisor', 'customer'], 'start_condition': 'a customer inquiry or complaint is received', 'ordered_steps': ['Open the service case and capture the issue.', 'Classify urgency and route to the responsible owner.', 'Follow up unresolved issues.', 'Confirm resolution with the customer.', 'Archive service documentation.'], 'primary_actions': ['create', 'assign', 'classify', 'escalate', 'track', 'confirm', 'close', 'archive'], 'primary_transitions': ['service_case: opened -> in_progress', 'service_case: in_progress -> resolved -> closed'], 'downstream_effects': ['service cases feed reporting, quality improvement, and risk/compliance review'], 'action_actors': {'create': ['service desk officer'], 'assign': ['service desk officer'], 'track': ['service desk officer'], 'confirm': ['supervisor'], 'close': ['assigned department owner'], 'record': ['service desk officer'], 'archive': ['assigned department owner']}}
 
 def handle_create(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

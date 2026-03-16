@@ -58,13 +58,15 @@
       "requester": "actor_reference",
       "requested_date": "schedule_marker",
       "decision_date": "schedule_marker",
-      "approver": "actor_reference"
+      "approver": "actor_reference",
+      "related_administrative_document": "relation_collection",
+      "related_access_log_entry": "relation_collection"
     },
     "search_fields": [
       "title",
       "reference_no",
       "description",
-      "request_no",
+      "request_number",
       "requester",
       "target_document"
     ],
@@ -85,28 +87,65 @@
       "closed"
     ],
     "action_targets": {
-      "close": "closed",
       "create": null,
       "assign": "in_review",
-      "approve": null
+      "approve": null,
+      "close": "closed"
     }
   },
   "workflow_hints": {
-    "business_objective": "Control and audit access requests for managed administrative records.",
+    "business_objective": "register, store, retrieve, control, and dispose of administrative records",
     "actors": [
-      "requester",
       "records officer",
-      "approver"
+      "document owner",
+      "requester",
+      "approver",
+      "archive custodian"
+    ],
+    "start_condition": "a document is received or created and must be governed as a business record",
+    "ordered_steps": [
+      "Handle retrieval and access requests."
+    ],
+    "primary_actions": [
+      "create",
+      "assign",
+      "approve",
+      "record",
+      "close"
     ],
     "primary_transitions": [
-      "document_access_request: open -> in_review -> resolved -> closed"
-    ]
+      "document_access_request: opened -> in_review -> resolved -> closed"
+    ],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable"
+    ],
+    "action_actors": {
+      "create": [
+        "records officer"
+      ],
+      "assign": [
+        "records officer"
+      ],
+      "approve": [
+        "approver"
+      ],
+      "close": [
+        "document owner"
+      ]
+    }
   },
+  "downstream_effects": [
+    "records become available to compliance, audit, and legal processes",
+    "access and disposal events become auditable"
+  ],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "administrative_document",
     "access_log_entry"
   ],
   "borrowed_fields": [
-    "document details from administrative_document"
+    "document metadata",
+    "classification from administrative_document"
   ]
 }

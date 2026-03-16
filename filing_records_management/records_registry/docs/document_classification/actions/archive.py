@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "document_classification"
 ACTION_ID = "archive"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': 'archived'}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': 'archived'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Define the classification scheme used to organize and secure administrative documents.', 'actors': ['records officer'], 'primary_transitions': ['document_classification: active -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Intake and classify the document.'], 'primary_actions': ['create', 'classify'], 'primary_transitions': [], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'update': ['records officer'], 'archive': ['document owner']}}
 
 def handle_archive(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

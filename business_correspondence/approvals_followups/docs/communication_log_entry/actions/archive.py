@@ -5,10 +5,10 @@ from __future__ import annotations
 
 DOC_ID = "communication_log_entry"
 ACTION_ID = "archive"
-ACTION_RULE = {'allowed_in_states': 'active', 'transitions_to': 'archived'}
+ACTION_RULE = {'allowed_in_states': ['active'], 'transitions_to': 'archived'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {'business_objective': 'Maintain an audit trail of communication events for correspondence processing.', 'actors': ['office administrator', 'operator'], 'primary_transitions': ['communication_log_entry: active -> archived']}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['correspondence_record'], 'borrowed_fields': ['correspondence type', 'subject from correspondence_record'], 'inferred_roles': ['approver']}, 'actors': ['approver'], 'action_actors': {'record': ['approver'], 'archive': ['approver']}}
 
 def handle_archive(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

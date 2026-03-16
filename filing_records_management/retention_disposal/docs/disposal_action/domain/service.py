@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'case_flow', 'supports_assignment': True, 'supports_escalation': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['draft', 'in_review', 'approved', 'closed', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'requested_disposal_date': 'schedule_marker', 'completion_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'action_no', 'document_or_series', 'retention_basis'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'in_review', 'approved', 'closed', 'archived'], 'terminal_states': ['closed', 'archived'], 'action_targets': {'close': 'closed', 'submit': 'in_review', 'create': None, 'approve': 'approved', 'archive': 'archived'}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'requested_disposal_date': 'schedule_marker', 'completion_date': 'schedule_marker', 'related_administrative_document': 'relation_collection', 'related_retention_policy': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'action_number', 'document_or_series', 'retention_basis'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'draft', 'lifecycle_states': ['draft', 'in_review', 'approved', 'closed', 'archived'], 'terminal_states': ['closed', 'archived'], 'action_targets': {'create': None, 'submit': 'in_review', 'approve': 'approved', 'close': 'closed', 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {'business_objective': 'Track approval and completion of records disposal under retention controls.', 'actors': ['records officer', 'approver', 'custodian'], 'primary_transitions': ['disposal_action: draft -> in_review -> approved -> closed -> archived']}
+WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Execute disposal when retention expires and approval exists.'], 'primary_actions': ['create', 'submit', 'approve', 'close', 'archive'], 'primary_transitions': ['disposal_action: draft -> in_review -> approved -> closed -> archived'], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'submit': ['records officer'], 'approve': ['approver'], 'close': ['document owner'], 'archive': ['document owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'related_docs': ['administrative_document', 'retention_policy'], 'action_targets': {'create': None, 'submit': 'in_review', 'approve': 'approved', 'close': 'closed', 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "disposal_action"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

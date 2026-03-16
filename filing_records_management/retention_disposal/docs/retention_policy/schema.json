@@ -1,462 +1,529 @@
 {
-    "schema_version":  1,
-    "source":  "3plug_newdoc_scaffold",
-    "title_field":  "title",
-    "search_fields":  [
-                          "title",
-                          "reference_no",
-                          "description",
-                          "policy_code",
-                          "record_series",
-                          "retention_period"
-                      ],
-    "sort_field":  "modified",
-    "sort_order":  "DESC",
-    "default_view":  "List",
-    "status_field":  "workflow_state",
-    "fields":  [
-                   {
-                       "field_id":  "title",
-                       "label":  "Title",
-                       "type":  "Data",
-                       "required":  true,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  true,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  true,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "reference_no",
-                       "label":  "Reference No",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  true,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  true,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "description",
-                       "label":  "Description",
-                       "type":  "Text",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  false,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  false,
-                                  "filterable":  false,
-                                  "sortable":  false
-                              }
-                   },
-                   {
-                       "field_id":  "workflow_state",
-                       "label":  "Workflow State",
-                       "type":  "Select",
-                       "required":  true,
-                       "read_only":  false,
-                       "options":  {
-                                       "values":  [
-                                                      "draft",
-                                                      "active",
-                                                      "archived"
-                                                  ]
-                                   },
-                       "default":  "draft",
-                       "unique":  false,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  true,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  true,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              },
-                       "purpose":  "lifecycle_state"
-                   },
-                   {
-                       "field_id":  "policy_code",
-                       "label":  "Policy Code",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  true,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  true,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "record_series",
-                       "label":  "Record Series",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  false,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  false,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "retention_period",
-                       "label":  "Retention Period",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  false,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  false,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "trigger_event",
-                       "label":  "Trigger Event",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  false,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  false,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "disposal_rule",
-                       "label":  "Disposal Rule",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  false,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  false,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "authority_source",
-                       "label":  "Authority Source",
-                       "type":  "Data",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "purpose":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  false,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  false,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              }
-                   },
-                   {
-                       "field_id":  "review_date",
-                       "label":  "Review Date",
-                       "type":  "Date",
-                       "required":  false,
-                       "read_only":  false,
-                       "default":  null,
-                       "unique":  false,
-                       "options":  null,
-                       "linked_doc":  null,
-                       "depends_on":  null,
-                       "mandatory_depends_on":  null,
-                       "read_only_depends_on":  null,
-                       "fetch_from":  null,
-                       "allow_on_submit":  false,
-                       "indexed":  true,
-                       "ui":  {
-                                  "visible":  true,
-                                  "list_visible":  true,
-                                  "filterable":  true,
-                                  "sortable":  true
-                              },
-                       "purpose":  "schedule_marker"
-                   }
-               ],
-    "field_groups":  {
-                         "system":  [
-                                        "id",
-                                        "creation",
-                                        "modified",
-                                        "owner",
-                                        "docstatus",
-                                        "workflow_state"
-                                    ],
-                         "identity":  [
-                                          "title",
-                                          "reference_no"
-                                      ],
-                         "content":  [
-                                         "description",
-                                         "policy_code",
-                                         "record_series",
-                                         "retention_period",
-                                         "trigger_event",
-                                         "disposal_rule",
-                                         "authority_source"
-                                     ],
-                         "relations":  [
-
-                                       ],
-                         "amounts":  [
-
-                                     ],
-                         "dates":  [
-                                       "review_date"
-                                   ],
-                         "parties":  [
-
-                                     ],
-                         "status":  [
-                                        "workflow_state"
-                                    ]
-                     },
-    "system_fields":  [
-                          "id",
-                          "creation",
-                          "modified",
-                          "owner",
-                          "docstatus",
-                          "workflow_state"
-                      ],
-    "child_tables":  [
-
-                     ],
-    "validation_rules":  [
-
-                         ],
-    "naming_rule":  {
-                        "strategy":  "custom",
-                        "pattern":  "retention_policy"
-                    },
-    "record_contract":  {
-                            "doc_kind":  "configuration",
-                            "supports_attachments":  true,
-                            "supports_comments":  false,
-                            "supports_activity_log":  true,
-                            "supports_assignments":  false
-                        },
-    "lifecycle":  {
-                      "initial_state":  "draft",
-                      "states":  [
-                                     "draft",
-                                     "active",
-                                     "archived"
-                                 ],
-                      "terminal_states":  [
-                                              "archived"
-                                          ]
-                  },
-    "action_rules":  {
-                         "create":  {
-                                        "allowed_in_states":  [
-                                                                  "draft",
-                                                                  "active"
-                                                              ],
-                                        "transitions_to":  null
-                                    },
-                         "review":  {
-                                        "allowed_in_states":  [
-                                                                  "draft",
-                                                                  "active"
-                                                              ],
-                                        "transitions_to":  null
-                                    },
-                         "archive":  {
-                                         "allowed_in_states":  [
-                                                                   "draft",
-                                                                   "active"
-                                                               ],
-                                         "transitions_to":  "archived"
-                                     },
-                         "update":  {
-                                        "allowed_in_states":  [
-                                                                  "draft",
-                                                                  "active"
-                                                              ],
-                                        "transitions_to":  null
-                                    }
-                     },
-    "role_action_matrix":  [
-                               {
-                                   "role_id":  "System Manager",
-                                   "actions":  [
-                                                   "create",
-                                                   "update",
-                                                   "view",
-                                                   "list",
-                                                   "record",
-                                                   "review",
-                                                   "assign",
-                                                   "track",
-                                                   "monitor",
-                                                   "confirm",
-                                                   "archive"
-                                               ]
-                               }
-                           ],
-    "transaction_behavior":  {
-                                 "is_transactional":  false,
-                                 "transaction_kind":  null,
-                                 "posting_behavior":  {
-                                                          "requires_posting":  false,
-                                                          "posting_action":  "post",
-                                                          "reversal_action":  "cancel"
-                                                      },
-                                 "party_model":  {
-                                                     "primary_party_field":  null,
-                                                     "counterparty_field":  null,
-                                                     "party_roles":  [
-
-                                                                     ]
-                                                 },
-                                 "value_model":  {
-                                                     "currency_field":  null,
-                                                     "amount_fields":  [
-
-                                                                       ],
-                                                     "balance_impact":  "none"
-                                                 },
-                                 "reference_model":  {
-                                                         "reference_no_field":  "reference_no",
-                                                         "upstream_links":  [
-
-                                                                            ],
-                                                         "downstream_links":  [
-
-                                                                              ]
-                                                     },
-                                 "line_items":  {
-                                                    "enabled":  false,
-                                                    "table_field":  null,
-                                                    "item_key_field":  null,
-                                                    "quantity_field":  null,
-                                                    "rate_field":  null,
-                                                    "amount_field":  null
-                                                },
-                                 "fulfilment":  {
-                                                    "enabled":  false,
-                                                    "dispatch_state_field":  null,
-                                                    "delivery_state_field":  null,
-                                                    "completion_action":  "confirm"
-                                                },
-                                 "audit":  {
-                                               "track_state_history":  true,
-                                               "track_action_log":  true,
-                                               "track_external_refs":  true
-                                           }
-                             }
+  "schema_version": 1,
+  "source": "3plug_newdoc_scaffold",
+  "title_field": "title",
+  "search_fields": [
+    "title",
+    "reference_no",
+    "description",
+    "policy_code",
+    "record_series",
+    "retention_period"
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "default_view": "List",
+  "status_field": "workflow_state",
+  "fields": [
+    {
+      "field_id": "title",
+      "label": "Title",
+      "type": "Data",
+      "required": true,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": true,
+      "ui": {
+        "visible": true,
+        "list_visible": true,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "reference_no",
+      "label": "Reference No",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": true,
+      "ui": {
+        "visible": true,
+        "list_visible": true,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "description",
+      "label": "Description",
+      "type": "Text",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": true,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "workflow_state",
+      "label": "Workflow State",
+      "type": "Select",
+      "required": true,
+      "read_only": false,
+      "options": {
+        "values": [
+          "draft",
+          "active",
+          "archived"
+        ]
+      },
+      "default": "draft",
+      "unique": false,
+      "linked_doc": null,
+      "purpose": "lifecycle_state",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": true,
+      "ui": {
+        "visible": true,
+        "list_visible": true,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "policy_code",
+      "label": "Policy Code",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": true,
+      "ui": {
+        "visible": true,
+        "list_visible": true,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "record_series",
+      "label": "Record Series",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": true,
+        "list_visible": false,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "retention_period",
+      "label": "Retention Period",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": true,
+        "list_visible": false,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "trigger_event",
+      "label": "Trigger Event",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": true,
+        "list_visible": false,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "disposal_rule",
+      "label": "Disposal Rule",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": true,
+        "list_visible": false,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "authority_source",
+      "label": "Authority Source",
+      "type": "Data",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": null,
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": true,
+        "list_visible": false,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "review_date",
+      "label": "Review Date",
+      "type": "Date",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "schedule_marker",
+      "linked_doc": null,
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": true,
+      "ui": {
+        "visible": true,
+        "list_visible": true,
+        "filterable": true,
+        "sortable": true
+      }
+    },
+    {
+      "field_id": "related_document_classification",
+      "label": "Related Document Classification",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "document_classification",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_disposal_action",
+      "label": "Related Disposal Action",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "disposal_action",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    }
+  ],
+  "field_groups": {
+    "system": [
+      "id",
+      "creation",
+      "modified",
+      "owner",
+      "docstatus",
+      "workflow_state"
+    ],
+    "identity": [
+      "title",
+      "reference_no"
+    ],
+    "content": [
+      "description",
+      "policy_code",
+      "record_series",
+      "retention_period",
+      "trigger_event",
+      "disposal_rule",
+      "authority_source"
+    ],
+    "relations": [
+      "related_document_classification",
+      "related_disposal_action"
+    ],
+    "amounts": [],
+    "dates": [
+      "review_date"
+    ],
+    "parties": [],
+    "status": [
+      "workflow_state"
+    ]
+  },
+  "system_fields": [
+    "id",
+    "creation",
+    "modified",
+    "owner",
+    "docstatus",
+    "workflow_state"
+  ],
+  "child_tables": [],
+  "validation_rules": [],
+  "naming_rule": {
+    "strategy": "custom",
+    "pattern": "retention_policy"
+  },
+  "record_contract": {
+    "doc_kind": "configuration",
+    "supports_attachments": true,
+    "supports_comments": false,
+    "supports_activity_log": true,
+    "supports_assignments": false
+  },
+  "lifecycle": {
+    "initial_state": "draft",
+    "states": [
+      "draft",
+      "active",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "action_rules": {
+    "create": {
+      "allowed_in_states": [
+        "draft",
+        "active"
+      ],
+      "transitions_to": null
+    },
+    "update": {
+      "allowed_in_states": [
+        "draft",
+        "active"
+      ],
+      "transitions_to": null
+    },
+    "review": {
+      "allowed_in_states": [
+        "draft",
+        "active"
+      ],
+      "transitions_to": null
+    },
+    "archive": {
+      "allowed_in_states": [
+        "draft",
+        "active"
+      ],
+      "transitions_to": "archived"
+    }
+  },
+  "role_action_matrix": [
+    {
+      "role_id": "System Manager",
+      "actions": [
+        "view",
+        "list",
+        "create",
+        "update",
+        "review",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "records officer",
+      "actions": [
+        "view",
+        "list",
+        "create",
+        "update"
+      ]
+    },
+    {
+      "role_id": "document owner",
+      "actions": [
+        "view",
+        "list",
+        "review",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "requester",
+      "actions": [
+        "view",
+        "list"
+      ]
+    },
+    {
+      "role_id": "approver",
+      "actions": [
+        "view",
+        "list"
+      ]
+    },
+    {
+      "role_id": "archive custodian",
+      "actions": [
+        "view",
+        "list"
+      ]
+    }
+  ],
+  "transaction_behavior": {
+    "is_transactional": false,
+    "transaction_kind": null,
+    "posting_behavior": {
+      "requires_posting": false,
+      "posting_action": "post",
+      "reversal_action": "cancel"
+    },
+    "party_model": {
+      "primary_party_field": null,
+      "counterparty_field": null,
+      "party_roles": []
+    },
+    "value_model": {
+      "currency_field": null,
+      "amount_fields": [],
+      "balance_impact": "none"
+    },
+    "reference_model": {
+      "reference_no_field": "reference_no",
+      "upstream_links": [],
+      "downstream_links": []
+    },
+    "line_items": {
+      "enabled": false,
+      "table_field": null,
+      "item_key_field": null,
+      "quantity_field": null,
+      "rate_field": null,
+      "amount_field": null
+    },
+    "fulfilment": {
+      "enabled": false,
+      "dispatch_state_field": null,
+      "delivery_state_field": null,
+      "completion_action": "confirm"
+    },
+    "audit": {
+      "track_state_history": true,
+      "track_action_log": true,
+      "track_external_refs": true
+    }
+  }
 }

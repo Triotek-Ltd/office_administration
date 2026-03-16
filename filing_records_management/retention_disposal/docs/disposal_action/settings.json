@@ -1,82 +1,122 @@
 {
-    "display":  {
-                    "title_template":  "{title}",
-                    "subtitle_template":  "{reference_no}",
-                    "list_columns":  [
-                                         "title",
-                                         "reference_no",
-                                         "workflow_state",
-                                         "modified"
-                                     ],
-                    "default_filters":  [
-
-                                        ],
-                    "quick_entry":  false
-                },
-    "related_docs":  [
-                         {
-                             "doc_id":  "administrative_document",
-                             "relation_type":  "related",
-                             "show_in_related_panel":  true
-                         },
-                         {
-                             "doc_id":  "retention_policy",
-                             "relation_type":  "related",
-                             "show_in_related_panel":  true
-                         }
-                     ],
-    "lookup_rules":  [
-
-                     ],
-    "fetch_rules":  [
-
-                    ],
-    "reference_map":  {
-                          "primary_reference_field":  "reference_no",
-                          "reference_labels":  [
-
-                                               ]
-                      },
-    "relation_rules":  {
-                           "parent_doc":  null,
-                           "child_docs":  [
-
-                                          ],
-                           "show_related_panel":  true
-                       },
-    "borrowed_fields":  [
-                            {
-                                "description":  "retention basis from retention_policy"
-                            }
-                        ],
-    "ui_panels":  {
-                      "show_activity_log":  true,
-                      "show_comments":  true,
-                      "show_assignments":  true,
-                      "show_related_docs":  true
-                  },
-    "integration":  {
-                        "external_refs":  [
-
-                                          ],
-                        "sync_rules":  [
-
-                                       ]
-                    },
-    "runtime_hints":  {
-                          "doc_key":  "disposal_action",
-                          "supports_related_lookup":  true,
-                          "supports_fetch_rules":  true,
-                          "workflow_hints":  {
-                                                 "business_objective":  "Track approval and completion of records disposal under retention controls.",
-                                                 "actors":  [
-                                                                "records officer",
-                                                                "approver",
-                                                                "custodian"
-                                                            ],
-                                                 "primary_transitions":  [
-                                                                             "disposal_action: draft -\u003e in_review -\u003e approved -\u003e closed -\u003e archived"
-                                                                         ]
-                                             }
-                      }
+  "display": {
+    "title_template": "{title}",
+    "subtitle_template": "{reference_no}",
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "default_filters": [],
+    "quick_entry": false
+  },
+  "related_docs": [
+    {
+      "doc_id": "administrative_document",
+      "relation_type": "related",
+      "show_in_related_panel": true
+    },
+    {
+      "doc_id": "retention_policy",
+      "relation_type": "related",
+      "show_in_related_panel": true
+    }
+  ],
+  "lookup_rules": [
+    {
+      "field_id": "related_administrative_document",
+      "doc_id": "administrative_document",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_retention_policy",
+      "doc_id": "retention_policy",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
+  "fetch_rules": [],
+  "reference_map": {
+    "primary_reference_field": "reference_no",
+    "reference_labels": []
+  },
+  "relation_rules": {
+    "parent_doc": null,
+    "child_docs": [
+      "administrative_document",
+      "retention_policy"
+    ],
+    "show_related_panel": true
+  },
+  "borrowed_fields": [
+    {
+      "description": "retention period"
+    },
+    {
+      "description": "disposal rule from retention_policy"
+    }
+  ],
+  "ui_panels": {
+    "show_activity_log": true,
+    "show_comments": true,
+    "show_assignments": true,
+    "show_related_docs": true
+  },
+  "integration": {
+    "external_refs": [],
+    "sync_rules": []
+  },
+  "runtime_hints": {
+    "doc_key": "disposal_action",
+    "supports_related_lookup": true,
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "business_objective": "register, store, retrieve, control, and dispose of administrative records",
+      "actors": [
+        "records officer",
+        "document owner",
+        "requester",
+        "approver",
+        "archive custodian"
+      ],
+      "start_condition": "a document is received or created and must be governed as a business record",
+      "ordered_steps": [
+        "Execute disposal when retention expires and approval exists."
+      ],
+      "primary_actions": [
+        "create",
+        "submit",
+        "approve",
+        "close",
+        "archive"
+      ],
+      "primary_transitions": [
+        "disposal_action: draft -> in_review -> approved -> closed -> archived"
+      ],
+      "downstream_effects": [
+        "records become available to compliance, audit, and legal processes",
+        "access and disposal events become auditable"
+      ],
+      "action_actors": {
+        "create": [
+          "records officer"
+        ],
+        "submit": [
+          "records officer"
+        ],
+        "approve": [
+          "approver"
+        ],
+        "close": [
+          "document owner"
+        ],
+        "archive": [
+          "document owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
+  }
 }

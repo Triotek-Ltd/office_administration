@@ -14,7 +14,7 @@
     "doc_key": "correspondence_type"
   },
   "doc_key": "correspondence_type",
-  "doc_title": "correspondence_type",
+  "doc_title": "Correspondence Type",
   "allowed_actions": [
     "create",
     "update",
@@ -52,10 +52,12 @@
         "type_code",
         "label",
         "channel",
-        "approval_required",
+        "approval_required_flag",
         "filing_rule"
       ],
-      "relations": [],
+      "relations": [
+        "related_correspondence_record"
+      ],
       "amounts": [],
       "dates": [],
       "parties": [],
@@ -238,8 +240,8 @@
         }
       },
       {
-        "field_id": "approval_required",
-        "label": "Approval Required",
+        "field_id": "approval_required_flag",
+        "label": "Approval Required Flag",
         "type": "Data",
         "required": false,
         "read_only": false,
@@ -283,6 +285,30 @@
           "list_visible": false,
           "filterable": true,
           "sortable": true
+        }
+      },
+      {
+        "field_id": "related_correspondence_record",
+        "label": "Related Correspondence Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "correspondence_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
         }
       }
     ],
@@ -348,16 +374,10 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "create",
+          "update",
           "archive"
         ]
       }
@@ -426,7 +446,14 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_correspondence_record",
+        "doc_id": "correspondence_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -434,7 +461,9 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "correspondence_record"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [],
@@ -452,15 +481,7 @@
       "doc_key": "correspondence_type",
       "supports_related_lookup": true,
       "supports_fetch_rules": true,
-      "workflow_hints": {
-        "business_objective": "Define the correspondence categories and handling defaults used during office communication workflows.",
-        "actors": [
-          "office administrator"
-        ],
-        "primary_transitions": [
-          "correspondence_type: active -> archived"
-        ]
-      }
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -536,6 +557,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -551,6 +575,29 @@
       "doc_kind": "reference"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/office_administration/business_correspondence/correspondence_records/correspondence_type/",
+    "status_field": "workflow_state",
+    "initial_state": "active",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "archive",
+        "source_state": "active",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "correspondence_record"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -558,7 +605,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }
