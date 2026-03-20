@@ -4,5 +4,560 @@
   "app_id": "office_administration",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Calendar Schedule Management KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "calendar_schedule_management",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Calendar Schedule Management summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "calendar_schedule_management",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Calendar Schedule Management charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "calendar_schedule_management",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "calendar_schedule_management_trend_line",
+            "label": "Calendar Schedule Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "calendar_schedule_management_volume_column",
+            "label": "Calendar Schedule Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "calendar_schedule_management_distribution_donut",
+            "label": "Calendar Schedule Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "calendar_event_trend_line",
+            "label": "Calendar Event trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "calendar_event_volume_column",
+            "label": "Calendar Event volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "calendar_event_distribution_donut",
+            "label": "Calendar Event distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "participant_trend_line",
+            "label": "Participant trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "participant_volume_column",
+            "label": "Participant volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "participant_distribution_donut",
+            "label": "Participant distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "schedule_request_trend_line",
+            "label": "Schedule Request trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "schedule_request_volume_column",
+            "label": "Schedule Request volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "schedule_request_distribution_donut",
+            "label": "Schedule Request distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "travel_arrangement_trend_line",
+            "label": "Travel Arrangement trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "travel_arrangement_volume_column",
+            "label": "Travel Arrangement volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "travel_arrangement_distribution_donut",
+            "label": "Travel Arrangement distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Calendar Schedule Management reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "calendar_schedule_management",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "calendar_schedule_management",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "calendar_schedule_management",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "calendar_schedule_management",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "calendar_schedule_management",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Calendar Schedule Management Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Calendar Schedule Management Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Calendar Event Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Calendar Event Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "calendar_schedule_management_trend_line",
+        "label": "Calendar Schedule Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "calendar_schedule_management_volume_column",
+        "label": "Calendar Schedule Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "calendar_schedule_management_distribution_donut",
+        "label": "Calendar Schedule Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "calendar_event_trend_line",
+        "label": "Calendar Event trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "calendar_event_volume_column",
+        "label": "Calendar Event volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "calendar_event_distribution_donut",
+        "label": "Calendar Event distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "participant_trend_line",
+        "label": "Participant trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "participant_volume_column",
+        "label": "Participant volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "participant_distribution_donut",
+        "label": "Participant distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "schedule_request_trend_line",
+        "label": "Schedule Request trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "schedule_request_volume_column",
+        "label": "Schedule Request volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "schedule_request_distribution_donut",
+        "label": "Schedule Request distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "travel_arrangement_trend_line",
+        "label": "Travel Arrangement trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "travel_arrangement_volume_column",
+        "label": "Travel Arrangement volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "travel_arrangement_distribution_donut",
+        "label": "Travel Arrangement distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "calendar_event",
+        "title": "Calendar Event",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "participant",
+        "title": "Participant",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "schedule_request",
+        "title": "Schedule Request",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "travel_arrangement",
+        "title": "Travel Arrangement",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "participant",
+      "travel_arrangement",
+      "calendar_event"
+    ],
+    "upstream_docs": [
+      "participant",
+      "travel_arrangement",
+      "calendar_event"
+    ],
+    "downstream_docs": [],
+    "actors": [
+      "scheduler",
+      "participants",
+      "admin support"
+    ],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "emits_records": [],
+    "handoff_targets": [
+      "participant",
+      "travel_arrangement",
+      "calendar_event"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "calendar_event",
+        "target_doc": "participant",
+        "relation": "references"
+      },
+      {
+        "source_doc": "calendar_event",
+        "target_doc": "travel_arrangement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "participant",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "participant",
+        "target_doc": "travel_arrangement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "schedule_request",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "travel_arrangement",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "travel_arrangement",
+        "target_doc": "participant",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "participant",
+          "kind": "doc"
+        },
+        {
+          "id": "travel_arrangement",
+          "kind": "doc"
+        },
+        {
+          "id": "calendar_event",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "calendar_event",
+          "target_doc": "participant",
+          "relation": "references"
+        },
+        {
+          "source_doc": "calendar_event",
+          "target_doc": "travel_arrangement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "participant",
+          "target_doc": "calendar_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "participant",
+          "target_doc": "travel_arrangement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "schedule_request",
+          "target_doc": "calendar_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "travel_arrangement",
+          "target_doc": "calendar_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "travel_arrangement",
+          "target_doc": "participant",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

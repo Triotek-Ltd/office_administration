@@ -4,5 +4,581 @@
   "app_id": "office_administration",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Office Procedures Workflow KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_procedures_workflow",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Office Procedures Workflow summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_procedures_workflow",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Office Procedures Workflow charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_procedures_workflow",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "office_procedures_workflow_trend_line",
+            "label": "Office Procedures Workflow trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_procedures_workflow_volume_column",
+            "label": "Office Procedures Workflow volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_procedures_workflow_distribution_donut",
+            "label": "Office Procedures Workflow distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "meeting_action_item_trend_line",
+            "label": "Meeting Action Item trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "meeting_action_item_volume_column",
+            "label": "Meeting Action Item volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "meeting_action_item_distribution_donut",
+            "label": "Meeting Action Item distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "meeting_record_trend_line",
+            "label": "Meeting Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "meeting_record_volume_column",
+            "label": "Meeting Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "meeting_record_distribution_donut",
+            "label": "Meeting Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "workflow_task_trend_line",
+            "label": "Workflow Task trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "workflow_task_volume_column",
+            "label": "Workflow Task volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "workflow_task_distribution_donut",
+            "label": "Workflow Task distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "office_procedure_trend_line",
+            "label": "Office Procedure trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_procedure_volume_column",
+            "label": "Office Procedure volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_procedure_distribution_donut",
+            "label": "Office Procedure distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Office Procedures Workflow reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_procedures_workflow",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_procedures_workflow",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_procedures_workflow",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_procedures_workflow",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_procedures_workflow",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Office Procedures Workflow Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Office Procedures Workflow Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Meeting Action Item Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Meeting Action Item Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "office_procedures_workflow_trend_line",
+        "label": "Office Procedures Workflow trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_procedures_workflow_volume_column",
+        "label": "Office Procedures Workflow volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_procedures_workflow_distribution_donut",
+        "label": "Office Procedures Workflow distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "meeting_action_item_trend_line",
+        "label": "Meeting Action Item trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "meeting_action_item_volume_column",
+        "label": "Meeting Action Item volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "meeting_action_item_distribution_donut",
+        "label": "Meeting Action Item distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "meeting_record_trend_line",
+        "label": "Meeting Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "meeting_record_volume_column",
+        "label": "Meeting Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "meeting_record_distribution_donut",
+        "label": "Meeting Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "workflow_task_trend_line",
+        "label": "Workflow Task trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "workflow_task_volume_column",
+        "label": "Workflow Task volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "workflow_task_distribution_donut",
+        "label": "Workflow Task distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "office_procedure_trend_line",
+        "label": "Office Procedure trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_procedure_volume_column",
+        "label": "Office Procedure volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_procedure_distribution_donut",
+        "label": "Office Procedure distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "meeting_action_item",
+        "title": "Meeting Action Item",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "meeting_record",
+        "title": "Meeting Record",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "workflow_task",
+        "title": "Workflow Task",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "office_procedure",
+        "title": "Office Procedure",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "meeting_record",
+      "workflow_task",
+      "meeting_action_item",
+      "office_procedure"
+    ],
+    "upstream_docs": [
+      "meeting_record",
+      "workflow_task",
+      "meeting_action_item",
+      "office_procedure"
+    ],
+    "downstream_docs": [
+      "workflow_task"
+    ],
+    "actors": [
+      "scheduler",
+      "participants",
+      "admin support",
+      "admin coordinator",
+      "meeting owner",
+      "task owners"
+    ],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination",
+      "supports coordination, compliance, and operational follow-through"
+    ],
+    "emits_records": [
+      {
+        "action_id": "assign",
+        "target_doc": "workflow_task",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "meeting_record",
+      "workflow_task",
+      "meeting_action_item",
+      "office_procedure"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "meeting_action_item",
+        "target_doc": "meeting_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "meeting_action_item",
+        "target_doc": "workflow_task",
+        "relation": "references"
+      },
+      {
+        "source_doc": "meeting_action_item",
+        "target_doc": "workflow_task",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "meeting_record",
+        "target_doc": "meeting_action_item",
+        "relation": "references"
+      },
+      {
+        "source_doc": "workflow_task",
+        "target_doc": "office_procedure",
+        "relation": "references"
+      },
+      {
+        "source_doc": "workflow_task",
+        "target_doc": "meeting_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "office_procedure",
+        "target_doc": "workflow_task",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "meeting_record",
+          "kind": "doc"
+        },
+        {
+          "id": "workflow_task",
+          "kind": "doc"
+        },
+        {
+          "id": "meeting_action_item",
+          "kind": "doc"
+        },
+        {
+          "id": "office_procedure",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "meeting_action_item",
+          "target_doc": "meeting_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "meeting_action_item",
+          "target_doc": "workflow_task",
+          "relation": "references"
+        },
+        {
+          "source_doc": "meeting_action_item",
+          "target_doc": "workflow_task",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "meeting_record",
+          "target_doc": "meeting_action_item",
+          "relation": "references"
+        },
+        {
+          "source_doc": "workflow_task",
+          "target_doc": "office_procedure",
+          "relation": "references"
+        },
+        {
+          "source_doc": "workflow_task",
+          "target_doc": "meeting_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "office_procedure",
+          "target_doc": "workflow_task",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

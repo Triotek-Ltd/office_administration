@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "travel_arrangement"
 ACTION_ID = "create"
-ACTION_RULE = {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}
+ACTION_RULE: dict[str, Any] = {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': ['Create supporting travel arrangements where required.'], 'primary_actions': ['create', 'approve', 'issue', 'close'], 'primary_transitions': ['travel_arrangement: draft -> approved -> issued -> closed'], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'issue': ['admin support'], 'confirm': ['participants'], 'cancel': ['scheduler'], 'archive': ['scheduler']}}
 
 def handle_create(payload: dict, context: dict | None = None) -> dict:
     context = context or {}
-    next_state = ACTION_RULE.get("transitions_to")
+    next_state = cast(str | None, ACTION_RULE.get("transitions_to"))
     updates = {STATE_FIELD: next_state} if STATE_FIELD and next_state else {}
     return {
         "doc_id": DOC_ID,

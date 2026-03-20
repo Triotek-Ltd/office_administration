@@ -4,5 +4,580 @@
   "app_id": "office_administration",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Customer Service Administration KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_service_administration",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Customer Service Administration summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_service_administration",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Customer Service Administration charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_service_administration",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "customer_service_administration_trend_line",
+            "label": "Customer Service Administration trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_service_administration_volume_column",
+            "label": "Customer Service Administration volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_service_administration_distribution_donut",
+            "label": "Customer Service Administration distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "customer_profile_trend_line",
+            "label": "Customer Profile trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_profile_volume_column",
+            "label": "Customer Profile volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_profile_distribution_donut",
+            "label": "Customer Profile distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_case_trend_line",
+            "label": "Service Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_case_volume_column",
+            "label": "Service Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_case_distribution_donut",
+            "label": "Service Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_log_entry_trend_line",
+            "label": "Service Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_log_entry_volume_column",
+            "label": "Service Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_log_entry_distribution_donut",
+            "label": "Service Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_resolution_trend_line",
+            "label": "Service Resolution trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_resolution_volume_column",
+            "label": "Service Resolution volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_resolution_distribution_donut",
+            "label": "Service Resolution distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Customer Service Administration reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "customer_service_administration",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_service_administration",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_service_administration",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_service_administration",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "customer_service_administration",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Customer Service Administration Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Customer Service Administration Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Customer Profile Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Customer Profile Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "customer_service_administration_trend_line",
+        "label": "Customer Service Administration trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_service_administration_volume_column",
+        "label": "Customer Service Administration volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_service_administration_distribution_donut",
+        "label": "Customer Service Administration distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "customer_profile_trend_line",
+        "label": "Customer Profile trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_profile_volume_column",
+        "label": "Customer Profile volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_profile_distribution_donut",
+        "label": "Customer Profile distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_case_trend_line",
+        "label": "Service Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_case_volume_column",
+        "label": "Service Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_case_distribution_donut",
+        "label": "Service Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_log_entry_trend_line",
+        "label": "Service Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_log_entry_volume_column",
+        "label": "Service Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_log_entry_distribution_donut",
+        "label": "Service Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_resolution_trend_line",
+        "label": "Service Resolution trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_resolution_volume_column",
+        "label": "Service Resolution volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_resolution_distribution_donut",
+        "label": "Service Resolution distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "customer_profile",
+        "title": "Customer Profile",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "service_case",
+        "title": "Service Case",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "service_log_entry",
+        "title": "Service Log Entry",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "service_resolution",
+        "title": "Service Resolution",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "service_case",
+      "customer_profile",
+      "service_log_entry",
+      "service_resolution"
+    ],
+    "upstream_docs": [
+      "service_case",
+      "customer_profile",
+      "service_log_entry",
+      "service_resolution"
+    ],
+    "downstream_docs": [
+      "service_resolution"
+    ],
+    "actors": [
+      "account owner",
+      "case owner",
+      "service desk officer",
+      "assigned department owner",
+      "supervisor",
+      "customer"
+    ],
+    "downstream_effects": [
+      "service cases feed reporting, quality improvement, and risk/compliance review"
+    ],
+    "emits_records": [
+      {
+        "action_id": "close",
+        "target_doc": "service_resolution",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "service_case",
+      "customer_profile",
+      "service_log_entry",
+      "service_resolution"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "customer_profile",
+        "target_doc": "service_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "customer_profile",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "service_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "service_resolution",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "service_resolution",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "service_log_entry",
+        "target_doc": "service_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_resolution",
+        "target_doc": "service_case",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "service_case",
+          "kind": "doc"
+        },
+        {
+          "id": "customer_profile",
+          "kind": "doc"
+        },
+        {
+          "id": "service_log_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "service_resolution",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "customer_profile",
+          "target_doc": "service_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "customer_profile",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "service_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "service_resolution",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "service_resolution",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "service_log_entry",
+          "target_doc": "service_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_resolution",
+          "target_doc": "service_case",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

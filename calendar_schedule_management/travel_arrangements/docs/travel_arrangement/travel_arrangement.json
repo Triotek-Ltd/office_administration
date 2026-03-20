@@ -15,6 +15,242 @@
   },
   "doc_key": "travel_arrangement",
   "doc_title": "Travel Arrangement",
+  "ui": {
+    "icon_key": "receipt",
+    "accent": "#1f7a8c",
+    "logo_image": null,
+    "cover_image": null,
+    "preferred_views": [
+      "list",
+      "table",
+      "detail",
+      "report"
+    ],
+    "default_density": "comfortable"
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "doc",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "records",
+      "flatten_submodules_in_ui": false,
+      "views": [
+        "list",
+        "table",
+        "detail",
+        "report"
+      ]
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Travel Arrangement KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "travel_arrangement",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Travel Arrangement summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "travel_arrangement",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Travel Arrangement charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "travel_arrangement",
+          "metric_family": "trend"
+        }
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Travel Arrangement reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "travel_arrangement",
+          "metric_family": "reporting"
+        }
+      },
+      {
+        "id": "records",
+        "type": "record_table",
+        "title": "Travel Arrangement records",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "travel_arrangement",
+          "metric_family": "records"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "travel_arrangement",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "travel_arrangement",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "travel_arrangement",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "travel_arrangement",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Travel Arrangement Overview",
+        "report_type": "dashboard_summary",
+        "surface": "doc"
+      },
+      {
+        "id": "trend_report",
+        "label": "Travel Arrangement Trends",
+        "report_type": "trend_analysis",
+        "surface": "doc"
+      },
+      {
+        "id": "summary_report",
+        "label": "Travel Arrangement Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Travel Arrangement Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "supports_outputs": true,
+    "supports_print_formats": true,
+    "default_views": [
+      "summary",
+      "trend",
+      "report_table"
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "travel_arrangement_trend_line",
+        "label": "Travel Arrangement trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "travel_arrangement_volume_column",
+        "label": "Travel Arrangement volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "travel_arrangement_distribution_donut",
+        "label": "Travel Arrangement distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "calendar_event",
+      "participant"
+    ],
+    "upstream_docs": [
+      "calendar_event",
+      "participant"
+    ],
+    "downstream_docs": [],
+    "borrowed_fields": [
+      "traveler",
+      "event context from participant",
+      "calendar_event"
+    ],
+    "emits_records": [],
+    "downstream_effects": [
+      "supports meetings, travel, and service coordination"
+    ],
+    "actors": [
+      "scheduler",
+      "participants",
+      "admin support"
+    ],
+    "handoff_targets": [
+      "calendar_event",
+      "participant"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "travel_arrangement",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "travel_arrangement",
+        "target_doc": "participant",
+        "relation": "references"
+      }
+    ]
+  },
   "allowed_actions": [
     "create",
     "issue",
@@ -225,7 +461,7 @@
         "unique": false,
         "options": null,
         "purpose": "primary_party",
-        "linked_doc": null,
+        "linked_doc": "party_record",
         "depends_on": null,
         "mandatory_depends_on": null,
         "read_only_depends_on": null,
@@ -242,12 +478,39 @@
       {
         "field_id": "currency",
         "label": "Currency",
-        "type": "Data",
+        "type": "Select",
         "required": false,
         "read_only": false,
         "default": null,
         "unique": false,
-        "options": null,
+        "options": {
+          "values": [
+            "USD",
+            "EUR",
+            "GBP",
+            "KES",
+            "UGX",
+            "TZS",
+            "RWF",
+            "NGN",
+            "GHS",
+            "ZAR",
+            "AED",
+            "SAR",
+            "INR",
+            "CNY",
+            "JPY",
+            "CAD",
+            "AUD",
+            "NZD",
+            "CHF",
+            "SEK",
+            "NOK",
+            "DKK",
+            "ZMW",
+            "BWP"
+          ]
+        },
         "purpose": "currency_code",
         "linked_doc": null,
         "depends_on": null,
@@ -314,7 +577,7 @@
       {
         "field_id": "traveler",
         "label": "Traveler",
-        "type": "Data",
+        "type": "Link",
         "required": false,
         "read_only": false,
         "default": null,
@@ -338,7 +601,7 @@
       {
         "field_id": "event",
         "label": "Event",
-        "type": "Data",
+        "type": "Link",
         "required": false,
         "read_only": false,
         "default": null,
@@ -597,7 +860,9 @@
           "confirm",
           "cancel",
           "archive"
-        ]
+        ],
+        "scope": "system",
+        "ownership": "platform"
       },
       {
         "role_id": "scheduler",
@@ -605,9 +870,12 @@
           "view",
           "list",
           "create",
+          "update",
           "cancel",
           "archive"
-        ]
+        ],
+        "scope": "document",
+        "ownership": "functional"
       },
       {
         "role_id": "participants",
@@ -615,7 +883,9 @@
           "view",
           "list",
           "confirm"
-        ]
+        ],
+        "scope": "document",
+        "ownership": "functional"
       },
       {
         "role_id": "admin support",
@@ -623,7 +893,9 @@
           "view",
           "list",
           "issue"
-        ]
+        ],
+        "scope": "document",
+        "ownership": "functional"
       }
     ],
     "transaction_behavior": {
@@ -687,7 +959,186 @@
         "workflow_state"
       ],
       "default_filters": [],
-      "quick_entry": false
+      "quick_entry": false,
+      "form_layout": {
+        "version": 1,
+        "tabs": [
+          {
+            "id": "overview",
+            "label": "Overview",
+            "sections": [
+              {
+                "id": "identity",
+                "label": "Identity",
+                "columns": [
+                  {
+                    "id": "identity_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "title"
+                    ]
+                  },
+                  {
+                    "id": "identity_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "reference_no"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "parties",
+                "label": "Parties",
+                "columns": [
+                  {
+                    "id": "parties_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "party"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "dates",
+                "label": "Dates",
+                "columns": [
+                  {
+                    "id": "dates_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "transaction_date",
+                      "return_date"
+                    ]
+                  },
+                  {
+                    "id": "dates_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "departure_date"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "status",
+                "label": "Workflow",
+                "columns": [
+                  {
+                    "id": "status_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "workflow_state"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "details",
+            "label": "Details",
+            "sections": [
+              {
+                "id": "content",
+                "label": "Details",
+                "columns": [
+                  {
+                    "id": "content_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "travel_number",
+                      "authorization_number",
+                      "status"
+                    ]
+                  },
+                  {
+                    "id": "content_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "destination",
+                      "advance_flag"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "content_details",
+                "label": "Description",
+                "columns": [
+                  {
+                    "id": "content_details_column_1",
+                    "label": "",
+                    "width": 12,
+                    "fieldIds": [
+                      "description"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "amounts",
+                "label": "Amounts",
+                "columns": [
+                  {
+                    "id": "amounts_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "currency"
+                    ]
+                  },
+                  {
+                    "id": "amounts_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "total_amount"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "related",
+            "label": "Related",
+            "sections": [
+              {
+                "id": "relations",
+                "label": "Related Records",
+                "columns": [
+                  {
+                    "id": "relations_column_1",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "traveler"
+                    ]
+                  },
+                  {
+                    "id": "relations_column_2",
+                    "label": "",
+                    "width": 6,
+                    "fieldIds": [
+                      "event"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     "related_docs": [
       {
@@ -727,7 +1178,11 @@
       "show_activity_log": true,
       "show_comments": true,
       "show_assignments": true,
-      "show_related_docs": true
+      "show_related_docs": true,
+      "show_kpis": true,
+      "show_summaries": true,
+      "show_charts": true,
+      "show_reports": true
     },
     "integration": {
       "external_refs": [],
@@ -779,6 +1234,17 @@
         }
       },
       "action_side_effects_file": "side_effects.json"
+    },
+    "dashboard": {
+      "metric_blocks": [
+        "kpis",
+        "summaries",
+        "charts",
+        "reports",
+        "records"
+      ],
+      "default_view": "list",
+      "reporting_surface": "doc"
     }
   },
   "classification": {
@@ -883,6 +1349,13 @@
     "api_base_path": "/apis/office_administration/calendar_schedule_management/travel_arrangements/travel_arrangement/",
     "status_field": "workflow_state",
     "initial_state": "draft",
+    "actions": [
+      "create",
+      "issue",
+      "confirm",
+      "cancel",
+      "archive"
+    ],
     "required_fields": [
       "title",
       "workflow_state",
@@ -908,6 +1381,55 @@
     ],
     "downstream_effects": [
       "supports meetings, travel, and service coordination"
+    ],
+    "role_action_matrix": [
+      {
+        "role_id": "System Manager",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "issue",
+          "confirm",
+          "cancel",
+          "archive"
+        ],
+        "scope": "system",
+        "ownership": "platform"
+      },
+      {
+        "role_id": "scheduler",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "update",
+          "cancel",
+          "archive"
+        ],
+        "scope": "document",
+        "ownership": "functional"
+      },
+      {
+        "role_id": "participants",
+        "actions": [
+          "view",
+          "list",
+          "confirm"
+        ],
+        "scope": "document",
+        "ownership": "functional"
+      },
+      {
+        "role_id": "admin support",
+        "actions": [
+          "view",
+          "list",
+          "issue"
+        ],
+        "scope": "document",
+        "ownership": "functional"
+      }
     ],
     "action_side_effects_file": "side_effects.json"
   },

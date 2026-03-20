@@ -6,5 +6,19 @@
         "workflow_state": "closed"
       }
     }
+  ],
+  "assign": [
+    {
+      "type": "create_record",
+      "target_doc": "workflow_task",
+      "values": {
+        "title": {
+          "$template": "Workflow Task for {title|reference_no|id}"
+        },
+        "reference_no": {
+          "$template": "WORKFLOW_TASK-{reference_no|id}"
+        }
+      }
+    }
   ]
 }

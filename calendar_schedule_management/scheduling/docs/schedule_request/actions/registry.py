@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "schedule_request"
 ALLOWED_ACTIONS = ['create', 'review', 'confirm', 'cancel', 'close']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': 'confirmed'}, 'cancel': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': None}, 'close': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': 'closed'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': 'confirmed'}, 'cancel': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': None}, 'close': {'allowed_in_states': ['draft', 'proposed', 'confirmed', 'cancelled'], 'transitions_to': 'closed'}}
 
 STATE_FIELD = 'workflow_state'
 

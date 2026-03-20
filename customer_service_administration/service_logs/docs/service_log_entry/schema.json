@@ -191,7 +191,7 @@
     {
       "field_id": "timestamp",
       "label": "Timestamp",
-      "type": "Data",
+      "type": "Datetime",
       "required": false,
       "read_only": false,
       "default": null,
@@ -330,7 +330,8 @@
         "list_visible": false,
         "filterable": false,
         "sortable": false
-      }
+      },
+      "relation_kind": "explicit"
     }
   ],
   "field_groups": {
@@ -427,37 +428,49 @@
         "list",
         "record",
         "archive"
-      ]
+      ],
+      "scope": "system",
+      "ownership": "platform"
     },
     {
       "role_id": "service desk officer",
       "actions": [
         "view",
         "list",
-        "record"
-      ]
+        "record",
+        "create"
+      ],
+      "scope": "document",
+      "ownership": "functional"
     },
     {
       "role_id": "assigned department owner",
       "actions": [
         "view",
         "list",
-        "archive"
-      ]
+        "archive",
+        "update"
+      ],
+      "scope": "document",
+      "ownership": "functional"
     },
     {
       "role_id": "supervisor",
       "actions": [
         "view",
         "list"
-      ]
+      ],
+      "scope": "approval",
+      "ownership": "managerial"
     },
     {
       "role_id": "customer",
       "actions": [
         "view",
         "list"
-      ]
+      ],
+      "scope": "document",
+      "ownership": "functional"
     }
   ],
   "transaction_behavior": {

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "travel_arrangement"
 ALLOWED_ACTIONS = ['create', 'issue', 'confirm', 'cancel', 'archive']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}, 'issue': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': 'confirmed'}, 'cancel': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': 'archived'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}, 'issue': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': 'confirmed'}, 'cancel': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'confirmed', 'cancelled'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 

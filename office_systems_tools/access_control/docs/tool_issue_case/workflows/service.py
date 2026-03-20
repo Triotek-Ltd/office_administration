@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "tool_issue_case"
 ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'in_progress', 'escalated', 'closed', 'archived']
 TERMINAL_STATES = ['closed', 'archived']
-ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'in_progress'}, 'escalate': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'escalated'}, 'close': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'archived'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'in_progress'}, 'escalate': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'escalated'}, 'close': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'in_progress', 'escalated'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'relation_context': {'related_docs': ['office_file_record'], 'borrowed_fields': ['system or file context from office_file_record'], 'inferred_roles': ['case owner']}, 'actors': ['case owner'], 'action_actors': {'create': ['case owner'], 'assign': ['case owner'], 'close': ['case owner'], 'archive': ['case owner']}}
@@ -29,7 +31,7 @@ class WorkflowService:
 
     def next_state_for(self, action_id: str) -> str | None:
         rule = ACTION_RULES.get(action_id, {})
-        return rule.get("transitions_to")
+        return cast(str | None, rule.get("transitions_to"))
 
     def apply_action(self, action_id: str, state: str | None) -> dict:
         if not self.is_action_allowed(action_id, state):

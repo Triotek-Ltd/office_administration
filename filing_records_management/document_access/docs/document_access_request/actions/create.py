@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "document_access_request"
 ACTION_ID = "create"
-ACTION_RULE = {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}
+ACTION_RULE: dict[str, Any] = {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'business_objective': 'register, store, retrieve, control, and dispose of administrative records', 'actors': ['records officer', 'document owner', 'requester', 'approver', 'archive custodian'], 'start_condition': 'a document is received or created and must be governed as a business record', 'ordered_steps': ['Handle retrieval and access requests.'], 'primary_actions': ['create', 'assign', 'approve', 'record', 'close'], 'primary_transitions': ['document_access_request: opened -> in_review -> resolved -> closed'], 'downstream_effects': ['records become available to compliance, audit, and legal processes', 'access and disposal events become auditable'], 'action_actors': {'create': ['records officer'], 'assign': ['records officer'], 'approve': ['approver'], 'close': ['document owner']}}
 
 def handle_create(payload: dict, context: dict | None = None) -> dict:
     context = context or {}
-    next_state = ACTION_RULE.get("transitions_to")
+    next_state = cast(str | None, ACTION_RULE.get("transitions_to"))
     updates = {STATE_FIELD: next_state} if STATE_FIELD and next_state else {}
     return {
         "doc_id": DOC_ID,

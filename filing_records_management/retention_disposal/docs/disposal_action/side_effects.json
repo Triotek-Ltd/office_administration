@@ -7,6 +7,15 @@
       }
     }
   ],
+  "submit": [
+    {
+      "type": "update_current",
+      "fields": {
+        "workflow_state": "in_review",
+        "submission_status": "submitted"
+      }
+    }
+  ],
   "approve": [
     {
       "type": "update_current",

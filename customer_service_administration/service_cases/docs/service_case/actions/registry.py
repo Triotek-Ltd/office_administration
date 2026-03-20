@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "service_case"
 ALLOWED_ACTIONS = ['create', 'assign', 'track', 'confirm', 'close', 'classify', 'escalate', 'record', 'archive']
-ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'closed'}, 'close': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'closed'}, 'classify': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'escalate': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'record': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'archived'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'closed'}, 'close': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'closed'}, 'classify': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'escalate': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'record': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['open', 'in_progress', 'resolved'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 

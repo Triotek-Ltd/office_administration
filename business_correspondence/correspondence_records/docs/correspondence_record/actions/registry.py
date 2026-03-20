@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "correspondence_record"
 ALLOWED_ACTIONS = ['create', 'review', 'submit', 'approve', 'return_for_revision', 'issue', 'send', 'file', 'track', 'archive']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'in_review'}, 'submit': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'approved'}, 'return_for_revision': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'issue': {'allowed_in_states': ['approved'], 'transitions_to': None}, 'send': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'file': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'track': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'archived'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'in_review'}, 'submit': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'approved'}, 'return_for_revision': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'issue': {'allowed_in_states': ['approved'], 'transitions_to': None}, 'send': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'file': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'track': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'in_review', 'approved', 'sent'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 

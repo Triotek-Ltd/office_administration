@@ -1,9 +1,30 @@
 {
+  "confirm": [
+    {
+      "type": "update_current",
+      "fields": {
+        "workflow_state": "closed",
+        "confirmation_status": "confirmed"
+      }
+    }
+  ],
   "close": [
     {
       "type": "update_current",
       "fields": {
         "workflow_state": "closed"
+      }
+    },
+    {
+      "type": "create_record",
+      "target_doc": "service_resolution",
+      "values": {
+        "title": {
+          "$template": "Service Resolution for {title|reference_no|id}"
+        },
+        "reference_no": {
+          "$template": "SERVICE_RESOLUTION-{reference_no|id}"
+        }
       }
     }
   ],

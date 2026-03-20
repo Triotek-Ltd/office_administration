@@ -15,6 +15,15 @@
       }
     }
   ],
+  "confirm": [
+    {
+      "type": "update_current",
+      "fields": {
+        "workflow_state": "completed",
+        "confirmation_status": "confirmed"
+      }
+    }
+  ],
   "close": [
     {
       "type": "update_current",

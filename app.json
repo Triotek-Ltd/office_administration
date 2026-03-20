@@ -8,5 +8,2924 @@
     "id": "CUSTOM-PROPRIETARY",
     "type": "proprietary_custom",
     "terms_ref": "LICENSE"
+  },
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "app",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "modules",
+      "flatten_submodules_in_ui": false
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "My Plug App KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "office_administration",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "My Plug App summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "office_administration",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "My Plug App charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "office_administration",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "office_administration_trend_line",
+            "label": "My Plug App trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_administration_volume_column",
+            "label": "My Plug App volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_administration_distribution_donut",
+            "label": "My Plug App distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "business_correspondence_trend_line",
+            "label": "Business Correspondence trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "business_correspondence_volume_column",
+            "label": "Business Correspondence volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "business_correspondence_distribution_donut",
+            "label": "Business Correspondence distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "communication_log_entry_trend_line",
+            "label": "Communication Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "communication_log_entry_volume_column",
+            "label": "Communication Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "communication_log_entry_distribution_donut",
+            "label": "Communication Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "correspondence_approval_trend_line",
+            "label": "Correspondence Approval trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "correspondence_approval_volume_column",
+            "label": "Correspondence Approval volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "correspondence_approval_distribution_donut",
+            "label": "Correspondence Approval distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "correspondence_followup_trend_line",
+            "label": "Correspondence Followup trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "correspondence_followup_volume_column",
+            "label": "Correspondence Followup volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "correspondence_followup_distribution_donut",
+            "label": "Correspondence Followup distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "correspondence_record_trend_line",
+            "label": "Correspondence Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "correspondence_record_volume_column",
+            "label": "Correspondence Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "correspondence_record_distribution_donut",
+            "label": "Correspondence Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "correspondence_type_trend_line",
+            "label": "Correspondence Type trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "correspondence_type_volume_column",
+            "label": "Correspondence Type volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "correspondence_type_distribution_donut",
+            "label": "Correspondence Type distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "calendar_schedule_management_trend_line",
+            "label": "Calendar Schedule Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "calendar_schedule_management_volume_column",
+            "label": "Calendar Schedule Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "calendar_schedule_management_distribution_donut",
+            "label": "Calendar Schedule Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "calendar_event_trend_line",
+            "label": "Calendar Event trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "calendar_event_volume_column",
+            "label": "Calendar Event volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "calendar_event_distribution_donut",
+            "label": "Calendar Event distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "participant_trend_line",
+            "label": "Participant trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "participant_volume_column",
+            "label": "Participant volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "participant_distribution_donut",
+            "label": "Participant distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "schedule_request_trend_line",
+            "label": "Schedule Request trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "schedule_request_volume_column",
+            "label": "Schedule Request volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "schedule_request_distribution_donut",
+            "label": "Schedule Request distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "travel_arrangement_trend_line",
+            "label": "Travel Arrangement trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "travel_arrangement_volume_column",
+            "label": "Travel Arrangement volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "travel_arrangement_distribution_donut",
+            "label": "Travel Arrangement distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "customer_service_administration_trend_line",
+            "label": "Customer Service Administration trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_service_administration_volume_column",
+            "label": "Customer Service Administration volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_service_administration_distribution_donut",
+            "label": "Customer Service Administration distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "customer_profile_trend_line",
+            "label": "Customer Profile trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "customer_profile_volume_column",
+            "label": "Customer Profile volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "customer_profile_distribution_donut",
+            "label": "Customer Profile distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_case_trend_line",
+            "label": "Service Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_case_volume_column",
+            "label": "Service Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_case_distribution_donut",
+            "label": "Service Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_log_entry_trend_line",
+            "label": "Service Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_log_entry_volume_column",
+            "label": "Service Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_log_entry_distribution_donut",
+            "label": "Service Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_resolution_trend_line",
+            "label": "Service Resolution trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_resolution_volume_column",
+            "label": "Service Resolution volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_resolution_distribution_donut",
+            "label": "Service Resolution distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "filing_records_management_trend_line",
+            "label": "Filing Records Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "filing_records_management_volume_column",
+            "label": "Filing Records Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "filing_records_management_distribution_donut",
+            "label": "Filing Records Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "access_log_entry_trend_line",
+            "label": "Access Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "access_log_entry_volume_column",
+            "label": "Access Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "access_log_entry_distribution_donut",
+            "label": "Access Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "document_access_request_trend_line",
+            "label": "Document Access Request trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "document_access_request_volume_column",
+            "label": "Document Access Request volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "document_access_request_distribution_donut",
+            "label": "Document Access Request distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "administrative_document_trend_line",
+            "label": "Administrative Document trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "administrative_document_volume_column",
+            "label": "Administrative Document volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "administrative_document_distribution_donut",
+            "label": "Administrative Document distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "document_classification_trend_line",
+            "label": "Document Classification trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "document_classification_volume_column",
+            "label": "Document Classification volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "document_classification_distribution_donut",
+            "label": "Document Classification distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "records_register_entry_trend_line",
+            "label": "Records Register Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "records_register_entry_volume_column",
+            "label": "Records Register Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "records_register_entry_distribution_donut",
+            "label": "Records Register Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "disposal_action_trend_line",
+            "label": "Disposal Action trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "disposal_action_volume_column",
+            "label": "Disposal Action volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "disposal_action_distribution_donut",
+            "label": "Disposal Action distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "retention_policy_trend_line",
+            "label": "Retention Policy trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "retention_policy_volume_column",
+            "label": "Retention Policy volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "retention_policy_distribution_donut",
+            "label": "Retention Policy distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "office_procedures_workflow_trend_line",
+            "label": "Office Procedures Workflow trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_procedures_workflow_volume_column",
+            "label": "Office Procedures Workflow volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_procedures_workflow_distribution_donut",
+            "label": "Office Procedures Workflow distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "meeting_action_item_trend_line",
+            "label": "Meeting Action Item trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "meeting_action_item_volume_column",
+            "label": "Meeting Action Item volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "meeting_action_item_distribution_donut",
+            "label": "Meeting Action Item distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "meeting_record_trend_line",
+            "label": "Meeting Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "meeting_record_volume_column",
+            "label": "Meeting Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "meeting_record_distribution_donut",
+            "label": "Meeting Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "workflow_task_trend_line",
+            "label": "Workflow Task trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "workflow_task_volume_column",
+            "label": "Workflow Task volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "workflow_task_distribution_donut",
+            "label": "Workflow Task distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "office_procedure_trend_line",
+            "label": "Office Procedure trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_procedure_volume_column",
+            "label": "Office Procedure volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_procedure_distribution_donut",
+            "label": "Office Procedure distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "office_systems_tools_trend_line",
+            "label": "Office Systems Tools trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_systems_tools_volume_column",
+            "label": "Office Systems Tools volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_systems_tools_distribution_donut",
+            "label": "Office Systems Tools distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "access_grant_trend_line",
+            "label": "Access Grant trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "access_grant_volume_column",
+            "label": "Access Grant volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "access_grant_distribution_donut",
+            "label": "Access Grant distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "tool_issue_case_trend_line",
+            "label": "Tool Issue Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "tool_issue_case_volume_column",
+            "label": "Tool Issue Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "tool_issue_case_distribution_donut",
+            "label": "Tool Issue Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "office_file_record_trend_line",
+            "label": "Office File Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_file_record_volume_column",
+            "label": "Office File Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_file_record_distribution_donut",
+            "label": "Office File Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "version_record_trend_line",
+            "label": "Version Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "version_record_volume_column",
+            "label": "Version Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "version_record_distribution_donut",
+            "label": "Version Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "My Plug App reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "app",
+          "entity_id": "office_administration",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "office_administration",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "office_administration",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "office_administration",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "app",
+        "entity_id": "office_administration",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "My Plug App Overview",
+        "report_type": "dashboard_summary",
+        "surface": "app"
+      },
+      {
+        "id": "trend_report",
+        "label": "My Plug App Trends",
+        "report_type": "trend_analysis",
+        "surface": "app"
+      },
+      {
+        "id": "summary_report",
+        "label": "Communication Log Entry Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Communication Log Entry Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "office_administration_trend_line",
+        "label": "My Plug App trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_administration_volume_column",
+        "label": "My Plug App volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_administration_distribution_donut",
+        "label": "My Plug App distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "business_correspondence_trend_line",
+        "label": "Business Correspondence trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "business_correspondence_volume_column",
+        "label": "Business Correspondence volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "business_correspondence_distribution_donut",
+        "label": "Business Correspondence distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "communication_log_entry_trend_line",
+        "label": "Communication Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "communication_log_entry_volume_column",
+        "label": "Communication Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "communication_log_entry_distribution_donut",
+        "label": "Communication Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "correspondence_approval_trend_line",
+        "label": "Correspondence Approval trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "correspondence_approval_volume_column",
+        "label": "Correspondence Approval volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "correspondence_approval_distribution_donut",
+        "label": "Correspondence Approval distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "correspondence_followup_trend_line",
+        "label": "Correspondence Followup trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "correspondence_followup_volume_column",
+        "label": "Correspondence Followup volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "correspondence_followup_distribution_donut",
+        "label": "Correspondence Followup distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "correspondence_record_trend_line",
+        "label": "Correspondence Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "correspondence_record_volume_column",
+        "label": "Correspondence Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "correspondence_record_distribution_donut",
+        "label": "Correspondence Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "correspondence_type_trend_line",
+        "label": "Correspondence Type trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "correspondence_type_volume_column",
+        "label": "Correspondence Type volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "correspondence_type_distribution_donut",
+        "label": "Correspondence Type distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "calendar_schedule_management_trend_line",
+        "label": "Calendar Schedule Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "calendar_schedule_management_volume_column",
+        "label": "Calendar Schedule Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "calendar_schedule_management_distribution_donut",
+        "label": "Calendar Schedule Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "calendar_event_trend_line",
+        "label": "Calendar Event trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "calendar_event_volume_column",
+        "label": "Calendar Event volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "calendar_event_distribution_donut",
+        "label": "Calendar Event distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "participant_trend_line",
+        "label": "Participant trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "participant_volume_column",
+        "label": "Participant volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "participant_distribution_donut",
+        "label": "Participant distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "schedule_request_trend_line",
+        "label": "Schedule Request trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "schedule_request_volume_column",
+        "label": "Schedule Request volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "schedule_request_distribution_donut",
+        "label": "Schedule Request distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "travel_arrangement_trend_line",
+        "label": "Travel Arrangement trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "travel_arrangement_volume_column",
+        "label": "Travel Arrangement volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "travel_arrangement_distribution_donut",
+        "label": "Travel Arrangement distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "customer_service_administration_trend_line",
+        "label": "Customer Service Administration trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_service_administration_volume_column",
+        "label": "Customer Service Administration volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_service_administration_distribution_donut",
+        "label": "Customer Service Administration distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "customer_profile_trend_line",
+        "label": "Customer Profile trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "customer_profile_volume_column",
+        "label": "Customer Profile volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "customer_profile_distribution_donut",
+        "label": "Customer Profile distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_case_trend_line",
+        "label": "Service Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_case_volume_column",
+        "label": "Service Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_case_distribution_donut",
+        "label": "Service Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_log_entry_trend_line",
+        "label": "Service Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_log_entry_volume_column",
+        "label": "Service Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_log_entry_distribution_donut",
+        "label": "Service Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_resolution_trend_line",
+        "label": "Service Resolution trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_resolution_volume_column",
+        "label": "Service Resolution volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_resolution_distribution_donut",
+        "label": "Service Resolution distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "filing_records_management_trend_line",
+        "label": "Filing Records Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "filing_records_management_volume_column",
+        "label": "Filing Records Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "filing_records_management_distribution_donut",
+        "label": "Filing Records Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "access_log_entry_trend_line",
+        "label": "Access Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "access_log_entry_volume_column",
+        "label": "Access Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "access_log_entry_distribution_donut",
+        "label": "Access Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "document_access_request_trend_line",
+        "label": "Document Access Request trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "document_access_request_volume_column",
+        "label": "Document Access Request volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "document_access_request_distribution_donut",
+        "label": "Document Access Request distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "administrative_document_trend_line",
+        "label": "Administrative Document trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "administrative_document_volume_column",
+        "label": "Administrative Document volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "administrative_document_distribution_donut",
+        "label": "Administrative Document distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "document_classification_trend_line",
+        "label": "Document Classification trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "document_classification_volume_column",
+        "label": "Document Classification volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "document_classification_distribution_donut",
+        "label": "Document Classification distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "records_register_entry_trend_line",
+        "label": "Records Register Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "records_register_entry_volume_column",
+        "label": "Records Register Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "records_register_entry_distribution_donut",
+        "label": "Records Register Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "disposal_action_trend_line",
+        "label": "Disposal Action trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "disposal_action_volume_column",
+        "label": "Disposal Action volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "disposal_action_distribution_donut",
+        "label": "Disposal Action distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "retention_policy_trend_line",
+        "label": "Retention Policy trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "retention_policy_volume_column",
+        "label": "Retention Policy volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "retention_policy_distribution_donut",
+        "label": "Retention Policy distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "office_procedures_workflow_trend_line",
+        "label": "Office Procedures Workflow trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_procedures_workflow_volume_column",
+        "label": "Office Procedures Workflow volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_procedures_workflow_distribution_donut",
+        "label": "Office Procedures Workflow distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "meeting_action_item_trend_line",
+        "label": "Meeting Action Item trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "meeting_action_item_volume_column",
+        "label": "Meeting Action Item volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "meeting_action_item_distribution_donut",
+        "label": "Meeting Action Item distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "meeting_record_trend_line",
+        "label": "Meeting Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "meeting_record_volume_column",
+        "label": "Meeting Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "meeting_record_distribution_donut",
+        "label": "Meeting Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "workflow_task_trend_line",
+        "label": "Workflow Task trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "workflow_task_volume_column",
+        "label": "Workflow Task volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "workflow_task_distribution_donut",
+        "label": "Workflow Task distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "office_procedure_trend_line",
+        "label": "Office Procedure trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_procedure_volume_column",
+        "label": "Office Procedure volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_procedure_distribution_donut",
+        "label": "Office Procedure distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "office_systems_tools_trend_line",
+        "label": "Office Systems Tools trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_systems_tools_volume_column",
+        "label": "Office Systems Tools volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_systems_tools_distribution_donut",
+        "label": "Office Systems Tools distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "access_grant_trend_line",
+        "label": "Access Grant trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "access_grant_volume_column",
+        "label": "Access Grant volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "access_grant_distribution_donut",
+        "label": "Access Grant distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "tool_issue_case_trend_line",
+        "label": "Tool Issue Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "tool_issue_case_volume_column",
+        "label": "Tool Issue Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "tool_issue_case_distribution_donut",
+        "label": "Tool Issue Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "office_file_record_trend_line",
+        "label": "Office File Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_file_record_volume_column",
+        "label": "Office File Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_file_record_distribution_donut",
+        "label": "Office File Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "version_record_trend_line",
+        "label": "Version Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "version_record_volume_column",
+        "label": "Version Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "version_record_distribution_donut",
+        "label": "Version Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "business_correspondence",
+        "title": "Business Correspondence",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "calendar_schedule_management",
+        "title": "Calendar Schedule Management",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "customer_service_administration",
+        "title": "Customer Service Administration",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "filing_records_management",
+        "title": "Filing Records Management",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "office_procedures_workflow",
+        "title": "Office Procedures Workflow",
+        "surface": "module",
+        "source_docs": []
+      },
+      {
+        "id": "office_systems_tools",
+        "title": "Office Systems Tools",
+        "surface": "module",
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "correspondence_record",
+      "correspondence_type",
+      "correspondence_approval",
+      "correspondence_followup",
+      "administrative_document",
+      "participant",
+      "travel_arrangement",
+      "calendar_event",
+      "service_case",
+      "customer_profile",
+      "service_log_entry",
+      "service_resolution",
+      "document_access_request",
+      "access_log_entry",
+      "document_classification",
+      "retention_policy",
+      "records_register_entry",
+      "disposal_action",
+      "meeting_record",
+      "workflow_task",
+      "meeting_action_item",
+      "office_procedure",
+      "office_file_record",
+      "version_record",
+      "access_grant"
+    ],
+    "upstream_docs": [
+      "correspondence_record",
+      "correspondence_type",
+      "correspondence_approval",
+      "correspondence_followup",
+      "administrative_document",
+      "participant",
+      "travel_arrangement",
+      "calendar_event",
+      "service_case",
+      "customer_profile",
+      "service_log_entry",
+      "service_resolution",
+      "document_access_request",
+      "access_log_entry",
+      "document_classification",
+      "retention_policy",
+      "records_register_entry",
+      "disposal_action",
+      "meeting_record",
+      "workflow_task",
+      "meeting_action_item",
+      "office_procedure",
+      "office_file_record",
+      "version_record",
+      "access_grant"
+    ],
+    "downstream_docs": [
+      "correspondence_record",
+      "service_resolution",
+      "access_log_entry",
+      "workflow_task",
+      "office_file_record"
+    ],
+    "actors": [
+      "approver",
+      "service desk officer",
+      "assigned department owner",
+      "supervisor",
+      "customer",
+      "scheduler",
+      "participants",
+      "admin support",
+      "account owner",
+      "case owner",
+      "records officer",
+      "document owner",
+      "requester",
+      "archive custodian",
+      "administrative officer",
+      "drafter",
+      "recipient",
+      "follow-up owner",
+      "admin coordinator",
+      "meeting owner",
+      "task owners",
+      "office user",
+      "system admin",
+      "support owner"
+    ],
+    "downstream_effects": [
+      "service cases feed reporting, quality improvement, and risk/compliance review",
+      "supports meetings, travel, and service coordination",
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable",
+      "correspondence becomes available to records, audit, legal, and service workflows",
+      "supports coordination, compliance, and operational follow-through",
+      "supports office controls and operational continuity"
+    ],
+    "emits_records": [
+      {
+        "action_id": "approve",
+        "target_doc": "correspondence_record",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "service_resolution",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "approve",
+        "target_doc": "access_log_entry",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "workflow_task",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "approve",
+        "target_doc": "office_file_record",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "correspondence_record",
+      "correspondence_type",
+      "correspondence_approval",
+      "correspondence_followup",
+      "administrative_document",
+      "participant",
+      "travel_arrangement",
+      "calendar_event",
+      "service_case",
+      "customer_profile",
+      "service_log_entry",
+      "service_resolution",
+      "document_access_request",
+      "access_log_entry",
+      "document_classification",
+      "retention_policy",
+      "records_register_entry",
+      "disposal_action",
+      "meeting_record",
+      "workflow_task",
+      "meeting_action_item",
+      "office_procedure",
+      "office_file_record",
+      "version_record",
+      "access_grant"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "communication_log_entry",
+        "target_doc": "correspondence_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_approval",
+        "target_doc": "correspondence_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_approval",
+        "target_doc": "correspondence_record",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "correspondence_followup",
+        "target_doc": "correspondence_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_record",
+        "target_doc": "correspondence_type",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_record",
+        "target_doc": "correspondence_approval",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_record",
+        "target_doc": "correspondence_followup",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_record",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "correspondence_type",
+        "target_doc": "correspondence_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "calendar_event",
+        "target_doc": "participant",
+        "relation": "references"
+      },
+      {
+        "source_doc": "calendar_event",
+        "target_doc": "travel_arrangement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "participant",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "participant",
+        "target_doc": "travel_arrangement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "schedule_request",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "travel_arrangement",
+        "target_doc": "calendar_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "travel_arrangement",
+        "target_doc": "participant",
+        "relation": "references"
+      },
+      {
+        "source_doc": "customer_profile",
+        "target_doc": "service_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "customer_profile",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "service_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "service_resolution",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_case",
+        "target_doc": "service_resolution",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "service_log_entry",
+        "target_doc": "service_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_resolution",
+        "target_doc": "service_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "access_log_entry",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "access_log_entry",
+        "target_doc": "document_access_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_access_request",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_access_request",
+        "target_doc": "access_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_access_request",
+        "target_doc": "access_log_entry",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "document_classification",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "retention_policy",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "records_register_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "document_access_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "disposal_action",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_classification",
+        "target_doc": "retention_policy",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_classification",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "records_register_entry",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "records_register_entry",
+        "target_doc": "document_access_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "records_register_entry",
+        "target_doc": "access_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "disposal_action",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "disposal_action",
+        "target_doc": "retention_policy",
+        "relation": "references"
+      },
+      {
+        "source_doc": "retention_policy",
+        "target_doc": "document_classification",
+        "relation": "references"
+      },
+      {
+        "source_doc": "retention_policy",
+        "target_doc": "disposal_action",
+        "relation": "references"
+      },
+      {
+        "source_doc": "meeting_action_item",
+        "target_doc": "meeting_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "meeting_action_item",
+        "target_doc": "workflow_task",
+        "relation": "references"
+      },
+      {
+        "source_doc": "meeting_action_item",
+        "target_doc": "workflow_task",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "meeting_record",
+        "target_doc": "meeting_action_item",
+        "relation": "references"
+      },
+      {
+        "source_doc": "workflow_task",
+        "target_doc": "office_procedure",
+        "relation": "references"
+      },
+      {
+        "source_doc": "workflow_task",
+        "target_doc": "meeting_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "office_procedure",
+        "target_doc": "workflow_task",
+        "relation": "references"
+      },
+      {
+        "source_doc": "access_grant",
+        "target_doc": "office_file_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "access_grant",
+        "target_doc": "office_file_record",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "tool_issue_case",
+        "target_doc": "office_file_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "office_file_record",
+        "target_doc": "version_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "office_file_record",
+        "target_doc": "access_grant",
+        "relation": "references"
+      },
+      {
+        "source_doc": "version_record",
+        "target_doc": "office_file_record",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "business_correspondence",
+          "kind": "module",
+          "title": "Business Correspondence"
+        },
+        {
+          "id": "calendar_schedule_management",
+          "kind": "module",
+          "title": "Calendar Schedule Management"
+        },
+        {
+          "id": "customer_service_administration",
+          "kind": "module",
+          "title": "Customer Service Administration"
+        },
+        {
+          "id": "filing_records_management",
+          "kind": "module",
+          "title": "Filing Records Management"
+        },
+        {
+          "id": "office_procedures_workflow",
+          "kind": "module",
+          "title": "Office Procedures Workflow"
+        },
+        {
+          "id": "office_systems_tools",
+          "kind": "module",
+          "title": "Office Systems Tools"
+        },
+        {
+          "id": "correspondence_record",
+          "kind": "doc"
+        },
+        {
+          "id": "correspondence_type",
+          "kind": "doc"
+        },
+        {
+          "id": "correspondence_approval",
+          "kind": "doc"
+        },
+        {
+          "id": "correspondence_followup",
+          "kind": "doc"
+        },
+        {
+          "id": "administrative_document",
+          "kind": "doc"
+        },
+        {
+          "id": "participant",
+          "kind": "doc"
+        },
+        {
+          "id": "travel_arrangement",
+          "kind": "doc"
+        },
+        {
+          "id": "calendar_event",
+          "kind": "doc"
+        },
+        {
+          "id": "service_case",
+          "kind": "doc"
+        },
+        {
+          "id": "customer_profile",
+          "kind": "doc"
+        },
+        {
+          "id": "service_log_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "service_resolution",
+          "kind": "doc"
+        },
+        {
+          "id": "document_access_request",
+          "kind": "doc"
+        },
+        {
+          "id": "access_log_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "document_classification",
+          "kind": "doc"
+        },
+        {
+          "id": "retention_policy",
+          "kind": "doc"
+        },
+        {
+          "id": "records_register_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "disposal_action",
+          "kind": "doc"
+        },
+        {
+          "id": "meeting_record",
+          "kind": "doc"
+        },
+        {
+          "id": "workflow_task",
+          "kind": "doc"
+        },
+        {
+          "id": "meeting_action_item",
+          "kind": "doc"
+        },
+        {
+          "id": "office_procedure",
+          "kind": "doc"
+        },
+        {
+          "id": "office_file_record",
+          "kind": "doc"
+        },
+        {
+          "id": "version_record",
+          "kind": "doc"
+        },
+        {
+          "id": "access_grant",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "communication_log_entry",
+          "target_doc": "correspondence_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_approval",
+          "target_doc": "correspondence_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_approval",
+          "target_doc": "correspondence_record",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "correspondence_followup",
+          "target_doc": "correspondence_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_record",
+          "target_doc": "correspondence_type",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_record",
+          "target_doc": "correspondence_approval",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_record",
+          "target_doc": "correspondence_followup",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_record",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "correspondence_type",
+          "target_doc": "correspondence_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "calendar_event",
+          "target_doc": "participant",
+          "relation": "references"
+        },
+        {
+          "source_doc": "calendar_event",
+          "target_doc": "travel_arrangement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "participant",
+          "target_doc": "calendar_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "participant",
+          "target_doc": "travel_arrangement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "schedule_request",
+          "target_doc": "calendar_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "travel_arrangement",
+          "target_doc": "calendar_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "travel_arrangement",
+          "target_doc": "participant",
+          "relation": "references"
+        },
+        {
+          "source_doc": "customer_profile",
+          "target_doc": "service_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "customer_profile",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "service_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "service_resolution",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_case",
+          "target_doc": "service_resolution",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "service_log_entry",
+          "target_doc": "service_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_resolution",
+          "target_doc": "service_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "access_log_entry",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "access_log_entry",
+          "target_doc": "document_access_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_access_request",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_access_request",
+          "target_doc": "access_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_access_request",
+          "target_doc": "access_log_entry",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "document_classification",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "retention_policy",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "records_register_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "document_access_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "disposal_action",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_classification",
+          "target_doc": "retention_policy",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_classification",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "records_register_entry",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "records_register_entry",
+          "target_doc": "document_access_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "records_register_entry",
+          "target_doc": "access_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "disposal_action",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "disposal_action",
+          "target_doc": "retention_policy",
+          "relation": "references"
+        },
+        {
+          "source_doc": "retention_policy",
+          "target_doc": "document_classification",
+          "relation": "references"
+        },
+        {
+          "source_doc": "retention_policy",
+          "target_doc": "disposal_action",
+          "relation": "references"
+        },
+        {
+          "source_doc": "meeting_action_item",
+          "target_doc": "meeting_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "meeting_action_item",
+          "target_doc": "workflow_task",
+          "relation": "references"
+        },
+        {
+          "source_doc": "meeting_action_item",
+          "target_doc": "workflow_task",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "meeting_record",
+          "target_doc": "meeting_action_item",
+          "relation": "references"
+        },
+        {
+          "source_doc": "workflow_task",
+          "target_doc": "office_procedure",
+          "relation": "references"
+        },
+        {
+          "source_doc": "workflow_task",
+          "target_doc": "meeting_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "office_procedure",
+          "target_doc": "workflow_task",
+          "relation": "references"
+        },
+        {
+          "source_doc": "access_grant",
+          "target_doc": "office_file_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "access_grant",
+          "target_doc": "office_file_record",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "tool_issue_case",
+          "target_doc": "office_file_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "office_file_record",
+          "target_doc": "version_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "office_file_record",
+          "target_doc": "access_grant",
+          "relation": "references"
+        },
+        {
+          "source_doc": "version_record",
+          "target_doc": "office_file_record",
+          "relation": "references"
+        }
+      ]
+    }
   }
 }

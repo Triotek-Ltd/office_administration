@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "correspondence_approval"
 ALLOWED_ACTIONS = ['submit', 'approve', 'return_for_revision', 'close']
-ACTION_RULES = {'submit': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'approved'}, 'return_for_revision': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'closed'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'submit': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'approved'}, 'return_for_revision': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'closed'}}
 
 STATE_FIELD = 'workflow_state'
 

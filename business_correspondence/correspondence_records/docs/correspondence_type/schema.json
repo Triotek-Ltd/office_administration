@@ -258,7 +258,8 @@
         "list_visible": false,
         "filterable": false,
         "sortable": false
-      }
+      },
+      "relation_kind": "explicit"
     }
   ],
   "field_groups": {
@@ -352,7 +353,9 @@
         "create",
         "update",
         "archive"
-      ]
+      ],
+      "scope": "system",
+      "ownership": "platform"
     }
   ],
   "transaction_behavior": {

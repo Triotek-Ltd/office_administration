@@ -4,5 +4,906 @@
   "app_id": "office_administration",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Filing Records Management KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "filing_records_management",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Filing Records Management summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "filing_records_management",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Filing Records Management charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "filing_records_management",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "filing_records_management_trend_line",
+            "label": "Filing Records Management trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "filing_records_management_volume_column",
+            "label": "Filing Records Management volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "filing_records_management_distribution_donut",
+            "label": "Filing Records Management distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "access_log_entry_trend_line",
+            "label": "Access Log Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "access_log_entry_volume_column",
+            "label": "Access Log Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "access_log_entry_distribution_donut",
+            "label": "Access Log Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "document_access_request_trend_line",
+            "label": "Document Access Request trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "document_access_request_volume_column",
+            "label": "Document Access Request volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "document_access_request_distribution_donut",
+            "label": "Document Access Request distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "administrative_document_trend_line",
+            "label": "Administrative Document trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "administrative_document_volume_column",
+            "label": "Administrative Document volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "administrative_document_distribution_donut",
+            "label": "Administrative Document distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "document_classification_trend_line",
+            "label": "Document Classification trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "document_classification_volume_column",
+            "label": "Document Classification volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "document_classification_distribution_donut",
+            "label": "Document Classification distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "records_register_entry_trend_line",
+            "label": "Records Register Entry trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "records_register_entry_volume_column",
+            "label": "Records Register Entry volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "records_register_entry_distribution_donut",
+            "label": "Records Register Entry distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "disposal_action_trend_line",
+            "label": "Disposal Action trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "disposal_action_volume_column",
+            "label": "Disposal Action volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "disposal_action_distribution_donut",
+            "label": "Disposal Action distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "retention_policy_trend_line",
+            "label": "Retention Policy trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "retention_policy_volume_column",
+            "label": "Retention Policy volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "retention_policy_distribution_donut",
+            "label": "Retention Policy distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Filing Records Management reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "filing_records_management",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "filing_records_management",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "filing_records_management",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "filing_records_management",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "filing_records_management",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Filing Records Management Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Filing Records Management Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Access Log Entry Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Access Log Entry Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "filing_records_management_trend_line",
+        "label": "Filing Records Management trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "filing_records_management_volume_column",
+        "label": "Filing Records Management volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "filing_records_management_distribution_donut",
+        "label": "Filing Records Management distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "access_log_entry_trend_line",
+        "label": "Access Log Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "access_log_entry_volume_column",
+        "label": "Access Log Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "access_log_entry_distribution_donut",
+        "label": "Access Log Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "document_access_request_trend_line",
+        "label": "Document Access Request trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "document_access_request_volume_column",
+        "label": "Document Access Request volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "document_access_request_distribution_donut",
+        "label": "Document Access Request distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "administrative_document_trend_line",
+        "label": "Administrative Document trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "administrative_document_volume_column",
+        "label": "Administrative Document volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "administrative_document_distribution_donut",
+        "label": "Administrative Document distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "document_classification_trend_line",
+        "label": "Document Classification trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "document_classification_volume_column",
+        "label": "Document Classification volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "document_classification_distribution_donut",
+        "label": "Document Classification distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "records_register_entry_trend_line",
+        "label": "Records Register Entry trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "records_register_entry_volume_column",
+        "label": "Records Register Entry volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "records_register_entry_distribution_donut",
+        "label": "Records Register Entry distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "disposal_action_trend_line",
+        "label": "Disposal Action trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "disposal_action_volume_column",
+        "label": "Disposal Action volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "disposal_action_distribution_donut",
+        "label": "Disposal Action distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "retention_policy_trend_line",
+        "label": "Retention Policy trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "retention_policy_volume_column",
+        "label": "Retention Policy volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "retention_policy_distribution_donut",
+        "label": "Retention Policy distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "access_log_entry",
+        "title": "Access Log Entry",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "document_access_request",
+        "title": "Document Access Request",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "administrative_document",
+        "title": "Administrative Document",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "document_classification",
+        "title": "Document Classification",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "records_register_entry",
+        "title": "Records Register Entry",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "disposal_action",
+        "title": "Disposal Action",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "retention_policy",
+        "title": "Retention Policy",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "administrative_document",
+      "document_access_request",
+      "access_log_entry",
+      "document_classification",
+      "retention_policy",
+      "records_register_entry",
+      "disposal_action"
+    ],
+    "upstream_docs": [
+      "administrative_document",
+      "document_access_request",
+      "access_log_entry",
+      "document_classification",
+      "retention_policy",
+      "records_register_entry",
+      "disposal_action"
+    ],
+    "downstream_docs": [
+      "access_log_entry"
+    ],
+    "actors": [
+      "records officer",
+      "document owner",
+      "requester",
+      "approver",
+      "archive custodian",
+      "administrative officer",
+      "drafter",
+      "recipient",
+      "follow-up owner"
+    ],
+    "downstream_effects": [
+      "records become available to compliance, audit, and legal processes",
+      "access and disposal events become auditable",
+      "correspondence becomes available to records, audit, legal, and service workflows"
+    ],
+    "emits_records": [
+      {
+        "action_id": "approve",
+        "target_doc": "access_log_entry",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "administrative_document",
+      "document_access_request",
+      "access_log_entry",
+      "document_classification",
+      "retention_policy",
+      "records_register_entry",
+      "disposal_action"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "access_log_entry",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "access_log_entry",
+        "target_doc": "document_access_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_access_request",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_access_request",
+        "target_doc": "access_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_access_request",
+        "target_doc": "access_log_entry",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "document_classification",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "retention_policy",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "records_register_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "document_access_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "administrative_document",
+        "target_doc": "disposal_action",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_classification",
+        "target_doc": "retention_policy",
+        "relation": "references"
+      },
+      {
+        "source_doc": "document_classification",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "records_register_entry",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "records_register_entry",
+        "target_doc": "document_access_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "records_register_entry",
+        "target_doc": "access_log_entry",
+        "relation": "references"
+      },
+      {
+        "source_doc": "disposal_action",
+        "target_doc": "administrative_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "disposal_action",
+        "target_doc": "retention_policy",
+        "relation": "references"
+      },
+      {
+        "source_doc": "retention_policy",
+        "target_doc": "document_classification",
+        "relation": "references"
+      },
+      {
+        "source_doc": "retention_policy",
+        "target_doc": "disposal_action",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "administrative_document",
+          "kind": "doc"
+        },
+        {
+          "id": "document_access_request",
+          "kind": "doc"
+        },
+        {
+          "id": "access_log_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "document_classification",
+          "kind": "doc"
+        },
+        {
+          "id": "retention_policy",
+          "kind": "doc"
+        },
+        {
+          "id": "records_register_entry",
+          "kind": "doc"
+        },
+        {
+          "id": "disposal_action",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "access_log_entry",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "access_log_entry",
+          "target_doc": "document_access_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_access_request",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_access_request",
+          "target_doc": "access_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_access_request",
+          "target_doc": "access_log_entry",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "document_classification",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "retention_policy",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "records_register_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "document_access_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "administrative_document",
+          "target_doc": "disposal_action",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_classification",
+          "target_doc": "retention_policy",
+          "relation": "references"
+        },
+        {
+          "source_doc": "document_classification",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "records_register_entry",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "records_register_entry",
+          "target_doc": "document_access_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "records_register_entry",
+          "target_doc": "access_log_entry",
+          "relation": "references"
+        },
+        {
+          "source_doc": "disposal_action",
+          "target_doc": "administrative_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "disposal_action",
+          "target_doc": "retention_policy",
+          "relation": "references"
+        },
+        {
+          "source_doc": "retention_policy",
+          "target_doc": "document_classification",
+          "relation": "references"
+        },
+        {
+          "source_doc": "retention_policy",
+          "target_doc": "disposal_action",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

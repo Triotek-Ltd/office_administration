@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "correspondence_approval"
 ARCHETYPE = "workflow_case"
 INITIAL_STATE = 'open'
 STATES = ['open', 'in_review', 'approved', 'closed']
 TERMINAL_STATES = ['closed']
-ACTION_RULES = {'submit': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'approved'}, 'return_for_revision': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'closed'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'submit': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'approved'}, 'return_for_revision': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'approved'], 'transitions_to': 'closed'}}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'relation_context': {'related_docs': ['correspondence_record'], 'borrowed_fields': ['subject', 'sender', 'recipient', 'approval-required flag from correspondence_record'], 'inferred_roles': ['approver']}, 'actors': ['approver'], 'action_actors': {'submit': ['approver'], 'approve': ['approver'], 'close': ['approver']}}
@@ -29,7 +31,7 @@ class WorkflowService:
 
     def next_state_for(self, action_id: str) -> str | None:
         rule = ACTION_RULES.get(action_id, {})
-        return rule.get("transitions_to")
+        return cast(str | None, rule.get("transitions_to"))
 
     def apply_action(self, action_id: str, state: str | None) -> dict:
         if not self.is_action_allowed(action_id, state):

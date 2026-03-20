@@ -5,6 +5,18 @@
       "fields": {
         "workflow_state": "approved"
       }
+    },
+    {
+      "type": "create_record",
+      "target_doc": "office_file_record",
+      "values": {
+        "title": {
+          "$template": "Office File Record for {title|reference_no|id}"
+        },
+        "reference_no": {
+          "$template": "OFFICE_FILE_RECORD-{reference_no|id}"
+        }
+      }
     }
   ],
   "close": [

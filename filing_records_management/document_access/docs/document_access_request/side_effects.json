@@ -14,5 +14,19 @@
         "workflow_state": "closed"
       }
     }
+  ],
+  "approve": [
+    {
+      "type": "create_record",
+      "target_doc": "access_log_entry",
+      "values": {
+        "title": {
+          "$template": "Access Log Entry for {title|reference_no|id}"
+        },
+        "reference_no": {
+          "$template": "ACCESS_LOG_ENTRY-{reference_no|id}"
+        }
+      }
+    }
   ]
 }

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "workflow_task"
 ALLOWED_ACTIONS = ['create', 'assign', 'track', 'close', 'archive']
-ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'archived'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'in_progress'}, 'track': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['open', 'in_progress'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 

@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "calendar_event"
 ACTION_ID = "create"
-ACTION_RULE = {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}
+ACTION_RULE: dict[str, Any] = {'allowed_in_states': ['scheduled', 'completed', 'cancelled'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': ['Confirm availability and reserve the calendar slot.', 'Update the event for changes, conflicts, or cancellations.'], 'primary_actions': ['create', 'schedule', 'confirm', 'reschedule', 'cancel', 'close'], 'primary_transitions': ['calendar_event: draft -> scheduled -> confirmed', 'calendar_event: confirmed -> rescheduled or cancelled -> closed'], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'update': ['scheduler'], 'confirm': ['participants'], 'cancel': ['scheduler'], 'archive': ['scheduler']}}
 
 def handle_create(payload: dict, context: dict | None = None) -> dict:
     context = context or {}
-    next_state = ACTION_RULE.get("transitions_to")
+    next_state = cast(str | None, ACTION_RULE.get("transitions_to"))
     updates = {STATE_FIELD: next_state} if STATE_FIELD and next_state else {}
     return {
         "doc_id": DOC_ID,

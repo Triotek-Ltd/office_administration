@@ -4,5 +4,561 @@
   "app_id": "office_administration",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Office Systems Tools KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_systems_tools",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Office Systems Tools summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_systems_tools",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Office Systems Tools charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_systems_tools",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "office_systems_tools_trend_line",
+            "label": "Office Systems Tools trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_systems_tools_volume_column",
+            "label": "Office Systems Tools volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_systems_tools_distribution_donut",
+            "label": "Office Systems Tools distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "access_grant_trend_line",
+            "label": "Access Grant trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "access_grant_volume_column",
+            "label": "Access Grant volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "access_grant_distribution_donut",
+            "label": "Access Grant distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "tool_issue_case_trend_line",
+            "label": "Tool Issue Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "tool_issue_case_volume_column",
+            "label": "Tool Issue Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "tool_issue_case_distribution_donut",
+            "label": "Tool Issue Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "office_file_record_trend_line",
+            "label": "Office File Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "office_file_record_volume_column",
+            "label": "Office File Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "office_file_record_distribution_donut",
+            "label": "Office File Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "version_record_trend_line",
+            "label": "Version Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "version_record_volume_column",
+            "label": "Version Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "version_record_distribution_donut",
+            "label": "Version Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Office Systems Tools reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "office_systems_tools",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_systems_tools",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_systems_tools",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_systems_tools",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "office_systems_tools",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Office Systems Tools Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Office Systems Tools Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Access Grant Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Access Grant Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "office_systems_tools_trend_line",
+        "label": "Office Systems Tools trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_systems_tools_volume_column",
+        "label": "Office Systems Tools volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_systems_tools_distribution_donut",
+        "label": "Office Systems Tools distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "access_grant_trend_line",
+        "label": "Access Grant trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "access_grant_volume_column",
+        "label": "Access Grant volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "access_grant_distribution_donut",
+        "label": "Access Grant distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "tool_issue_case_trend_line",
+        "label": "Tool Issue Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "tool_issue_case_volume_column",
+        "label": "Tool Issue Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "tool_issue_case_distribution_donut",
+        "label": "Tool Issue Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "office_file_record_trend_line",
+        "label": "Office File Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "office_file_record_volume_column",
+        "label": "Office File Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "office_file_record_distribution_donut",
+        "label": "Office File Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "version_record_trend_line",
+        "label": "Version Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "version_record_volume_column",
+        "label": "Version Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "version_record_distribution_donut",
+        "label": "Version Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "access_grant",
+        "title": "Access Grant",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "tool_issue_case",
+        "title": "Tool Issue Case",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "office_file_record",
+        "title": "Office File Record",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "version_record",
+        "title": "Version Record",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "office_file_record",
+      "version_record",
+      "access_grant"
+    ],
+    "upstream_docs": [
+      "office_file_record",
+      "version_record",
+      "access_grant"
+    ],
+    "downstream_docs": [
+      "office_file_record"
+    ],
+    "actors": [
+      "case owner",
+      "office user",
+      "system admin",
+      "support owner"
+    ],
+    "downstream_effects": [
+      "supports office controls and operational continuity"
+    ],
+    "emits_records": [
+      {
+        "action_id": "approve",
+        "target_doc": "office_file_record",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "office_file_record",
+      "version_record",
+      "access_grant"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "access_grant",
+        "target_doc": "office_file_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "access_grant",
+        "target_doc": "office_file_record",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "tool_issue_case",
+        "target_doc": "office_file_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "office_file_record",
+        "target_doc": "version_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "office_file_record",
+        "target_doc": "access_grant",
+        "relation": "references"
+      },
+      {
+        "source_doc": "version_record",
+        "target_doc": "office_file_record",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "office_file_record",
+          "kind": "doc"
+        },
+        {
+          "id": "version_record",
+          "kind": "doc"
+        },
+        {
+          "id": "access_grant",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "access_grant",
+          "target_doc": "office_file_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "access_grant",
+          "target_doc": "office_file_record",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "tool_issue_case",
+          "target_doc": "office_file_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "office_file_record",
+          "target_doc": "version_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "office_file_record",
+          "target_doc": "access_grant",
+          "relation": "references"
+        },
+        {
+          "source_doc": "version_record",
+          "target_doc": "office_file_record",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

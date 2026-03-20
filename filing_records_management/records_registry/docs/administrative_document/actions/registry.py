@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "administrative_document"
 ALLOWED_ACTIONS = ['create', 'update', 'review', 'archive', 'classify', 'file', 'register']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'update': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': 'archived'}, 'classify': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'file': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'register': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'update': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'review': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': 'archived'}, 'classify': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'file': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}, 'register': {'allowed_in_states': ['draft', 'active', 'disposed'], 'transitions_to': None}}
 
 STATE_FIELD = 'workflow_state'
 

@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "meeting_record"
 ARCHETYPE = "event"
 INITIAL_STATE = 'draft'
 STATES = ['draft', 'scheduled', 'completed', 'archived']
 TERMINAL_STATES = ['archived']
-ACTION_RULES = {'create': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}, 'update': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': 'completed'}, 'close': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': 'archived'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}, 'update': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}, 'confirm': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': 'completed'}, 'close': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['draft', 'scheduled', 'completed'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'business_objective': 'receive scheduling requests, reserve time and resources, and manage related meeting or travel arrangements', 'actors': ['scheduler', 'participants', 'admin support'], 'start_condition': 'a meeting, travel, or calendar request is received', 'ordered_steps': [], 'primary_actions': [], 'primary_transitions': [], 'downstream_effects': ['supports meetings, travel, and service coordination'], 'action_actors': {'create': ['scheduler'], 'update': ['scheduler'], 'confirm': ['participants'], 'close': ['scheduler'], 'archive': ['scheduler']}}
@@ -29,7 +31,7 @@ class WorkflowService:
 
     def next_state_for(self, action_id: str) -> str | None:
         rule = ACTION_RULES.get(action_id, {})
-        return rule.get("transitions_to")
+        return cast(str | None, rule.get("transitions_to"))
 
     def apply_action(self, action_id: str, state: str | None) -> dict:
         if not self.is_action_allowed(action_id, state):

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 
 DOC_ID = "document_access_request"
 ALLOWED_ACTIONS = ['create', 'assign', 'approve', 'close']
-ACTION_RULES = {'create': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'closed'}}
+ACTION_RULES: dict[str, dict[str, Any]] = {'create': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'in_review'}, 'approve': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': None}, 'close': {'allowed_in_states': ['open', 'in_review', 'resolved'], 'transitions_to': 'closed'}}
 
 STATE_FIELD = 'workflow_state'
 
